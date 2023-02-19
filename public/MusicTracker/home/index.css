@@ -23,7 +23,19 @@
 
 .font-header {
     font-size: 50px;
-    font-family: 'Helvetica Neue';
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+.nunito {
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+.volkhov {
+    font-family: 'Volkhov', serif;
+}
+
+.text-small {
+    font-size: 14px;
 }
 
 .no-pad-left {
