@@ -10,7 +10,7 @@ const TrendingReleaseItem = (release) => {
                 <span class="text-muted text-small float-left nunito ps-1">• ${release.year}</span>
             </div><br>
             <div class="text-muted text-small nunito">
-                reviews: ${release.reviews}
+                Reviews: ${release.reviews}
             </div>` + StarRating(release.averageRating) + `</div>
     `);
 }

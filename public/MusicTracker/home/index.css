@@ -2,6 +2,10 @@
     float: left;
 }
 
+.float-right {
+    float: right;
+}
+
 .album-cover-trending-release {
     float: left;
     margin-right: 10px;
@@ -19,6 +23,16 @@
     height: 300px;
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
+}
+
+.profile-picture-top-right {
+    border-radius: 40px;
+    width: 40px;
+    height: 40px;
+}
+
+.center {
+    align-items: center;
 }
 
 .font-header {
@@ -76,5 +90,20 @@ button.thumb {
 }
 
 button.thumb:hover {
+    color: salmon;
+}
+
+input.form-control {
+    background: none;
+    color: salmon;
+}
+
+input.form-control:focus {
+    background: none;
+    border-color: salmon;
+    color: salmon;
+}
+
+input.form-control:focus::placeholder {
     color: salmon;
 }
