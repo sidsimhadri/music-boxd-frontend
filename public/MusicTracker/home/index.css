@@ -1,0 +1,37 @@
+.float-left {
+    float: left;
+}
+
+.album-cover-trending-release {
+    float: left;
+    margin-right: 10px;
+    height: 100px;
+    width: 100px;
+}
+
+.font-header {
+    font-size: 50px;
+    font-family: 'Helvetica Neue';
+}
+
+.no-pad-left {
+    padding-left: 0px;
+}
+
+.list-group-item.no-rounded-tops {
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+a:hover {
+    color: salmon;
+}
+
+a.text-muted:hover {
+    color: salmon;
+}
