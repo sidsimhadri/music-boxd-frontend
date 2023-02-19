@@ -1,5 +1,6 @@
 import MusicTrackerLogo from "../MusicTrackerLogo/index.js";
 import TrendingReleases from "../TrendingReleases/index.js";
+import FeaturedReviews from "../FeaturedReviews/index.js";
 
 /* eslint-env jquery */
 function homeComponent() {
@@ -11,8 +12,8 @@ function homeComponent() {
             <div class="no-pad-left col-3 col-md-2 col-lg-2 col-xl-3">
                 ${TrendingReleases()}
             </div>
-            <div class="col-9 col-lg-10 col-xl-9 bg-secondary">
-                <h2>Two row</h2>
+            <div class="col-9 col-lg-10 col-xl-9">
+                ${FeaturedReviews()}
             </div>
         </div>
     `);

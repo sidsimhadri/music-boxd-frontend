@@ -23,5 +23,13 @@ export default [
         year: 2021,
         reviews: 506,
         averageRating: 4.2
+    },
+    {
+        image: "https://media.pitchfork.com/photos/603d5455040c463283888ec6/1:1/w_600/Japanese%20Breakfast%20-%20Jubilee%20_%20Album%20Art.jpg",
+        title: "Jubilee",
+        artist: "Japanese Breakfast",
+        year: 2021,
+        reviews: 457,
+        averageRating: 3.9
     }
 ];

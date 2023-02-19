@@ -1,3 +1,5 @@
+import StarRating from "../StarRating/index.js";
+
 const TrendingReleaseItem = (release) => {
     return (`
         <div class="list-group-item no-rounded-tops">
@@ -9,22 +11,8 @@ const TrendingReleaseItem = (release) => {
             </div><br>
             <div class="text-muted">
                 reviews: ${release.reviews}
-            </div>` + getStarRanking(release.averageRating) + `</div>
+            </div>` + StarRating(release.averageRating) + `</div>
     `);
-}
-
-const getStarRanking = (ranking) => {
-    let i = 1
-    let ret = ``;
-    while (i < ranking) {
-        ret += `<i class="fa fa-star pe-1" style="color: salmon"> </i>`;
-        i += 1;
-    }
-    while (i < 6) {
-        ret += `<i class="fa fa-star pe-1" style="color: gray"> </i>`;
-        i += 1;
-    }
-    return ret;
 }
 
 export default TrendingReleaseItem;
