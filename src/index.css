@@ -1,8 +1,8 @@
-a.override {
+.override {
   text-decoration: none;
   color: white;
 }
 
-a.override:hover {
+.override:hover {
     color: salmon;
 }

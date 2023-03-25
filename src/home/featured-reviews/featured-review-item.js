@@ -1,4 +1,5 @@
 import StarRating from "../../star-rating";
+import ReviewInteractionsComponent from "../../review-components/review-interactions";
 import { Link } from "react-router-dom";
 
 const FeaturedReviewItem = ({ review }) => {
@@ -18,23 +19,9 @@ const FeaturedReviewItem = ({ review }) => {
                         </div>
                     </div>
                     <p className="card-text nunito">{review.review}</p>
-                    <button className="btn btn-outline-success me-2">
-                        <i className="fa fa-arrow-up"></i><span className="nunito"> {review.likes} </span>
-                    </button>
-                    <button className="btn btn-outline-danger me-2">
-                        <i className="fa fa-arrow-down"></i><span className="nunito"> {review.dislikes} </span>
-                    </button>
-                    <button className="btn btn-outline-primary me-2">
-                        <i className="fa fa-comment"></i><span className="nunito"> {review.comments} </span>
-                    </button>
-                    {
-                        review.currentUser &&
-                        <button className="btn btn-outline-info">
-                            <i className="fa fa-edit"></i><span className="nunito"> Edit </span>
-                        </button>
-                    }
+                    <ReviewInteractionsComponent review={review} />
                 </div>
-                <img className="album-cover-review-image col-4" src={review.image} />
+                <img className="album-cover-review-image col-4" src={review.image} alt={review.title}/>
             </div>
         </div>
     )
