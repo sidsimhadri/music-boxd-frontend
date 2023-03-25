@@ -1,19 +1,20 @@
 import StarRating from "../../star-rating";
+import { Link } from "react-router-dom";
 
 const FeaturedReviewItem = ({ review }) => {
     return (
         <div className="card border-dark mb-3" style={{ "max-width": "70%" }}>
             <div className="row card-body">
                 <div className="col-8">
-                    <h4 className="card-title small-margin-bottom volkhov text-white"><i><a href="#" className="override">{review.title}</a></i></h4>
-                    <h6 className="text-white nunito"><a href="#" className="override">{review.artist}</a> • {review.year}</h6>
+                    <h4 className="card-title small-margin-bottom volkhov text-white"><i><Link className="override" to="/">{review.title}</Link></i></h4>
+                    <h6 className="text-white nunito"><Link className="override" to="/">{review.artist}</Link> • {review.year}</h6>
                     <div className="row">
                         <div className="col-1">
-                            <img className="profile-picture me-3" src={review.profilepic} />
+                            <img className="profile-picture me-3" src={review.profilepic} alt=""/>
                         </div>
                         <div className="col-8 ms-3">
                             <StarRating rating={review.rating} />
-                            <h6 className="text-muted nunito"><a href="#" className="override">{review.reviewer}</a> - {review.timestamp}</h6>
+                            <h6 className="text-muted nunito"><Link className="override" to="/profile">{review.reviewer}</Link> - {review.timestamp}</h6>
                         </div>
                     </div>
                     <p className="card-text nunito">{review.review}</p>
