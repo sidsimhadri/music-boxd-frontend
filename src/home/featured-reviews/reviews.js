@@ -6,7 +6,7 @@ export default [
         year: 2019,
         reviewer: "@jackfurci",
         timestamp: "4 hr ago",
-        review: "This album was absolutely epic. Listened to it sooo many times XD. LETS GOOOOOOOO",
+        review: "This album was absolutely epic. Listened to it sooo many times. Very chill sounds!",
         rating: 5,
         likes: 200,
         dislikes: 35,

@@ -52,21 +52,25 @@
     font-size: 14px;
 }
 
-.no-pad-left {
+.row>.no-pad-left {
     padding-left: 0px;
 }
 
-.list-group-item.no-rounded-tops {
+.list-group-item.no-rounded-tops:first-child {
     border-top-right-radius: 0px;
     border-top-left-radius: 0px;
 }
 
-a {
+a.override {
   text-decoration: none;
   color: white;
 }
 
-a:hover {
+a.override:hover {
+    color: salmon;
+}
+
+a.salmon-hover:hover {
     color: salmon;
 }
 
