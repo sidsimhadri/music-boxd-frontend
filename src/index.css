@@ -1,8 +1,17 @@
-.override {
+.link-salmon {
   text-decoration: none;
   color: white;
 }
 
-.override:hover {
-    color: salmon;
+.link-salmon:hover {
+  color: salmon;
+}
+
+.link-white {
+  text-decoration: none;
+  color: white;
+}
+
+.link-white:hover {
+  color: white;
 }

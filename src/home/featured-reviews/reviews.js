@@ -1,6 +1,7 @@
 // eslint-disable-next-line import/no-anonymous-default-export
 export default [
     {
+        _id: 1,
         title: "IGOR",
         artist: "Tyler, the Creator",
         year: 2019,
@@ -16,6 +17,7 @@ export default [
         currentUser: true
     },
     {
+        _id: 2,
         title: "Punisher",
         artist: "Phoebe Bridgers",
         year: 2020,

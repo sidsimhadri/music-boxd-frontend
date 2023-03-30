@@ -1,5 +1,5 @@
 import StarRating from "../../star-rating";
-import ReviewInteractionsComponent from "../../review-components/review-interactions";
+import ReviewInteractionsComponent from "../../review-component/review-interactions";
 import { Link } from "react-router-dom";
 
 const FeaturedReviewItem = ({ review }) => {
@@ -7,15 +7,15 @@ const FeaturedReviewItem = ({ review }) => {
         <div className="card border-dark mb-3" style={{ "max-width": "70%" }}>
             <div className="row card-body">
                 <div className="col-8">
-                    <h4 className="card-title small-margin-bottom volkhov text-white"><i><Link className="override" to="/">{review.title}</Link></i></h4>
-                    <h6 className="text-white nunito"><Link className="override" to="/">{review.artist}</Link> • {review.year}</h6>
+                    <h4 className="card-title small-margin-bottom volkhov text-white"><i><Link className="link-salmon" to="/albums/">{review.title}</Link></i></h4>
+                    <h6 className="text-white nunito"><Link className="link-salmon" to="/artists/">{review.artist}</Link> • {review.year}</h6>
                     <div className="row">
                         <div className="col-1">
                             <img className="profile-picture me-3" src={review.profilepic} alt=""/>
                         </div>
                         <div className="col-8 ms-3">
                             <StarRating rating={review.rating} />
-                            <h6 className="text-muted nunito"><Link className="override" to="/profile">{review.reviewer}</Link> - {review.timestamp}</h6>
+                            <h6 className="text-muted nunito"><Link className="link-salmon" to="/profile">{review.reviewer}</Link> - {review.timestamp}</h6>
                         </div>
                     </div>
                     <p className="card-text nunito">{review.review}</p>
