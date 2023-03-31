@@ -8,9 +8,7 @@ const FeaturedReviews = () => {
             {
                 reviews.map(review => {
                     return (
-                        <Link className="link-white" to={`/reviews/${review._id}`}>
-                            <FeaturedReviewItem review={review} />
-                        </Link>
+                        <FeaturedReviewItem review={review} />
                     )
                 })
             }

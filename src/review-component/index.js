@@ -1,7 +1,14 @@
-function ReviewComponent() {
+import TrackStarHeader from "../trackstar-header";
+
+function ReviewComponent(
+    {review}
+) {
     return (
         <>
-            <h1>Review Component</h1>
+        <div className="row mt-2">
+            <TrackStarHeader />
+        </div>
+            
         </>
     )
 }
