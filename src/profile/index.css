@@ -1,0 +1,159 @@
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+.album-cover-trending-release {
+    float: left;
+    margin-right: 10px;
+    height: 100px;
+    width: 100px;
+}
+
+.album-cover-small-review {
+    margin-right: 10px;
+    height: 100px;
+    width: 100px;
+}
+
+.album-cover-review-image {
+    height: 200;
+    width: 200;
+}
+
+.album-cover-review-card {
+    width: 100%;
+    height: 300px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
+.profile-picture {
+    border-radius: 40px;
+    width: 40px;
+    height: 40px;
+}
+
+.profile-picture.larger {
+    border-radius: 390px;
+    width: 390px;
+    height: 390px;
+}
+
+.relative {
+    position: relative;
+}
+
+input#choose-profile-picture {
+    position: absolute;
+    display: none;
+    top: 50%;
+    left: 50%;
+}
+
+.center {
+    display: flex;
+    align-items: center;
+}
+
+.font-header {
+    font-size: 50px;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+.nunito {
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+.volkhov {
+    font-family: 'Volkhov', serif;
+}
+
+.text-small {
+    font-size: 14px;
+}
+
+.text-medium {
+    font-size: 20px;
+}
+
+.text-large {
+    font-size: 50px;
+}
+
+.no-pad-left {
+    padding-left: 0px;
+}
+
+.list-group-item.no-rounded-tops {
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+a:hover {
+    color: salmon;
+}
+
+a.text-muted:hover {
+    color: salmon;
+}
+
+i.opacity-low {
+    opacity: 0.1;
+}
+
+.card-title.small-margin-bottom {
+    margin-bottom: 2px;
+}
+
+button.thumb {
+    border: none;
+    background: none;
+    border-radius: 2px;
+    margin-right: 2px;
+}
+
+button.thumb:hover {
+    color: salmon;
+}
+
+input.form-control {
+    background: none;
+    color: salmon;
+}
+
+input.form-control:focus {
+    background: none;
+    border-color: salmon;
+    color: salmon;
+}
+
+input.form-control:focus::placeholder {
+    color: salmon;
+}
+
+button.profile-pic {
+    border-width: 0px;
+    padding: 0px;
+    border-radius: 50%;
+    width: 390px;
+    height: 390px;
+}
+
+button.profile-pic:hover {
+    opacity: 0.5;
+}
+
+.badge.follow-info {
+    font-size: 20px;
+    vertical-align:text-bottom;
+    margin-bottom: 5px;
+}

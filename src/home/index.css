@@ -1,0 +1,113 @@
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+.album-cover-trending-release {
+    float: left;
+    margin-right: 10px;
+    height: 100px;
+    width: 100px;
+}
+
+.album-cover-review-image {
+    height: 200;
+    width: 200;
+}
+
+.album-cover-review-card {
+    width: 100%;
+    height: 300px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
+.profile-picture {
+    border-radius: 40px;
+    width: 40px;
+    height: 40px;
+}
+
+.center {
+    align-items: center;
+}
+
+.font-header {
+    font-size: 50px;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+.nunito {
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+.volkhov {
+    font-family: 'Volkhov', serif;
+}
+
+.text-small {
+    font-size: 14px;
+}
+
+.row>.no-pad-left {
+    padding-left: 0px;
+}
+
+.list-group-item.no-rounded-tops:first-child {
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+}
+
+a.override {
+  text-decoration: none;
+  color: white;
+}
+
+a.override:hover {
+    color: salmon;
+}
+
+a.salmon-hover:hover {
+    color: salmon;
+}
+
+a.text-muted:hover {
+    color: salmon;
+}
+
+i.opacity-low {
+    opacity: 0.1;
+}
+
+.card-title.small-margin-bottom {
+    margin-bottom: 2px;
+}
+
+button.thumb {
+    border: none;
+    background: none;
+    border-radius: 2px;
+    margin-right: 2px;
+}
+
+button.thumb:hover {
+    color: salmon;
+}
+
+input.form-control {
+    background: none;
+    color: salmon;
+}
+
+input.form-control:focus {
+    background: none;
+    border-color: salmon;
+    color: salmon;
+}
+
+input.form-control:focus::placeholder {
+    color: salmon;
+}
