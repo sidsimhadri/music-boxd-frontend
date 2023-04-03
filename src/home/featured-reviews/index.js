@@ -1,6 +1,5 @@
 import FeaturedReviewItem from "./featured-review-item.js";
 import reviews from "./reviews.js"
-import { Link } from "react-router-dom";
 
 const FeaturedReviews = () => {
     return (

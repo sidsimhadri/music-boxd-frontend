@@ -9,10 +9,10 @@ const FeaturedReviewItem = ({ review }) => {
                 <div className="col-8">
                     <Link className="link-white" to={`/reviews/${review._id}`}>
                     <h4 className="card-title small-margin-bottom volkhov text-white"><i><Link className="link-salmon" to="/albums/">{review.title}</Link></i></h4>
-                    <h6 className="text-white nunito"><Link className="link-salmon" to="/artists/">{review.artist}</Link> • {review.year}</h6>
-                    <div className="row">
+                    <h6 className="text-white nunito no-margin-bottom"><Link className="link-salmon" to="/artists/">{review.artist}</Link> • {review.year}</h6>
+                    <div className="row no-margin-left d-flex center">
                         <div className="col-1">
-                            <img className="profile-picture me-3" src={review.profilepic} alt=""/>
+                            <img className="profile-picture me-2" src={review.profilepic} alt=""/>
                         </div>
                         <div className="col-8 ms-3">
                             <StarRating rating={review.rating} />
