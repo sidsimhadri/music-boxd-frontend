@@ -3,6 +3,7 @@ import StarRating from "../star-rating";
 import { Link } from "react-router-dom";
 import ReviewInteractionsComponent from "./review-interactions";
 import ReviewActionsComponent from "./review-actions";
+import TagsComponent from "./tags";
 
 function ReviewComponent(
     { review = {
@@ -19,6 +20,9 @@ function ReviewComponent(
         dislikes: 123,
         comments: 10,
         currentUser: true,
+        tags: [
+            'rap', 'soul'
+        ]
     } }
 ) {
     return (
@@ -32,10 +36,9 @@ function ReviewComponent(
                 </div>
                 <div className="col-6">
                     <div className="row">
-                        <span className="nunito float-left">Review by <Link className="link-salmon">
+                        <span className="nunito float-left">{review.timestamp} - Review by <Link className="link-salmon">
                             @{review.reviewer}
                             <img className="profile-picture ms-2 me-2" src={review.profilepic} alt={review.reviewer}></img></Link></span>
-
                     </div>
                     <div className="row" style={{ "word-break": "break-all" }}>
                         <span className="volkhov text-white h1-inline">
@@ -44,12 +47,12 @@ function ReviewComponent(
                         <div>
                             <Link className="nunito link-salmon">
                                 <span className="h2-inline">{review.artist}
-
                                 </span>
                             </Link> <span className="h2-inline nunito">, {review.albumYear} </span>
                             <div className="nunito text-white">
                                 {review.review}
                             </div>
+                            <TagsComponent review={review}/>
                         </div>
                     </div>
                     <div className="mt-3">
