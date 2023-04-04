@@ -31,10 +31,10 @@ function ReviewComponent(
                 <TrackStarHeader />
             </div>
             <div className="row mt-2">
-                <div className="col-3 no-pad-left">
-                    <img className="album-cover-review-image" src={review.image} alt={review.title} />
+                <div className="col-3 d-none d-lg-block no-pad-left">
+                    <img className="album-cover-review-image" width = "250px" src={review.image} alt={review.title} />
                 </div>
-                <div className="col-6">
+                <div className="col-12 col-md-8 col-lg-6">
                     <div className="row">
                         <span className="nunito float-left">{review.timestamp} - Review by <Link className="link-salmon">
                             @{review.reviewer}
@@ -59,7 +59,7 @@ function ReviewComponent(
                         <ReviewInteractionsComponent review={review} />
                     </div>
                 </div>
-                <div className="col-3 nunito">
+                <div className="col-md-4 col-lg-3 d-none d-md-block nunito">
                     <ReviewActionsComponent review={review}/>
                 </div>
             </div>
