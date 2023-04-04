@@ -19,7 +19,15 @@ export const createUserThunk = createAsyncThunk(
   async (user) => {
     const newUser = await service.createUser(user)
     return newUser
-})
+  })
+
+  export const updateUserThunk =
+  createAsyncThunk(
+    'user/updateUser',
+    async (user) =>
+      await service.updateUser(user)
+)
+
 
 export const findReviewsThunk = createAsyncThunk(
   'reviews/findReviews', async () =>
@@ -32,12 +40,19 @@ export const deleteReviewThunk = createAsyncThunk(
     return rid
     })
 
-export const createReviewThink = createAsyncThunk(
+export const createReviewThunk = createAsyncThunk(
   'review/createReview',
   async (review) => {
     const newReview = await service.createReview(review)
     return newReview
-    })
+  })
+    
+    export const updateReviewThunk =
+  createAsyncThunk(
+    'review/updateReview',
+    async (review) =>
+      await service.updateReview(review)
+)
 
     export const createTagThunk = createAsyncThunk(
   'tag/createTag',
