@@ -3,6 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router";
 import ProfileComponent from "./profile";
 import ReviewComponent from "./review-component";
+
 function App() {
   return (
     <BrowserRouter>
