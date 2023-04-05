@@ -8,7 +8,6 @@ export const createUser = async (user) => {
  return response.data;
 }
 
-
 export const findUser = async () => {
  const response = await axios.get(USER_API);
  const users = response.data;

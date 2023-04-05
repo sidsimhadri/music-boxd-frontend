@@ -45,3 +45,8 @@
 .no-margin-bottom{
   margin-bottom: 0px;
 }
+
+.tag-x {
+  border-style: none;
+  font-family: 'Nunito Sans', sans-serif;
+}

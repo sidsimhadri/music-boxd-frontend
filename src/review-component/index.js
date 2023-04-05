@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 import ReviewInteractionsComponent from "./review-interactions";
 import ReviewActionsComponent from "./review-actions";
 import TagsComponent from "./tags";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { findReviewsThunk, updateReviewThunk } from "../services/thunks";
 
 function ReviewComponent(
     { review = {
@@ -15,16 +18,23 @@ function ReviewComponent(
         artist: "Tyler, the Creator",
         albumYear: 2019,
         rating: 5,
-        review: "Wowwwwwwwwwwwioerhfgjpweriuhgfjaksvnhqewiufjhkmnrekngflkjvqerwifghqeruigjlknbglwjeksdnvmeqrwndfuipjfdkvbndfjgqierwlgwkejfqewlr",
+        body: "Wowwwwwwwwwwwioerhfgjpweriuhgfjaksvnhqewiufjhkmnrekngflkjvqerwifghqeruigjlknbglwjeksdnvmeqrwndfuipjfdkvbndfjgqierwlgwkejfqewlr",
         likes: 200,
+        liked: false,
         dislikes: 123,
+        disliked: false,
         comments: 10,
         currentUser: true,
         tags: [
             'rap', 'soul'
-        ]
+        ],
+        editing: false,
     } }
 ) {
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(findReviewsThunk())
+    })
     return (
         <>
             <div className="row mt-2">
@@ -32,7 +42,7 @@ function ReviewComponent(
             </div>
             <div className="row mt-2">
                 <div className="col-3 d-none d-lg-block no-pad-left">
-                    <img className="album-cover-review-image" width = "250px" src={review.image} alt={review.title} />
+                    <img className="album-cover-review-image" width="250px" src={review.image} alt={review.title} />
                 </div>
                 <div className="col-12 col-md-8 col-lg-6">
                     <div className="row">
@@ -40,7 +50,7 @@ function ReviewComponent(
                             @{review.reviewer}
                             <img className="profile-picture ms-2 me-2" src={review.profilepic} alt={review.reviewer}></img></Link></span>
                     </div>
-                    <div className="row" style={{ "word-break": "break-all" }}>
+                    <div className="row" style={{ "wordBreak": "break-all" }}>
                         <span className="volkhov text-white h1-inline">
                             <Link className="link-salmon"> <i className="me-3">{review.albumName}</i></Link><StarRating rating={review.rating}></StarRating>
                         </span>
@@ -50,9 +60,9 @@ function ReviewComponent(
                                 </span>
                             </Link> <span className="h2-inline nunito">, {review.albumYear} </span>
                             <div className="nunito text-white">
-                                {review.review}
+                                {review.body}
                             </div>
-                            <TagsComponent review={review}/>
+                            <TagsComponent review={review} />
                         </div>
                     </div>
                     <div className="mt-3">
@@ -60,7 +70,7 @@ function ReviewComponent(
                     </div>
                 </div>
                 <div className="col-md-4 col-lg-3 d-none d-md-block nunito">
-                    <ReviewActionsComponent review={review}/>
+                    <ReviewActionsComponent review={review} />
                 </div>
             </div>
         </>
