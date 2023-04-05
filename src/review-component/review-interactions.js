@@ -1,6 +1,6 @@
 const ReviewInteractionsComponent = ({ review }) => {
     return (<>
-        <button className="btn btn-outline-success me-2">
+        <button className="btn btn-outline-success me-2" onClick={() => console.log('hello')}>
             <i className="fa fa-arrow-up"></i><span className="nunito"> {review.likes} </span>
         </button>
         <button className="btn btn-outline-danger me-2">
