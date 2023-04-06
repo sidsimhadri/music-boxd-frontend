@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import ReviewInteractionsComponent from "./review-interactions";
 import ReviewActionsComponent from "./review-actions";
 import TagsComponent from "./tags";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { findReviewsThunk, updateReviewThunk } from "../services/thunks";
 
@@ -20,7 +20,7 @@ function ReviewComponent(
         rating: 5,
         body: "Wowwwwwwwwwwwioerhfgjpweriuhgfjaksvnhqewiufjhkmnrekngflkjvqerwifghqeruigjlknbglwjeksdnvmeqrwndfuipjfdkvbndfjgqierwlgwkejfqewlr",
         likes: 200,
-        liked: false,
+        liked: true,
         dislikes: 123,
         disliked: false,
         comments: 10,
@@ -31,7 +31,8 @@ function ReviewComponent(
         editing: false,
     } }
 ) {
-    const dispatch = useDispatch();
+    let [body, setBody] = useState(review.body)
+    const dispatch = useDispatch()
     useEffect(() => {
         dispatch(findReviewsThunk())
     })
@@ -59,9 +60,18 @@ function ReviewComponent(
                                 <span className="h2-inline">{review.artist}
                                 </span>
                             </Link> <span className="h2-inline nunito">, {review.albumYear} </span>
-                            <div className="nunito text-white">
-                                {review.body}
-                            </div>
+                            {!review.editing &&
+                                <div className="nunito text-white">
+                                    {review.body}
+                                </div>
+                            }
+                            {
+                                review.editing &&
+                                <div>
+                                    <textarea className="form-control border-0 bg-dark text-white mb-1" value={body}
+                                        onChange={(event) => setBody(event.target.value)}></textarea>
+                                </div>
+                            }
                             <TagsComponent review={review} />
                         </div>
                     </div>
