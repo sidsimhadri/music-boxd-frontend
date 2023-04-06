@@ -61,7 +61,7 @@ function ReviewComponent(
                     <div className="row">
                         <ReviewByComponent review={review} />
                     </div>
-                    <div className="row" style={{ "wordBreak": "break-all" }}>
+                    <div className="row center" style={{ "wordBreak": "break-all" }}>
                         <span className="volkhov text-white h1-inline">
                             <Link className="link-salmon"> <i className="me-3">{review.albumName}</i></Link>
                             <Link className="nunito link-salmon">
@@ -70,8 +70,6 @@ function ReviewComponent(
                             </Link><span className="h2-inline nunito">, {review.albumYear} </span>
                         </span>
                         <div>
-
-                            <div className="h2-inline mb-2 nudge-up" style={{"height": 40}}><StarRating rating={reviewRating}></StarRating></div>
                             {!editing && <div className="nunito text-white"> {reviewBody} </div>}
                             {editing &&
                                 <div>
@@ -79,6 +77,7 @@ function ReviewComponent(
                                         onChange={(event) => setBody(event.target.value)}></textarea>
                                 </div>
                             }
+                            <div className="h2-inline mb-2 center" style={{"height": 40}}><StarRating rating={reviewRating}></StarRating></div>
                             <TagsComponent review={review} />
                         </div>
                     </div>
