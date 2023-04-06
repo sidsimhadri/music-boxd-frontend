@@ -66,3 +66,26 @@ export const findTagThunk = createAsyncThunk(
     await service.findTag()
 )
 
+export const findAlbumThunk = createAsyncThunk(
+  'spotify/album', async () =>
+    await service.findAlbum()
+)
+
+export const findArtistAlbumsThunk = createAsyncThunk(
+  'spotify/albums', async () =>
+    await service.findArtistAlbums()
+)
+export const findNewreleasesThunk = createAsyncThunk(
+  'spotify/newreleases', async () =>
+    await service.findNewreleases()
+)
+
+export const findSearchResultsThunk = createAsyncThunk(
+  'spotify/search', async () =>
+    await service.findSearchResults()
+)
+
+export const findPlaylistThunk = createAsyncThunk(
+  'spotify/playlist', async () =>
+    await service.findPlaylist()
+)

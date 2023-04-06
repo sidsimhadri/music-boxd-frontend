@@ -2,6 +2,7 @@ import axios from 'axios';
 const USER_API = 'http://localhost:4000/api/users';
 const TAGS_API = 'http://localhost:4000/api/tags';
 const REVIEWS_API = 'http://localhost:4000/api/reviews';
+const SPOTIFY_API = 'http://localhost:4000/api/spotify'
 
 export const createUser = async (user) => {
  const response = await axios.post(USER_API, user)
@@ -62,3 +63,34 @@ export const findTag = async () => {
  const tags = response.data;
  return tags;
 }
+export const findAlbum = async () => {
+ const response = await axios.get(SPOTIFY_API + "/album");
+ const album = response.data;
+ return album;
+}
+
+export const findArtistAlbums = async () => {
+ const response = await axios.get(SPOTIFY_API + "/albums");
+ const albums = response.data;
+ return albums;
+}
+
+export const findNewreleases = async () => {
+ const response = await axios.get(SPOTIFY_API + "/newreleases");
+ const newreleases = response.data;
+ return newreleases;
+}
+
+export const findSearchResults = async () => {
+ const response = await axios.get(SPOTIFY_API + "/search");
+ const results = response.data;
+ return results;
+}
+
+export const findPlaylist = async () => {
+ const response = await axios.get(SPOTIFY_API + "/playlist");
+ const playlist = response.data;
+ return playlist;
+}
+
+
