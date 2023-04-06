@@ -28,14 +28,23 @@ function ReviewComponent(
         tags: [
             'rap', 'soul'
         ],
-        editing: false,
     } }
 ) {
-    let [body, setBody] = useState(review.body)
+    let [reviewBody, setBody] = useState(review.body)
+    let [editing, setEditing] = useState(false)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(findReviewsThunk())
     })
+    const editingHandler = ({ review }) => {
+        setEditing(!editing)
+        if (!editing) { // review has been saved
+            dispatch(updateReviewThunk({
+                ...review,
+                body: reviewBody,
+            }))
+        }
+    }
     return (
         <>
             <div className="row mt-2">
@@ -60,15 +69,15 @@ function ReviewComponent(
                                 <span className="h2-inline">{review.artist}
                                 </span>
                             </Link> <span className="h2-inline nunito">, {review.albumYear} </span>
-                            {!review.editing &&
+                            {!editing &&
                                 <div className="nunito text-white">
                                     {review.body}
                                 </div>
                             }
                             {
-                                review.editing &&
+                                editing &&
                                 <div>
-                                    <textarea className="form-control border-0 bg-dark text-white mb-1" value={body}
+                                    <textarea className="form-control border-0 bg-dark text-white mb-1" value={reviewBody}
                                         onChange={(event) => setBody(event.target.value)}></textarea>
                                 </div>
                             }
@@ -77,6 +86,17 @@ function ReviewComponent(
                     </div>
                     <div className="mt-3">
                         <ReviewInteractionsComponent review={review} />
+                        {
+                            review.currentUser &&
+                            <button className={"btn " + (editing ? "btn-info" : "btn-outline-info")}
+                                onClick={() => editingHandler({ review })}>
+                                <i className={"fa " + (editing ? "fa-check" : "fa-edit")}></i>
+                                <span className="nunito">
+                                    {!editing && " Edit"}
+                                    {editing && " Save"}
+                                </span>
+                            </button>
+                        }
                     </div>
                 </div>
                 <div className="col-md-4 col-lg-3 d-none d-md-block nunito">

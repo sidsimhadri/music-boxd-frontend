@@ -17,12 +17,6 @@ const ReviewInteractionsComponent = ({ review }) => {
             disliked: !review.disliked
         }))
     }
-    const editingHandler = ({ review }) => {
-        dispatch(updateReviewThunk({
-            ...review,
-            editing: !review.editing
-        }))
-    }
     return (<>
         <button className={"btn me-2 " + (review.liked ? "btn-success" : "btn-outline-success")}
             onClick={() => upvoteHandler({ review })}>
@@ -32,13 +26,6 @@ const ReviewInteractionsComponent = ({ review }) => {
             onClick={() => downvoteHandler({ review })}>
             <i className="fa fa-arrow-down"></i><span className="nunito"> {review.dislikes} </span>
         </button>
-        {
-            review.currentUser &&
-            <button className={"btn " + (review.editing ? "btn-info" : "btn-outline-info")}
-                onClick={() => editingHandler({ review })}>
-                <i className="fa fa-edit"></i><span className="nunito"> Edit </span>
-            </button>
-        }
     </>);
 }
 
