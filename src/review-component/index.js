@@ -18,7 +18,7 @@ function ReviewComponent(
         albumName: "IGOR",
         artist: "Tyler, the Creator",
         albumYear: 2019,
-        rating: 5,
+        rating: 4,
         body: "Wowwwwwwwwwwwioerhfgjpweriuhgfjaksvnhqewiufjhkmnrekngflkjvqerwifghqeruigjlknbglwjeksdnvmeqrwndfuipjfdkvbndfjgqierwlgwkejfqewlr",
         likes: 200,
         liked: true,
@@ -33,6 +33,7 @@ function ReviewComponent(
 ) {
     let [reviewBody, setBody] = useState(review.body)
     let [editing, setEditing] = useState(false)
+    let [reviewRating, setRating] = useState(review.rating)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(findReviewsThunk())
@@ -43,6 +44,7 @@ function ReviewComponent(
             dispatch(updateReviewThunk({
                 ...review,
                 body: reviewBody,
+                rating: reviewRating,
             }))
         }
     }
@@ -61,20 +63,17 @@ function ReviewComponent(
                     </div>
                     <div className="row" style={{ "wordBreak": "break-all" }}>
                         <span className="volkhov text-white h1-inline">
-                            <Link className="link-salmon"> <i className="me-3">{review.albumName}</i></Link><StarRating rating={review.rating}></StarRating>
-                        </span>
-                        <div>
+                            <Link className="link-salmon"> <i className="me-3">{review.albumName}</i></Link>
                             <Link className="nunito link-salmon">
                                 <span className="h2-inline">{review.artist}
                                 </span>
-                            </Link> <span className="h2-inline nunito">, {review.albumYear} </span>
-                            {!editing &&
-                                <div className="nunito text-white">
-                                    {review.body}
-                                </div>
-                            }
-                            {
-                                editing &&
+                            </Link><span className="h2-inline nunito">, {review.albumYear} </span>
+                        </span>
+                        <div>
+
+                            <div className="h2-inline mb-2 nudge-up" style={{"height": 40}}><StarRating rating={reviewRating}></StarRating></div>
+                            {!editing && <div className="nunito text-white"> {reviewBody} </div>}
+                            {editing &&
                                 <div>
                                     <textarea className="form-control border-0 bg-dark text-white mb-1" value={reviewBody}
                                         onChange={(event) => setBody(event.target.value)}></textarea>

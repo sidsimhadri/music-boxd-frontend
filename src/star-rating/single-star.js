@@ -1,4 +1,4 @@
-import { Star, StarFill, StarHalf } from "react-bootstrap-icons";
+import { Star, StarFill} from "react-bootstrap-icons";
 
 const SingleStar = ({ filledIn }) => {
     return (<>
