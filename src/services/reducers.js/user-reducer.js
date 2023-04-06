@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { findUsersThunk, deleteUserThunk, createUserThunk, updateUserThunk}  from "../service"
+import { findUsersThunk, deleteUserThunk, createUserThunk, updateUserThunk}  from "../thunks"
 
 const initialState = {
    users: [],

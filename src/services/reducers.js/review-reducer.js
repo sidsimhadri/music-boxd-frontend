@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { findReviewsThunk, deleteReviewThunk, createReviewThunk, updateReviewThunk}  from "../service"
+import { findReviewsThunk, deleteReviewThunk, createReviewThunk, updateReviewThunk}  from "../thunks"
 
 const initialState = {
    reviews: [],
