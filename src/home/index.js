@@ -9,10 +9,10 @@ function HomeComponent() {
             <TrackStarHeader />
         </div>
         <div className="row mt-2">
-            <div className="no-pad-left col-3 col-md-2 col-lg-2 col-xl-3">
+            <div className="d-none d-md-block no-pad-left col-3">
                 <TrendingReleases />
             </div>
-            <div className="col-9 col-lg-10 col-xl-9">
+            <div className="col-12 col-md-9">
                 <FeaturedReviews />
             </div>
         </div>
