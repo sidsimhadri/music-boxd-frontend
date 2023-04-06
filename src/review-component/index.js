@@ -7,6 +7,7 @@ import TagsComponent from "./tags";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { findReviewsThunk, updateReviewThunk } from "../services/thunks";
+import ReviewByComponent from "./review-by";
 
 function ReviewComponent(
     { review = {
@@ -56,9 +57,7 @@ function ReviewComponent(
                 </div>
                 <div className="col-12 col-md-8 col-lg-6">
                     <div className="row">
-                        <span className="nunito float-left">{review.timestamp} - Review by <Link className="link-salmon">
-                            @{review.reviewer}
-                            <img className="profile-picture ms-2 me-2" src={review.profilepic} alt={review.reviewer}></img></Link></span>
+                        <ReviewByComponent review={review} />
                     </div>
                     <div className="row" style={{ "wordBreak": "break-all" }}>
                         <span className="volkhov text-white h1-inline">
