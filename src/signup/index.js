@@ -100,11 +100,11 @@ function SignUp() {
                                         />
                                     </div>
                                     <div className="form-group">
-                                        <Link to="/">
+                                        {/* <Link to="/"> */}
                                             <button type="submit" className="btn btn-success btn-block">
                                                 Sign Up
                                             </button>
-                                        </Link>
+                                        {/* </Link> */}
 
                                     </div>
                                 </form>
