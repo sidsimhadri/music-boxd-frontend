@@ -4,8 +4,8 @@ import * as service from
     "./service"
 
 export const findUsersThunk = createAsyncThunk(
-  'user/findUsers', async () =>
-    await service.findUser()
+  'user/findUsers', async (uid) =>
+    await service.findUser(uid)
 )
 export const deleteUserThunk = createAsyncThunk(
   'user/deleteUser',
@@ -30,8 +30,8 @@ export const createUserThunk = createAsyncThunk(
 
 
 export const findReviewsThunk = createAsyncThunk(
-  'reviews/findReviews', async () =>
-    await service.findReview()
+  'reviews/findReviews', async (rid) =>
+    await service.findReview(rid)
 )
 export const deleteReviewThunk = createAsyncThunk(
   'review/deleteReview',
@@ -62,18 +62,18 @@ export const createReviewThunk = createAsyncThunk(
 })
 
 export const findTagThunk = createAsyncThunk(
-  'tag/findTags', async () =>
-    await service.findTag()
+  'tag/findTags', async (tid) =>
+    await service.findTag(tid)
 )
 
 export const findAlbumThunk = createAsyncThunk(
-  'spotify/album', async () =>
-    await service.findAlbum()
+  'spotify/album', async (aid) =>
+    await service.findAlbum(aid)
 )
 
 export const findArtistAlbumsThunk = createAsyncThunk(
-  'spotify/albums', async () =>
-    await service.findArtistAlbums()
+  'spotify/albums', async (artistId) =>
+    await service.findArtistAlbums(artistId)
 )
 export const findNewreleasesThunk = createAsyncThunk(
   'spotify/newreleases', async () =>
@@ -86,6 +86,6 @@ export const findSearchResultsThunk = createAsyncThunk(
 )
 
 export const findPlaylistThunk = createAsyncThunk(
-  'spotify/playlist', async () =>
-    await service.findPlaylist()
+  'spotify/playlist', async (pid) =>
+    await service.findPlaylist(pid)
 )

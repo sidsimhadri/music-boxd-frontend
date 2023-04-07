@@ -10,8 +10,8 @@ export const createUser = async (user) => {
 }
 
 
-export const findUser = async () => {
- const response = await axios.get(USER_API);
+export const findUser = async (uid) => {
+ const response = await axios.get(`${USER_API}/${uid}`)
  const users = response.data;
  return users;
 }
@@ -34,8 +34,8 @@ export const createReview = async (review) => {
 }
 
 
-export const findReview = async () => {
- const response = await axios.get(REVIEWS_API);
+export const findReview = async (rid) => {
+ const response = await axios.get(`${REVIEWS_API}/${rid}`)
  const reviews = response.data;
  return reviews;
 }
@@ -58,19 +58,19 @@ export const createTag = async (tag) => {
 }
 
 
-export const findTag = async () => {
- const response = await axios.get(TAGS_API);
+export const findTag = async (tid) => {
+ const response = await axios.get(`${TAGS_API}/${tid}`)
  const tags = response.data;
  return tags;
 }
-export const findAlbum = async () => {
- const response = await axios.get(SPOTIFY_API + "/album");
+export const findAlbum = async (aid) => {
+  const response = await axios.get(`${SPOTIFY_API}/album/${aid}`)
  const album = response.data;
  return album;
 }
 
-export const findArtistAlbums = async () => {
- const response = await axios.get(SPOTIFY_API + "/albums");
+export const findArtistAlbums = async (artistId) => {
+ const response = await axios.get(`${SPOTIFY_API}/albums/${artistId}`)
  const albums = response.data;
  return albums;
 }
@@ -87,8 +87,8 @@ export const findSearchResults = async () => {
  return results;
 }
 
-export const findPlaylist = async () => {
- const response = await axios.get(SPOTIFY_API + "/playlist");
+export const findPlaylist = async (pid) => {
+ const response = await axios.get(`${SPOTIFY_API}/playlist/${pid}`)
  const playlist = response.data;
  return playlist;
 }
