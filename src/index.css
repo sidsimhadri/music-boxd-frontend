@@ -38,15 +38,23 @@
   color: gray;
 }
 
-.no-margin-left{
+.no-margin-left {
   margin-left: 0px;
 }
 
-.no-margin-bottom{
+.no-margin-bottom {
   margin-bottom: 0px;
 }
 
 .tag-x {
   border-style: none;
   font-family: 'Nunito Sans', sans-serif;
+}
+
+.star-button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0px;
 }

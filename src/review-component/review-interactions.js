@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { updateReviewThunk } from "../services/thunks";
 
-const ReviewInteractionsComponent = ({ review }) => {
+const ReviewInteractionsComponent = ({ review }, editing, setEditing) => {
     const dispatch = useDispatch()
     const upvoteHandler = ({ review }) => {
         dispatch(updateReviewThunk({

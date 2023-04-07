@@ -1,30 +1,28 @@
-import { useDispatch } from "react-redux";
-import { updateReviewThunk } from "../services/thunks";
+import { useState } from "react";
 
-const TagsComponent = ({ review }) => {
-    const dispatch = useDispatch();
-    const deleteTagHandler = (review, tag) => {
-        dispatch(updateReviewThunk({
-            ...review,
-            tags: review.tags.filter(t => t !== tag)
-        }))
+const TagsComponent = ({ tags, editing, setParentTags }) => {
+    const [currTags, setTags] = useState(tags);
+    const deleteTagHandler = (tag) => {
+        let newTags = tags.filter(t => t !== tag)
+        setTags(newTags)
+        setParentTags(newTags)
     }
     return (
         <>
             {
-                review.tags.map(t => {
+                currTags.map(t => {
                     return (
                         <span className="badge bg-info me-2">{t}
-                            {review.editing &&
+                            {editing &&
                                 <button className="bg-info tag-x" onClick={() => {
-                                    deleteTagHandler(review, t)
+                                    deleteTagHandler(t)
                                 }}>X</button>
                             }
                         </span>
                     );
                 })
             }
-            {review.editing &&
+            {editing &&
                 <span className="badge bg-dark me-2">
                     <button className="bg-dark tag-x">+</button>
                 </span>

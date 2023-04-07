@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import ReviewInteractionsComponent from "./review-interactions";
 import ReviewActionsComponent from "./review-actions";
 import TagsComponent from "./tags";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { findReviewsThunk, updateReviewThunk } from "../services/thunks";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { updateReviewThunk } from "../services/thunks";
 import ReviewByComponent from "./review-by";
 
 function ReviewComponent(
@@ -19,7 +19,7 @@ function ReviewComponent(
         artist: "Tyler, the Creator",
         albumYear: 2019,
         rating: 4,
-        body: "Wowwwwwwwwwwwioerhfgjpweriuhgfjaksvnhqewiufjhkmnrekngflkjvqerwifghqeruigjlknbglwjeksdnvmeqrwndfuipjfdkvbndfjgqierwlgwkejfqewlr",
+        body: "Wow.",
         likes: 200,
         liked: true,
         dislikes: 123,
@@ -31,13 +31,11 @@ function ReviewComponent(
         ],
     } }
 ) {
-    let [reviewBody, setBody] = useState(review.body)
     let [editing, setEditing] = useState(false)
+    let [reviewBody, setBody] = useState(review.body)
     let [reviewRating, setRating] = useState(review.rating)
+    let [reviewTags, setReviewTags] = useState(review.tags)
     const dispatch = useDispatch()
-    useEffect(() => {
-        dispatch(findReviewsThunk())
-    })
     const editingHandler = ({ review }) => {
         setEditing(!editing)
         if (!editing) { // review has been saved
@@ -45,6 +43,7 @@ function ReviewComponent(
                 ...review,
                 body: reviewBody,
                 rating: reviewRating,
+                tags: reviewTags,
             }))
         }
     }
@@ -77,12 +76,15 @@ function ReviewComponent(
                                         onChange={(event) => setBody(event.target.value)}></textarea>
                                 </div>
                             }
-                            <div className="h2-inline mb-2 center" style={{"height": 40}}><StarRating rating={reviewRating}></StarRating></div>
-                            <TagsComponent review={review} />
+                            <div className="h2-inline mb-2 center" style={{ "height": 40 }}>
+                                <StarRating rating={reviewRating} editing={editing} setParentRating={setRating}></StarRating>
+                            </div>
+                            <TagsComponent tags={reviewTags} editing={editing} setParentTags={setReviewTags} />
                         </div>
                     </div>
                     <div className="mt-3">
-                        <ReviewInteractionsComponent review={review} />
+                        <ReviewInteractionsComponent
+                            review={review} />
                         {
                             review.currentUser &&
                             <button className={"btn " + (editing ? "btn-info" : "btn-outline-info")}
