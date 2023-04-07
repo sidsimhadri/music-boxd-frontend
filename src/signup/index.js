@@ -1,22 +1,23 @@
 import '../vendors/bootstrap.min.css';
 import TrackStarLogo from '../trackstar-header/trackstar-logo';
-
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { createUserThunk } from '../services/thunks';
+import { Link } from 'react-router-dom';
 
 function SignUp() {
     const dispatch = useDispatch();
     const [userData, setUserData] = useState({
         firstName: '',
         lastName: '',
+        username: '',
         email: '',
         password: '',
     });
 
     const handleInputChange = (e) => {
         setUserData({
-           // ...userData,
+            ...userData,
             [e.target.name]: e.target.value,
         });
     };
@@ -24,36 +25,98 @@ function SignUp() {
     const handleSubmit = (e) => {
         e.preventDefault();
         const newUser = {
-            username: userData.email,
+            username: userData.userName,
             id: Date.now().toString(),
             followers: 0,
             following: 0,
             role: 'general',
-           // ...userData
+            // ...userData
         }
         dispatch(createUserThunk(newUser));
     };
 
     return (
-        <div>
-            <TrackStarLogo />
-            <h1>Sign Up</h1>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="firstName">First Name:</label>
-                <input type="text" name="firstName" onChange={handleInputChange} />
+        <>
+            <div className="mt-3"> <TrackStarLogo /></div>
 
-                <label htmlFor="lastName">Last Name:</label>
-                <input type="text" name="lastName" onChange={handleInputChange} />
+            <div className="container mt-5">
+                <div className="row justify-content-center">
+                    <div className="col-md-6">
+                        <div className="card">
+                            <div className="card-header bg-success text-white">
 
-                <label htmlFor="email">Email:</label>
-                <input type="email" name="email" onChange={handleInputChange} />
+                                <h4 className="card-title text-center mt-3 mb-0">Sign Up</h4>
+                            </div>
+                            <div className="card-body">
+                                <form onSubmit={handleSubmit}>
+                                    <div className="form-group">
+                                        <label htmlFor="firstName">First Name:</label>
+                                        <input
+                                            type="text"
+                                            name="firstName"
+                                            className="form-control"
+                                            onChange={handleInputChange}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="lastName">Last Name:</label>
+                                        <input
+                                            type="text"
+                                            name="lastName"
+                                            className="form-control"
+                                            onChange={handleInputChange}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="userName">Username:</label>
+                                        <input
+                                            type="text"
+                                            name="userName"
+                                            className="form-control"
+                                            onChange={handleInputChange}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="email">Email:</label>
+                                        <input
+                                            type="email"
+                                            name="email"
+                                            className="form-control"
+                                            onChange={handleInputChange}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="password">Password:</label>
+                                        <input
+                                            type="password"
+                                            name="password"
+                                            className="form-control"
+                                            onChange={handleInputChange}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <Link to="/">
+                                            <button type="submit" className="btn btn-success btn-block">
+                                                Sign Up
+                                            </button>
+                                        </Link>
 
-                <label htmlFor="password">Password:</label>
-                <input type="password" name="password" onChange={handleInputChange} />
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                <button type="submit">Sign Up</button>
-            </form>
-        </div>
+
+
+        </>
     );
 }
 
