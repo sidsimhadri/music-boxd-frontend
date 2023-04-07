@@ -1,20 +1,31 @@
-const ReviewInteractionsComponent = ({ review }) => {
+import { useDispatch } from "react-redux";
+import { updateReviewThunk } from "../services/thunks";
+
+const ReviewInteractionsComponent = ({ review }, editing, setEditing) => {
+    const dispatch = useDispatch()
+    const upvoteHandler = ({ review }) => {
+        dispatch(updateReviewThunk({
+            ...review,
+            likes: review.likes + (review.liked ? 1 : -1),
+            liked: !review.liked
+        }))
+    }
+    const downvoteHandler = ({ review }) => {
+        dispatch(updateReviewThunk({
+            ...review,
+            dislikes: review.dislikes + (review.disliked ? 1 : -1),
+            disliked: !review.disliked
+        }))
+    }
     return (<>
-        <button className="btn btn-outline-success me-2" onClick={() => console.log('hello')}>
+        <button className={"btn me-2 " + (review.liked ? "btn-success" : "btn-outline-success")}
+            onClick={() => upvoteHandler({ review })}>
             <i className="fa fa-arrow-up"></i><span className="nunito"> {review.likes} </span>
         </button>
-        <button className="btn btn-outline-danger me-2">
+        <button className={"btn me-2 " + (review.disliked ? "btn-danger" : "btn-outline-danger")}
+            onClick={() => downvoteHandler({ review })}>
             <i className="fa fa-arrow-down"></i><span className="nunito"> {review.dislikes} </span>
         </button>
-        <button className="btn btn-outline-primary me-2">
-            <i className="fa fa-comment"></i><span className="nunito"> {review.comments} </span>
-        </button>
-        {
-            review.currentUser &&
-            <button className="btn btn-outline-info">
-                <i className="fa fa-edit"></i><span className="nunito"> Edit </span>
-            </button>
-        }
     </>);
 }
 

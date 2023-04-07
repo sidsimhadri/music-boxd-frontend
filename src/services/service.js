@@ -10,8 +10,10 @@ export const createUser = async (user) => {
 }
 
 
+
 export const findUser = async (uid) => {
  const response = await axios.get(`${USER_API}/${uid}`)
+
  const users = response.data;
  return users;
 }
@@ -57,9 +59,9 @@ export const createTag = async (tag) => {
  return response.data;
 }
 
-
 export const findTag = async (tid) => {
  const response = await axios.get(`${TAGS_API}/${tid}`)
+
  const tags = response.data;
  return tags;
 }
