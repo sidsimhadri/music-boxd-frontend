@@ -45,11 +45,11 @@ function SignUp() {
                         <div className="card">
                             <div className="card-header bg-success text-white">
 
-                                <h4 className="card-title text-center mt-3 mb-0">Sign Up</h4>
+                                <h2 className="card-title text-center mt-3 mb-3">Sign Up</h2>
                             </div>
                             <div className="card-body">
                                 <form onSubmit={handleSubmit}>
-                                    <div className="form-group">
+                                    <div className="form-group mb-2">
                                         <label htmlFor="firstName">First Name:</label>
                                         <input
                                             type="text"
@@ -59,7 +59,7 @@ function SignUp() {
                                             required
                                         />
                                     </div>
-                                    <div className="form-group">
+                                    <div className="form-group mb-2">
                                         <label htmlFor="lastName">Last Name:</label>
                                         <input
                                             type="text"
@@ -69,7 +69,7 @@ function SignUp() {
                                             required
                                         />
                                     </div>
-                                    <div className="form-group">
+                                    <div className="form-group mb-2">
                                         <label htmlFor="userName">Username:</label>
                                         <input
                                             type="text"
@@ -79,7 +79,7 @@ function SignUp() {
                                             required
                                         />
                                     </div>
-                                    <div className="form-group">
+                                    <div className="form-group mb-2">
                                         <label htmlFor="email">Email:</label>
                                         <input
                                             type="email"
@@ -89,7 +89,7 @@ function SignUp() {
                                             required
                                         />
                                     </div>
-                                    <div className="form-group">
+                                    <div className="form-group mb-2">
                                         <label htmlFor="password">Password:</label>
                                         <input
                                             type="password"
