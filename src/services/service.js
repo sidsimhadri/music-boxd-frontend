@@ -81,8 +81,8 @@ export const findNewreleases = async () => {
  return newreleases;
 }
 
-export const findSearchResults = async () => {
- const response = await axios.get(SPOTIFY_API + "/search");
+export const findSearchResults = async (textInput) => {
+ const response = await axios.get(SPOTIFY_API + "/search", textInput);
  const results = response.data;
  return results;
 }
