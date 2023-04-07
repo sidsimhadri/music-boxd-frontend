@@ -32,7 +32,7 @@ function Login() {
                         </Link>
                         <div className="nunito mt-2">
                             <span>
-                                don't have align account?
+                                don't have an account?
                             </span>
                             <span>&nbsp;</span>
                             <span>
