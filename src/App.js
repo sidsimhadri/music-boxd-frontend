@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router";
 import ProfileComponent from "./profile";
 import ReviewComponent from "./review-component";
 import LoginComponent from "./login";
+import SignupComponent from "./signup";
 import { configureStore }
   from '@reduxjs/toolkit';
 import { Provider } from "react-redux";
@@ -24,6 +25,7 @@ function App() {
           <Route path="/profile" element={<ProfileComponent />}/>
           <Route path="/reviews/:id" element={<ReviewComponent />}/>
           <Route path="/login" element={<LoginComponent />}/>
+          <Route path="/signup" element={<SignupComponent />}/>
         </Routes>
       </div>
       </BrowserRouter>
