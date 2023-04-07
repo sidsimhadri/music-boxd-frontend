@@ -27,7 +27,9 @@ function Login() {
                             <input type="checkbox" className="form-check-input" id="remember-me" />
                             <label className="form-check-label" htmlFor="remember-me">Remember me</label>
                         </div>
+                        <Link to="/">
                         <button type="submit" className="btn btn-success  mt-2 btn-block">Login</button>
+                        </Link>
                         <div className="nunito mt-2">
                             <span>
                                 no account?
