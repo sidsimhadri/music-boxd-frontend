@@ -3,7 +3,6 @@ import TrackStarLogo from '../trackstar-header/trackstar-logo';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { createUserThunk } from '../services/thunks';
-import { Link } from 'react-router-dom';
 
 function SignUp() {
     const dispatch = useDispatch();
