@@ -71,8 +71,9 @@ export const findAlbum = async (aid) => {
  return album;
 }
 
+// finds albums by a given artist
 export const findArtistAlbums = async (artistId) => {
- const response = await axios.get(`${SPOTIFY_API}/albums/${artistId}`)
+ const response = await axios.get(`${SPOTIFY_API}/artists/${artistId}/albums`)
  const albums = response.data;
  return albums;
 }
