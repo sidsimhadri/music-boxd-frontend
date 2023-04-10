@@ -2,15 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { findReviewsThunk, deleteReviewThunk, createReviewThunk, updateReviewThunk } from "../thunks"
 
 const initialState = {
-  reviews: [{
-    "body": "bla bla",
-    "upvotes": "3",
-    "downvotes": "223",
-    "_id": "123",
-    "timestamp": "122312423324",
-    "albumId": "123324",
-    "userId": "123"
-}],
+  reviews: [],
   loading: false
 }
 

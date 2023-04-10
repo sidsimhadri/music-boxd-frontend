@@ -7,7 +7,7 @@ import TagsComponent from "./tags";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { findReviewsThunk, updateReviewThunk } from "../services/thunks";
+import { createReviewThunk, findReviewsThunk, updateReviewThunk } from "../services/thunks";
 import ReviewByComponent from "./review-by";
 
 function ReviewComponent(
@@ -34,21 +34,22 @@ function ReviewComponent(
 ) {
     
     const { id } = useParams();
-    const { reviews, loading } = useSelector(state => state.reviews)
     const dispatch = useDispatch()
-    // gets information about the review first
     useEffect(() => {
-        dispatch(findReviewsThunk(id))
-    }, [dispatch, id])
-    // useEffect(() => {
-    //     dispatch(createReviewThunk({
-    //         "body": "bla bla",
-    //         "upvotes": "3",
-    //         "downvotes": "223",
-    //         "albumId": "123324",
-    //         "userId": "123"
-    //     }))
-    // }, [dispatch])
+        dispatch(findReviewsThunk())
+    }, [dispatch])
+    const { reviews, loading } = useSelector(state => state.reviews)
+    !loading && console.log(reviews)
+         dispatch(createReviewThunk(id))
+    useEffect(() => {
+        dispatch(createReviewThunk({
+            "body": "bla bla",
+            "upvotes": "3",
+            "downvotes": "223",
+            "albumId": "123324",
+            "userId": "123"
+        }))
+    }, [dispatch])
     let review = reviews[0]
     let [editing, setEditing] = useState(false)
     let [reviewBody, setBody] = useState(review.body)

@@ -33,9 +33,9 @@ export const createReview = async (review) => {
 }
 
 
-export const findReview = async (rid) => {
- const response = await axios.get(`${REVIEWS_API}/${rid}`)
- const reviews = response.data;
+export const findReview = async () => {
+ const response = await axios.get(REVIEWS_API)
+  const reviews = response.data;
  return reviews;
 }
 
