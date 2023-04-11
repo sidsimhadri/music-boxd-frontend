@@ -4,6 +4,7 @@ const TAGS_API = 'http://localhost:4000/api/tags';
 const REVIEWS_API = 'http://localhost:4000/api/reviews';
 const SPOTIFY_API = 'http://localhost:4000/api/spotify'
 
+
 export const createUser = async (user) => {
  const response = await axios.post(USER_API, user)
  return response.data;
