@@ -1,6 +1,6 @@
-import { Star, StarFill, StarHalf } from "react-bootstrap-icons";
+import { Star, StarFill } from "react-bootstrap-icons";
 
-const SingleStar = ({ filledIn }) => {
+const SingleStar = ({ filledIn, setRating }) => {
     return (<>
         {filledIn && <StarFill className="pe-1" color="salmon" />}
         {!filledIn && <Star className="pe-1" color="salmon" />}

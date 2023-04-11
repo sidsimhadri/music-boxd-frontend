@@ -20,11 +20,11 @@ function ProfileComponent() {
             <TrackStarHeader />
         </div>
         <div className="mt-2 row">
-            <div className="col-4 relative" align="center">
+            <div className="col-5 d-none d-lg-flex flex-column justify-content-center align-items-center relative">
                 <ProfilePictureComponent user={user} />
                 <FollowUnfollowButton following={user.isFollowing}/>
             </div>
-            <div className="col-6">
+            <div className="col-12 col-lg-7">
                 <ProfileHeaderComponent user={user} />
                 <h2 className="nunito text-white">Latest Ratings: </h2>
                 <LatestReviewsComponent />
