@@ -12,7 +12,6 @@ const ReviewItem = ({ review }) => {
       <div className="list-group-item">
       <p className="mb-1">{review.body}</p>
       <ReviewInteractionsComponent review={review}/>
-      {/* <Link to={`api/reviews/${review.id}`}>View Review</Link> */}
     </div>
         </Link>
     </>
