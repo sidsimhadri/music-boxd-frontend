@@ -3,9 +3,7 @@ import { Link } from "react-router-dom";
 import ReviewInteractionsComponent from "../review-component/review-interactions";
 
 const ReviewItem = ({ review }) => {
-  const date = new Date(review.timestamp);
-  const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
-
+ 
   return (
     <>
       <Link to={`/api/reviews/${review.id}`}>

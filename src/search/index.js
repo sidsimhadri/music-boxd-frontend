@@ -10,7 +10,7 @@ function SearchComponent() {
       <div className="row mt-2">
         <TrackStarHeader />
       </div>
-      <ReviewSearchComponent query={query}/>
+      <ReviewSearchComponent reviewId={query}/>
 
     </>
   );
