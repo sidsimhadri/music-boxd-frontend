@@ -25,7 +25,7 @@ function App() {
           <Route path="/profile" element={<ProfileComponent />}/>
           <Route path="/reviews/:id" element={<ReviewComponent />}/>
           <Route path="/login" element={<LoginComponent />}/>
-          <Route path="/search" element={<Search />}/>
+          <Route path="/search/:query" element={<Search />}/>
         </Routes>
       </div>
       </BrowserRouter>

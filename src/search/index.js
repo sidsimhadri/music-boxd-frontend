@@ -1,14 +1,19 @@
-import React from 'react';
-import '../vendors/bootstrap.min.css'; 
-import TrackStarHeader from '../trackstar-header';
+import TrackStarHeader from "../trackstar-header";
+import { useParams } from "react-router-dom";
+import ReviewSearchComponent from "./review-search";
 
-function Search() {
+function SearchComponent() {
+  const { query } = useParams();
+
   return (
     <>
-    <TrackStarHeader/>
-    
+      <div className="row mt-2">
+        <TrackStarHeader />
+      </div>
+      <ReviewSearchComponent query={query}/>
+
     </>
   );
 }
 
-export default Search;
+export default SearchComponent;

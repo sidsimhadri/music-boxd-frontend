@@ -3,6 +3,7 @@ const USER_API = 'http://localhost:4000/api/users';
 const TAGS_API = 'http://localhost:4000/api/tags';
 const REVIEWS_API = 'http://localhost:4000/api/reviews';
 
+
 export const createUser = async (user) => {
  const response = await axios.post(USER_API, user)
  return response.data;
