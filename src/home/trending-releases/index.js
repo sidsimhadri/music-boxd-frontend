@@ -5,7 +5,7 @@ import TrendingReleaseItem from "./trending-release-item";
 const TrendingReleases = () => {
     return (
         <>
-            <div className="bg-dark text-white pt-3 ps-3 pb-1 bg-dark">
+            <div className="bg-dark text-white pt-3 ps-3 pb-1 bg-dark rounded">
                 <h6 className="nunito">Trending Releases</h6>
             </div>
             <ul className="list-group">

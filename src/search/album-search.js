@@ -1,30 +1,40 @@
-// import React, { useEffect } from "react";
-// import AlbumItem from "./album-item";
-// import { useDispatch, useSelector } from "react-redux";
-// import { findAlbums } from "../services/thunks";
+import React, { useEffect, useState } from "react";
+import ReviewItem from "./review-item";
+import { useDispatch, useSelector } from "react-redux";
+import { findReviewsThunk } from "../services/thunks";
 
-// const AlbumSearchComponent = () => {
-//   const { albums, loading } = useSelector(
-//     state => state.albumsData
-//   );
+const AlbumSearchComponent = ({ reviewId }) => {
+    const reviews = useSelector((state) => state.reviews.reviews);
+    const loading = useSelector((state) => state.loading);
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(findReviewsThunk(reviewId));
+    }, [dispatch, reviewId]);
 
-//   const dispatch = useDispatch();
+    console.log("reviews:", reviews);
+    console.log("loading:", loading);
 
-//   useEffect(() => {
-//     dispatch(fetchAlbums());
-//   }, [dispatch]);
+    const filteredReviews = Array.isArray(reviews) 
+    ? reviews.filter(review => review._id === reviewId)
+    : reviews._id === reviewId ? [reviews] : [];
 
-//   return (
-//     <div className="container-fluid">
-//       <div className="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4">
-//         {loading && <p>Loading...</p>}
-//         {albums &&
-//           albums.map(album => (
-//             <AlbumItem key={album.id} album={album} />
-//           ))}
-//       </div>
-//     </div>
-//   );
-// };
+    return (
+        <div className="container-fluid">
+            <div className="list-group mt-4">
+                {loading && (
+                    <div className="d-flex justify-content-center align-items-center">
+                        <div className="spinner-border text-danger" role="status">
+                            <span className="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                )}
+                {reviews &&
+                    filteredReviews.map(review => (
+                        <ReviewItem key={review._id} review={review} />
+                    ))}
+            </div>
+        </div>
+    );
+};
 
-// export default AlbumSearchComponent;
+export default AlbumSearchComponent;

@@ -31,6 +31,7 @@ function App() {
           <Route path="/login" element={<LoginComponent />}/>
 
           <Route path="/search/:query" element={<Search />}/>
+          <Route path="/search" element={<Search />}/>
 
           <Route path="/signup" element={<SignupComponent />}/>
         </Routes>

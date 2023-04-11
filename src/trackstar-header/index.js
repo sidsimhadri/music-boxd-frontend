@@ -4,7 +4,7 @@ import ProfileInformation from "./profile-information.js";
 
 function TrackStarHeader() {
     return (
-        <div className="d-flex center justify-content-between bg-dark">
+        <div className="d-flex center justify-content-between bg-dark rounded">
             <TrackStarLogo />
             <MainSearchBar/>
             <ProfileInformation />

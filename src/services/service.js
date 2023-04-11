@@ -85,7 +85,7 @@ export const findNewreleases = async () => {
 }
 
 export const searchArtists = async (textInput) => {
- const response = await axios.get(SPOTIFY_API + "/searchArtists", textInput);
+ const response = await axios.get(SPOTIFY_API + "/searchArtists/", textInput);
  const results = response.data;
  return results;
 }
