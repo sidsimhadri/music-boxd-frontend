@@ -36,10 +36,10 @@ function ReviewComponent() {
     const { reviews, loading } = useSelector(state => state.reviews)
     const [album, setAlbum] = useState(null);
     const dispatch = useDispatch()
-    let [editing, setEditing] = useState(false)
-    let [reviewBody, setBody] = useState(reviews.body)
-    let [reviewRating, setRating] = useState(reviews.rating)
-    let [albumTitle, setAlbumTitle] = useState(null)
+    const [editing, setEditing] = useState(false)
+    const [reviewBody, setBody] = useState(reviews.body)
+    const [reviewRating, setRating] = useState(reviews.rating)
+    const [albumTitle, setAlbumTitle] = useState(null)
 
     useEffect(() => {
         dispatch(findReviewsThunk(id));
@@ -47,10 +47,10 @@ function ReviewComponent() {
 
     useEffect(() => {
         setBody(reviews.body)
+        setRating(reviews.rating)
         if (reviews.albumId !== undefined) {
             setAlbum(service.findAlbum(reviews.albumId))
         }
-        setRating(reviews.rating)
     }, [reviews])
 
     const editingHandler = ({ review }) => {
