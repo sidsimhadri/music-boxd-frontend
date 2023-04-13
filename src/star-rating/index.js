@@ -16,7 +16,7 @@ const StarRating = ({ rating, editing, setParentRating }) => {
                     <>
                         {editing &&
                             <button className="star-button" onClick={() => handleRatingChange(i)}>
-                                <SingleStar filledIn={currRating >= i} />
+                                <SingleStar key={i} filledIn={currRating >= i} />
                             </button>
 
                         }
@@ -25,21 +25,6 @@ const StarRating = ({ rating, editing, setParentRating }) => {
                 )
             })
         }
-        {/* <button className="star-button" onClick={() => handleRatingChange(1)}>
-            <SingleStar filledIn={currRating >= 1} />
-        </button>
-        <button className="star-button" onClick={() => handleRatingChange(2)}>
-            <SingleStar filledIn={currRating >= 2} />
-        </button>
-        <button className="star-button" onClick={() => handleRatingChange(3)}>
-            <SingleStar filledIn={currRating >= 3} />
-        </button>
-        <button className="star-button" onClick={() => handleRatingChange(4)}>
-            <SingleStar filledIn={currRating >= 4} />
-        </button>
-        <button className="star-button" onClick={() => handleRatingChange(5)}>
-            <SingleStar filledIn={currRating === 5} />
-        </button> */}
     </span>
 };
 

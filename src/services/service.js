@@ -33,8 +33,14 @@ export const createReview = async (review) => {
 }
 
 
-export const findReview = async () => {
- const response = await axios.get(REVIEWS_API)
+export const findReview = async (rid) => {
+  let response =""
+  if(rid === undefined){
+    response = await axios.get(`${REVIEWS_API}}`)
+  }
+  else {
+    response = await axios.get(`${REVIEWS_API}/${rid}`)
+  }
   const reviews = response.data;
  return reviews;
 }
@@ -64,8 +70,8 @@ export const findTag = async (tid) => {
 }
 export const findAlbum = async (aid) => {
   const response = await axios.get(`${SPOTIFY_API}/album/${aid}`)
- const album = response.data;
- return album;
+  const album = response.data;
+  return album;
 }
 
 export const findArtistAlbums = async (artistId) => {

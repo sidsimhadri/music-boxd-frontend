@@ -6,14 +6,14 @@ const ReviewInteractionsComponent = ({ review }, editing, setEditing) => {
     const upvoteHandler = ({ review }) => {
         dispatch(updateReviewThunk({
             ...review,
-            likes: review.likes + (review.liked ? 1 : -1),
+            likes: review.likes - (review.liked ? 1 : -1),
             liked: !review.liked
         }))
     }
     const downvoteHandler = ({ review }) => {
         dispatch(updateReviewThunk({
             ...review,
-            dislikes: review.dislikes + (review.disliked ? 1 : -1),
+            dislikes: review.dislikes - (review.disliked ? 1 : -1),
             disliked: !review.disliked
         }))
     }
