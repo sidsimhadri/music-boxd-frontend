@@ -12,39 +12,20 @@ import { findReviewsThunk, updateReviewThunk } from "../services/thunks";
 import ReviewByComponent from "./review-by";
 
 function ReviewComponent() {
-    // { r = {
-    //     image: "https://upload.wikimedia.org/wikipedia/en/5/51/Igor_-_Tyler%2C_the_Creator.jpg",
-    //     reviewer: "jackfurci",
-    //     timestamp: "2h",
-    //     profilepic: "https://render.fineartamerica.com/images/rendered/small/print/images/artworkimages/square/3/regular-show-benson-graham-macy.jpg",
-    //     albumName: "IGOR",
-    //     artist: "Tyler, the Creator",
-    //     albumYear: 2019,
-    //     rating: 4,
-    //     body: "Wow.",
-    //     likes: 200,
-    //     liked: true,
-    //     dislikes: 123,
-    //     disliked: false,
-    //     comments: 10,
-    //     currentUser: true,
-    //     tags: [
-    //         'rap', 'soul'
-    //     ],
-    // } }
     const { id } = useParams();
     const { reviews, loading } = useSelector(state => state.reviews)
     const [album, setAlbum] = useState(null);
-    const dispatch = useDispatch()
+    const [albumTitle, setAlbumTitle] = useState("")
+    const [albumCover, setAlbumCover] = useState("")
+    const [albumArtist, setAlbumArtist] = useState("")
+    const [albumDate, setAlbumDate] = useState("")
     const [editing, setEditing] = useState(false)
     const [reviewBody, setBody] = useState(reviews.body)
     const [reviewRating, setRating] = useState(reviews.rating)
-    const [albumTitle, setAlbumTitle] = useState(null)
-
+    const dispatch = useDispatch()
     useEffect(() => {
         dispatch(findReviewsThunk(id));
     }, [])
-
     useEffect(() => {
         setBody(reviews.body)
         setRating(reviews.rating)
@@ -52,7 +33,6 @@ function ReviewComponent() {
             setAlbum(service.findAlbum(reviews.albumId))
         }
     }, [reviews])
-
     const editingHandler = ({ review }) => {
         setEditing(!editing)
         if (!editing) { // review has been saved
@@ -60,13 +40,16 @@ function ReviewComponent() {
                 ...review,
                 body: reviewBody,
                 rating: reviewRating,
-                //tags: reviewTags,
             }))
         }
     } 
     if (album !== null) {
         album.then((response) => {
-            setAlbumTitle(response.body.name)
+            let obj = response.body
+            setAlbumTitle(obj.name)
+            setAlbumCover(obj.images[0].url)
+            setAlbumArtist(obj.artists[0].name)
+            setAlbumDate(obj.release_date)
         })
     }
     return (
@@ -80,7 +63,7 @@ function ReviewComponent() {
             {!loading &&
                 <div className="row mt-2">
                     <div className="col-3 d-none d-lg-block no-pad-left">
-                        <img className="album-cover-review-image" width="250px" src={reviews.image} alt={reviews.title} />
+                        <img className="album-cover-review-image" width="250px" src={albumCover} alt={reviews.title} />
                     </div>
                     <div className="col-12 col-md-8 col-lg-6">
                         <div className="row">
@@ -88,11 +71,11 @@ function ReviewComponent() {
                         </div>
                         <div className="row center" style={{ "wordBreak": "break-all" }}>
                             <span className="volkhov text-white h1-inline">
-                                <Link className="link-salmon"> <i className="me-3">{albumTitle}</i></Link>
+                                <Link className="link-salmon"> <i className="me-3">{albumTitle}</i></Link><br/>
                                 <Link className="nunito link-salmon">
-                                    <span className="h2-inline">{reviews.artist}
+                                    <span className="h2-inline">{albumArtist}
                                     </span>
-                                </Link><span className="h2-inline nunito">, {reviews.albumYear} </span>
+                                </Link><span className="h2-inline nunito">, {albumDate} </span>
                             </span>
                             <div>
                                 {!editing && <div className="nunito text-white"> {reviewBody} </div>}
@@ -109,8 +92,7 @@ function ReviewComponent() {
                             </div>
                         </div>
                         <div className="mt-3">
-                            <ReviewInteractionsComponent
-                                review={reviews} />
+                            <ReviewInteractionsComponent review={reviews} />
                             {
                                 reviews.currentUser &&
                                 <button className={"btn " + (editing ? "btn-info" : "btn-outline-info")}
