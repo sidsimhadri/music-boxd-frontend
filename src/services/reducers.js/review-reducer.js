@@ -40,12 +40,12 @@ const reviewSlice = createSlice({
     [updateReviewThunk.fulfilled]:
       (state, { payload }) => {
         state.loading = false
-        const reviewNdx = state.reviews
-          .findIndex((t) => t._id === payload._id)
-        state.reviews[reviewNdx] = {
-          ...state.reviews[reviewNdx],
-          ...payload
-        }
+          const reviewNdx = state.reviews.findIndex((t) => t._id === payload._id)
+          state.reviews[reviewNdx] = {
+            ...state.reviews[reviewNdx],
+            ...payload
+          }
+
       }
   },
   reducers: {}

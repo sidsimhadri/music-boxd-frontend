@@ -3,7 +3,7 @@ import StarRating from "../star-rating";
 import { Link } from "react-router-dom";
 import ReviewInteractionsComponent from "./review-interactions";
 import ReviewActionsComponent from "./review-actions";
-import TagsComponent from "./tags";
+//import TagsComponent from "./tags";
 import * as service from "../services/service";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,43 +14,47 @@ import ReviewByComponent from "./review-by";
 function ReviewComponent() {
     const { id } = useParams();
     const { reviews, loading } = useSelector(state => state.reviews)
-    const [album, setAlbum] = useState(null);
-    const [albumTitle, setAlbumTitle] = useState("")
-    const [albumCover, setAlbumCover] = useState("")
-    const [albumArtist, setAlbumArtist] = useState("")
-    const [albumDate, setAlbumDate] = useState("")
     const [editing, setEditing] = useState(false)
     const [reviewBody, setBody] = useState(reviews.body)
     const [reviewRating, setRating] = useState(reviews.rating)
+    const [albumPromise, setAlbumPromise] = useState(null)
+    const [album, setAlbum] = useState({
+        "name": "",
+        "release_date": "",
+        "images": [
+            {"url": ""},
+        ],
+        "artists": [
+            {"name": ""},
+        ],
+    })
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(findReviewsThunk(id));
-    }, [])
+    },[dispatch, id])
     useEffect(() => {
         setBody(reviews.body)
         setRating(reviews.rating)
         if (reviews.albumId !== undefined) {
-            setAlbum(service.findAlbum(reviews.albumId))
+            setAlbumPromise(service.findAlbum(reviews.albumId))
         }
-    }, [reviews])
-    const editingHandler = ({ review }) => {
-        setEditing(!editing)
-        if (!editing) { // review has been saved
+    }, [reviews.body, reviews.rating, reviews.albumId])
+    useEffect(() => {
+        if (albumPromise !== null) {
+            albumPromise.then((response) => {
+                setAlbum(response.body)
+            })
+        }
+    }, [albumPromise])
+    const editingHandler = () => {
+        if (editing) { 
             dispatch(updateReviewThunk({
-                ...review,
+                ...reviews,
                 body: reviewBody,
                 rating: reviewRating,
             }))
         }
-    } 
-    if (album !== null) {
-        album.then((response) => {
-            let obj = response.body
-            setAlbumTitle(obj.name)
-            setAlbumCover(obj.images[0].url)
-            setAlbumArtist(obj.artists[0].name)
-            setAlbumDate(obj.release_date)
-        })
+        setEditing(editing => !editing)
     }
     return (
         <>
@@ -63,7 +67,7 @@ function ReviewComponent() {
             {!loading &&
                 <div className="row mt-2">
                     <div className="col-3 d-none d-lg-block no-pad-left">
-                        <img className="album-cover-review-image" width="250px" src={albumCover} alt={reviews.title} />
+                        <img className="album-cover-review-image" width="250px" src={album.images[0].url} alt={album.images[0].url} />
                     </div>
                     <div className="col-12 col-md-8 col-lg-6">
                         <div className="row">
@@ -71,11 +75,11 @@ function ReviewComponent() {
                         </div>
                         <div className="row center" style={{ "wordBreak": "break-all" }}>
                             <span className="volkhov text-white h1-inline">
-                                <Link className="link-salmon"> <i className="me-3">{albumTitle}</i></Link><br/>
+                                <Link className="link-salmon"> <i className="me-3">{album.name}</i></Link><br/>
                                 <Link className="nunito link-salmon">
-                                    <span className="h2-inline">{albumArtist}
+                                    <span className="h2-inline">{album.artists[0].name}
                                     </span>
-                                </Link><span className="h2-inline nunito">, {albumDate} </span>
+                                </Link><span className="h2-inline nunito">, {album.release_date} </span>
                             </span>
                             <div>
                                 {!editing && <div className="nunito text-white"> {reviewBody} </div>}
@@ -86,7 +90,7 @@ function ReviewComponent() {
                                     </div>
                                 }
                                 <div className="h2-inline mb-2 center" style={{ "height": 40 }}>
-                                    <StarRating rating={reviewRating} editing={editing} setParentRating={setRating}></StarRating>
+                                    <StarRating rating={reviews.rating} editing={editing} setParentRating={setRating}></StarRating>
                                 </div>
                                 {/* <TagsComponent tags={reviewTags} editing={editing} setParentTags={setReviewTags} /> */}
                             </div>
@@ -96,7 +100,7 @@ function ReviewComponent() {
                             {
                                 reviews.currentUser &&
                                 <button className={"btn " + (editing ? "btn-info" : "btn-outline-info")}
-                                    onClick={() => editingHandler({ reviews })}>
+                                    onClick={() => editingHandler()}>
                                     <i className={"fa " + (editing ? "fa-check" : "fa-edit")}></i>
                                     <span className="nunito">
                                         {!editing && " Edit"}

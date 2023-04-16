@@ -18,7 +18,6 @@ const StarRating = ({ rating, editing, setParentRating }) => {
                             <button className="star-button" onClick={() => handleRatingChange(i)}>
                                 <SingleStar key={i} filledIn={currRating >= i} />
                             </button>
-
                         }
                         {!editing && <SingleStar filledIn={currRating >= i} />}
                     </>

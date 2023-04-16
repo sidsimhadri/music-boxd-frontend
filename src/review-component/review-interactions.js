@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { updateReviewThunk } from "../services/thunks";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const ReviewInteractionsComponent = ({ review }) => {
     const dispatch = useDispatch()
@@ -9,22 +9,22 @@ const ReviewInteractionsComponent = ({ review }) => {
     const [upvotes, setUpvotes] = useState(review.upvotes); 
     const [downvotes, setDownvotes] = useState(review.downvotes); 
     const upvoteHandler = ({ review }) => {
-        setUpvoted(upvoted => !upvoted);
-        setUpvotes(upvotes => upvoted ? upvotes - 1 : upvotes + 1);
         dispatch(updateReviewThunk({ 
             ...review,
-            upvotes: review.upvotes - (review.upvoted ? 1 : -1),
+            upvotes: upvoted ? upvotes - 1 : upvotes + 1,
             upvoted: !upvoted
         }))
+        setUpvotes(upvotes => upvoted ? upvotes - 1 : upvotes + 1);
+        setUpvoted(upvoted => !upvoted);
     }
     const downvoteHandler = ({ review }) => {
-        setDownvoted(downvoted => !downvoted);
-        setDownvotes(downvotes => downvoted ? downvotes - 1 : downvotes + 1);
         dispatch(updateReviewThunk({
             ...review,
-            downvotes: review.downvotes - (review.downvoted ? 1 : -1),
+            downvotes: downvoted ? downvotes - 1 : downvotes + 1,
             downvoted: !downvoted
         }))
+        setDownvotes(downvotes => downvoted ? downvotes - 1 : downvotes + 1);
+        setDownvoted(downvoted => !downvoted);
     }
     return (<>
         <button className={"btn me-2 " + (upvoted ? "btn-success" : "btn-outline-success")}
