@@ -26,6 +26,7 @@ function App() {
           <Route path="/reviews/:id" element={<ReviewComponent />}/>
           <Route path="/login" element={<LoginComponent />}/>
           <Route path="/signup" element={<SignupComponent />}/>
+          
         </Routes>
       </div>
       </BrowserRouter>
