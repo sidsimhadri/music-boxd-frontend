@@ -9,8 +9,6 @@ export const createUser = async (user) => {
  return response.data;
 }
 
-
-
 export const findUser = async (uid) => {
  const response = await axios.get(`${USER_API}/${uid}`)
 
