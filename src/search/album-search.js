@@ -2,38 +2,37 @@ import React, { useEffect, useState } from "react";
 import ReviewItem from "./review-item";
 import { useDispatch, useSelector } from "react-redux";
 import { findReviewsThunk } from "../services/thunks";
+import * as service from "../services/service"
 
-const AlbumSearchComponent = ({ reviewId }) => {
-    const reviews = useSelector((state) => state.reviews.reviews);
-    const loading = useSelector((state) => state.loading);
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(findReviewsThunk(reviewId));
-    }, [dispatch, reviewId]);
+const AlbumSearchComponent = () => {
+        const [albumsPromise, setAlbumsPromise] = useState(null)
+    const [albums, setAlbums] = useState([{
+        "name": "",
+        "release_date": "",
+        "images": [
+            {"url": ""},
+        ],
+                "artists": [
+            {"name": ""},
+        ],
+    }])
+        useEffect(() => {
+    let searchParams = "pitbull"
+            if (searchParams !== undefined) {
+            setAlbumsPromise(service.searchAlbums(searchParams))
+        }
+    }, [])
 
-    console.log("reviews:", reviews);
-    console.log("loading:", loading);
-
-    const filteredReviews = Array.isArray(reviews) 
-    ? reviews.filter(review => review._id === reviewId)
-    : reviews._id === reviewId ? [reviews] : [];
-
+        useEffect(() => {
+        if (albumsPromise !== null) {
+            albumsPromise.then((response) => {
+                setAlbums(response.body)
+            })
+        }
+        }, [albumsPromise])
+    console.log(albums)
     return (
-        <div className="container-fluid">
-            <div className="list-group mt-4">
-                {loading && (
-                    <div className="d-flex justify-content-center align-items-center">
-                        <div className="spinner-border text-danger" role="status">
-                            <span className="sr-only">Loading...</span>
-                        </div>
-                    </div>
-                )}
-                {reviews &&
-                    filteredReviews.map(review => (
-                        <ReviewItem key={review._id} review={review} />
-                    ))}
-            </div>
-        </div>
+<></>
     );
 };
 

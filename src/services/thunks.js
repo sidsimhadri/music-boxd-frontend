@@ -32,6 +32,11 @@ export const findReviewsThunk = createAsyncThunk(
   'reviews/findReviews', async (rid) =>
     await service.findReview(rid)
 )
+
+export const findReviewsByBodyThunk = createAsyncThunk(
+  'reviews/findReviewsByBody', async (body) =>
+    await service.findReviewByBody(body)
+)
 export const deleteReviewThunk = createAsyncThunk(
   'review/deleteReview',
   async (rid) => {

@@ -1,6 +1,7 @@
 import TrackStarHeader from "../trackstar-header";
 import { useParams } from "react-router-dom";
 import ReviewSearchComponent from "./review-search";
+import AlbumSearchComponent from "./album-search";
 
 function SearchComponent() {
   const { query } = useParams();
@@ -10,7 +11,8 @@ function SearchComponent() {
       <div className="row mt-2">
         <TrackStarHeader />
       </div>
-      <ReviewSearchComponent reviewId={query}/>
+      {/* <ReviewSearchComponent reviewId={query} /> */}
+      <AlbumSearchComponent/>
 
     </>
   );

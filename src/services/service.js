@@ -42,6 +42,11 @@ export const findReview = async (rid) => {
  const reviews = response.data;
  return reviews;
 }
+export const findReviewByBody = async (search) => {
+ const response = await axios.get(`${REVIEWS_API}/body/${search}`)
+ const reviews = response.data;
+ return reviews;
+}
 
 export const deleteReview = async (rid) => {
   const response = await axios
@@ -91,8 +96,8 @@ export const searchArtists = async (textInput) => {
 }
 
 export const searchAlbums = async (textInput) => {
- const response = await axios.get(SPOTIFY_API + "/searchAlbums", textInput);
- const results = response.data;
+   const response = await axios.get(`${SPOTIFY_API}/searchAlbums/${textInput}`)
+  const results = response.data;
  return results;
 }
 
