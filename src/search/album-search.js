@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { findReviewsThunk } from "../services/thunks";
 import * as service from "../services/service"
 
-const AlbumSearchComponent = () => {
+const AlbumSearchComponent = ({ query }) => {
         const [albumsPromise, setAlbumsPromise] = useState(null)
     const [albums, setAlbums] = useState([{
         "name": "",
@@ -17,11 +17,10 @@ const AlbumSearchComponent = () => {
         ],
     }])
         useEffect(() => {
-    let searchParams = "pitbull"
-            if (searchParams !== undefined) {
-            setAlbumsPromise(service.searchAlbums(searchParams))
-        }
-    }, [])
+    if (query !== undefined) {
+        setAlbumsPromise(service.searchAlbums(query));
+      }
+    }, [query]);
 
         useEffect(() => {
         if (albumsPromise !== null) {

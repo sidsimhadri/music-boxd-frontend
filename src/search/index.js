@@ -12,7 +12,7 @@ function SearchComponent() {
         <TrackStarHeader />
       </div>
       {/* <ReviewSearchComponent reviewId={query} /> */}
-      <AlbumSearchComponent/>
+      <AlbumSearchComponent query={query}/>
 
     </>
   );
