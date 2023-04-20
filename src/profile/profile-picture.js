@@ -2,9 +2,9 @@ const ProfilePictureComponent = ({user}) => {
     return (
         <>
             <button className="profile-pic" onClick="document.getElementById('choose-profile-picture').click();">
-                <img className="profile-picture larger float-left" alt = "" 
+                <img className="profile-picture larger float-left" alt = "desc" 
                 //  style={{width: '70%', height: 'auto'}}
-                 src={user.image} alt="" />
+                 src={user.image}  />
                 <input type="file" id="choose-profile-picture" />
             </button>
         </>
