@@ -1,56 +1,53 @@
 import React from "react";
+import TrackStarHeader from "../trackstar-header";
 import { useParams } from 'react-router-dom';
-//import ArtistAlbumItem from "./artist-album-item";
 import {findArtistAlbums} from "../services/service.js";
-import {findAlbum} from "../services/service.js";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { findArtistAlbumsThunk } from "../services/thunks";
 import "./index.css";
+
+function filterDuplicateAlbums(albumList) {
+  let filtered = []
+  let names = []
+  albumList.forEach((item) => {
+    if (!names.includes(item.name)) {
+      names.push(item.name)
+      filtered.push(item)
+    }
+  })
+  return filtered
+}
 
 function ArtistAlbumsComponent() {
     const { artistId } = useParams();
-    console.log(artistId);
-    const { reviews, loading } = useSelector(state => state.reviews);
-    const [album, setAlbum] = useState({
-            "name": "",
-            "release_date": "",
-            "images": [
-                {"url": ""},
-            ],
-            "artists": [
-                {"name": ""},
-            ],
-        });
     const [artistLoading, setArtistLoading] = useState(true);
-
-    const [artistAlbums, setArtistAlbums] = useState([])
+    const [artistAlbums, setArtistAlbums] = useState(null)
     const [albumItems, setAlbumItems] = useState([])
     const [promise, setPromise] = useState(null)
     useEffect(() => {
         setPromise(findArtistAlbums(artistId))
-    }, [])
+    }, [artistId])
     useEffect(() => {
         if (promise !== null) {
             promise.then((response) => {
                 setArtistAlbums(response.body)
-                setArtistLoading(false)
-                setAlbumItems(artistAlbums.items)
             })
         }
-    }, [promise])
-    console.log(artistAlbums);
-    console.log(artistAlbums.items);
-    if (!artistLoading) { // check if the array has elements
-      console.log(artistAlbums.items[0].name); // access the first element
-    }
-    //console.log(artistAlbums.items.name);
+    }, [promise, artistAlbums])
+    useEffect(() => {
+      if (artistAlbums !== null) {
+        setAlbumItems(filterDuplicateAlbums(artistAlbums.items))
+        setArtistLoading(false)
+      }
+    }, [artistAlbums])
     return (<>
+    <div className="row mt-2">
+                <TrackStarHeader />
+            </div>
     {!artistLoading && (
-      <div>
-        {artistAlbums.items.map((album) => (
-          <div className="card border-dark mb-3" style={{ width: "80%" }}>
+      <div className="row mt-2">
+        {albumItems.map((album) => (
+          <div className="card border-dark mb-3 nunito" style={{ width: "80%" }}>
             <div className="row card-body">
              <div className="col-10">
               <h4 className="row">
@@ -68,7 +65,7 @@ function ArtistAlbumsComponent() {
               </h5>
              </div>
              <div className="col-2">
-               <img src={album.images[0].url} width="120px" height="120px" style={{ borderRadius: "10%" }}/>
+               <img src={album.images[0].url} width="120px" height="120px" style={{ borderRadius: "10%" }} alt={album.name}/>
              </div>
             </div>
           </div>
@@ -76,7 +73,7 @@ function ArtistAlbumsComponent() {
       </div>
     )}
     {artistLoading && (
-      <div>
+      <div className="nunito">
         <h6>Loading..</h6>
       </div>
     )}

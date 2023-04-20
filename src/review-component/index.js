@@ -13,7 +13,6 @@ import ReviewByComponent from "./review-by";
 
 function ReviewComponent() {
     const { id } = useParams();
-    console.log(id)
     const { reviews, loading } = useSelector(state => state.reviews)
     const [editing, setEditing] = useState(false)
     const [reviewBody, setBody] = useState(reviews.body)
@@ -23,17 +22,18 @@ function ReviewComponent() {
         "name": "",
         "release_date": "",
         "images": [
-            {"url": ""},
+            { "url": "" },
         ],
         "artists": [
-            {"name": ""},
+            { "name": "" },
         ],
     })
+    const [artistLink, setArtistLink] = useState("/")
     const [tags, setReviewTags] = useState([])
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(findReviewsThunk(id));
-    },[dispatch, id])
+    }, [dispatch, id])
     useEffect(() => {
         setBody(reviews.body)
         setRating(reviews.rating)
@@ -49,8 +49,13 @@ function ReviewComponent() {
             })
         }
     }, [albumPromise])
+    useEffect(() => {
+        if (album.artists[0].id !== undefined) {
+            setArtistLink(`/artists/${album.artists[0].id}`)
+        }
+    }, [album])
     const editingHandler = () => {
-        if (editing) { 
+        if (editing) {
             dispatch(updateReviewThunk({
                 ...reviews,
                 body: reviewBody,
@@ -78,8 +83,8 @@ function ReviewComponent() {
                         </div>
                         <div className="row center" style={{ "wordBreak": "break-all" }}>
                             <span className="volkhov text-white h1-inline">
-                                <Link className="link-salmon"> <i className="me-3">{album.name}</i></Link><br/>
-                                <Link className="nunito link-salmon">
+                                <Link className="link-salmon"> <i className="me-3">{album.name}</i></Link><br />
+                                <Link className="nunito link-salmon" to={artistLink}>
                                     <span className="h2-inline">{album.artists[0].name}
                                     </span>
                                 </Link><span className="h2-inline nunito">, {album.release_date} </span>
@@ -95,7 +100,7 @@ function ReviewComponent() {
                                 <div className="h2-inline mb-2 center" style={{ "height": 40 }}>
                                     <StarRating rating={reviews.rating} editing={editing} setParentRating={setRating}></StarRating>
                                 </div>
-                                <TagsComponent review={reviews} editing={editing} setParentTags={setReviewTags} /> 
+                                <TagsComponent review={reviews} editing={editing} setParentTags={setReviewTags} />
                             </div>
                         </div>
                         <div className="mt-3">
