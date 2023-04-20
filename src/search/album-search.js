@@ -1,37 +1,44 @@
 import React, { useEffect, useState } from "react";
-import ReviewItem from "./review-item";
+import AlbumItem from "./album-item.js";
 import { useDispatch, useSelector } from "react-redux";
 import { findReviewsThunk } from "../services/thunks";
 import * as service from "../services/service"
 
 const AlbumSearchComponent = ({ query }) => {
-        const [albumsPromise, setAlbumsPromise] = useState(null)
+    const [albumsPromise, setAlbumsPromise] = useState(null)
     const [albums, setAlbums] = useState([{
         "name": "",
         "release_date": "",
         "images": [
-            {"url": ""},
+            { "url": "" },
         ],
-                "artists": [
-            {"name": ""},
+        "artists": [
+            { "name": "" },
         ],
     }])
-        useEffect(() => {
-    if (query !== undefined) {
-        setAlbumsPromise(service.searchAlbums(query));
-      }
+    useEffect(() => {
+        if (query !== undefined) {
+            setAlbumsPromise(service.searchAlbums(query));
+        }
     }, [query]);
 
-        useEffect(() => {
+    useEffect(() => {
         if (albumsPromise !== null) {
             albumsPromise.then((response) => {
                 setAlbums(response.body)
             })
         }
-        }, [albumsPromise])
+    }, [albumsPromise])
+    // console.log(Array.isArray(albums.albums.items))
     console.log(albums)
+    // console.log(albums.albums.items)
+
+
+
     return (
-<></>
+        <>
+
+        </>
     );
 };
 
