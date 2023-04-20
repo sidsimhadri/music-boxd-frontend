@@ -13,6 +13,7 @@ import ReviewByComponent from "./review-by";
 
 function ReviewComponent() {
     const { id } = useParams();
+    console.log(id)
     const { reviews, loading } = useSelector(state => state.reviews)
     const [editing, setEditing] = useState(false)
     const [reviewBody, setBody] = useState(reviews.body)

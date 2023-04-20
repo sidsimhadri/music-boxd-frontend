@@ -8,6 +8,9 @@ import { Link } from "react-router-dom";
 import TagsComponent from "../../review-component/tags";
 
 const FeaturedReviewItem = ({ review }) => {
+    console.log(review)
+    console.log(review.albumId)
+
     const dispatch = useDispatch()
     const [albumPromise, setAlbumPromise] = useState(null)
     const [album, setAlbum] = useState({
@@ -17,15 +20,17 @@ const FeaturedReviewItem = ({ review }) => {
             { "url": "" },
         ],
         "artists": [
-            { "name": "" },
+            { "id": "", "name": "" },
         ],
     })
+    console.log(album)
     let dateObj = new Date(review.timestamp) 
     const date = dateObj.toDateString()
     const [user, setUser] = useState({
         "username": "",
         "profilePic": "",
     })
+    const [artistLink , setArtistLink] = useState("/")
     useEffect(() => {
         setAlbumPromise(service.findAlbum(review.albumId))
     },[review.albumId])
@@ -41,6 +46,11 @@ const FeaturedReviewItem = ({ review }) => {
             })
         }
     }, [albumPromise])
+    useEffect(() => {
+    if (album.artists[0].id !== undefined ){
+    setArtistLink(`/artists/${album.artists[0].id}`)
+    }
+    }, [album])
     const { users } = useSelector(state => state.users)
     useEffect(() => {
         if (users !== undefined) {
@@ -55,7 +65,7 @@ const FeaturedReviewItem = ({ review }) => {
                     <div className="col-8">
                         <Link className="link-white" to={`/reviews/${review._id}`}>
                             <h4 className="card-title small-margin-bottom volkhov text-white"><i><Link className="link-salmon" to="/albums/">{album.name}</Link></i></h4>
-                            <h6 className="text-white nunito no-margin-bottom"><Link className="link-salmon" to="/artists/">{album.artists[0].name}</Link> • {album.release_date}</h6>
+                            <h6 className="text-white nunito no-margin-bottom"><Link className="link-salmon" to={artistLink}>{album.artists[0].name}</Link> • {album.release_date}</h6>
                             <div className="row no-margin-left d-flex center">
                                 <div className="col-1">
                                     <img className="profile-picture me-2" src={user.profilePicture} alt="" />
