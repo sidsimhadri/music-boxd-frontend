@@ -30,13 +30,21 @@ const AlbumSearchComponent = ({ query }) => {
         }
     }, [albumsPromise])
     // console.log(Array.isArray(albums.albums.items))
-    console.log(albums)
+    // console.log(albums)
     // console.log(albums.albums.items)
-
+    console.log(albums);
+    console.log(albums.albums && albums.albums.items);
 
 
     return (
         <>
+            {albums && albums.albums && albums.albums.items.length > 0 ? (
+            albums.albums.items.map((album) => (
+                <AlbumItem key={album.id} album={album} />
+            ))
+        ) : (
+            <p>No results found.</p>
+        )}
 
         </>
     );

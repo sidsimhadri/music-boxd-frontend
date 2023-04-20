@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from "react";
 import ReviewItem from "./review-item";
 import { useDispatch, useSelector } from "react-redux";
-import { findReviewsThunk } from "../services/thunks";
+import { findReviewsByBodyThunk } from "../services/thunks";
 
 const ReviewSearchComponent = ({ reviewId }) => {
-    const reviews = useSelector((state) => state.reviews.reviews);
+    const reviews = useSelector((state) =>
+        state.reviews.reviews
+        
+    );
     const loading = useSelector((state) => state.loading);
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(findReviewsThunk(reviewId));
+        dispatch(findReviewsByBodyThunk(reviewId));
     }, [dispatch, reviewId]);
 
     console.log("reviews:", reviews);
     console.log("loading:", loading);
 
-    const filteredReviews = Array.isArray(reviews) 
-    ? reviews.filter(review => review._id === reviewId)
-    : reviews._id === reviewId ? [reviews] : [];
+
 
     return (
         <div className="container-fluid">
@@ -28,10 +29,13 @@ const ReviewSearchComponent = ({ reviewId }) => {
                         </div>
                     </div>
                 )}
-                {reviews &&
-                    filteredReviews.map(review => (
+                {reviews && reviews.length > 0 ? (
+                    reviews.map((review) => (
                         <ReviewItem key={review._id} review={review} />
-                    ))}
+                    ))
+                ) : (
+                    <div>No reviews found</div>
+                )}
             </div>
         </div>
     );
