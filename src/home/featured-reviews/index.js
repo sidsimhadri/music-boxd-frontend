@@ -16,7 +16,6 @@ const FeaturedReviews = () => {
         {loading &&
             <div className="nunito">Loading...</div>
         }
-
         {!loading &&
             <ul className="list-group">
                 {

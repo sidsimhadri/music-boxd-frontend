@@ -49,7 +49,7 @@ const FeaturedReviewItem = ({ review }) => {
     }, [users])
     return (
         <>
-            <div className="card border-dark mb-3" style={{ "max-width": "80%" }}>
+            <div className="card border-dark mb-3" style={{ "maxWidth": "80%" }}>
 
                 <div className="row card-body">
                     <div className="col-8">

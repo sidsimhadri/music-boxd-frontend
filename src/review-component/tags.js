@@ -36,7 +36,7 @@ const TagsComponent = ({ review, editing, setParentTags}) => {
             {
                 tagArr.map(t => {
                     return (
-                        <span className="badge bg-info me-2">{t.name}
+                        <span className="badge bg-info me-2" key={t.name}>{t.name}
                             {editing &&
                                 <button className="bg-info tag-x" onClick={() => {
                                     deleteTagHandler(t)
