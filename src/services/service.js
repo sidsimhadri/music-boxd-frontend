@@ -45,6 +45,27 @@ export const findReview = async (rid) => {
   return reviews;
 }
 
+export const findReviewsByAlbumId = async (aid) => {
+  let response = ""
+  if (aid !== undefined) {
+    response = await axios.get(`${REVIEWS_API}/album/${aid}`)
+  }
+  if (response === "") {
+      return [{
+        "name": "",
+        "release_date": "",
+        "images": [
+            { "url": "" },
+        ],
+        "artists": [
+            { "name": "" },
+        ],
+    }]
+  }
+  const reviews = response.data;
+  return reviews;
+}
+
 export const deleteReview = async (rid) => {
   const response = await axios
     .delete(`${REVIEWS_API}/${rid}`)
