@@ -43,7 +43,6 @@ import { profileThunk, logoutThunk, updateUserThunk }
   from "../services/auth-thunks";
 function ProfileScreen() {
  const currentUser = useSelector((state) => {
-    console.log("bruh)")
     console.log(state.auth.currentUser)
     return state.auth.currentUser
 
