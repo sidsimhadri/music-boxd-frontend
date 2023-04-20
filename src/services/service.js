@@ -5,14 +5,14 @@ const REVIEWS_API = 'http://localhost:4000/api/reviews';
 const SPOTIFY_API = 'http://localhost:4000/api/spotify'
 
 export const createUser = async (user) => {
- const response = await axios.post(USER_API, user)
- return response.data;
+  const response = await axios.post(USER_API, user)
+  return response.data;
 }
 
 export const findUser = async (uid) => {
- const response = await axios.get(`${USER_API}/${uid}`)
- const users = response.data;
- return users;
+  const response = await axios.get(`${USER_API}/${uid}`)
+  const users = response.data;
+  return users;
 }
 
 export const deleteUser = async (uid) => {
@@ -28,21 +28,21 @@ export const updateUser = async (user) => {
 }
 
 export const createReview = async (review) => {
- const response = await axios.post(REVIEWS_API, review)
- return response.data;
+  const response = await axios.post(REVIEWS_API, review)
+  return response.data;
 }
 
 
 export const findReview = async (rid) => {
-  let response =""
-  if(rid === undefined){
-    response = await axios.get(`${REVIEWS_API}}`)
+  let response = ""
+  if (rid === undefined) {
+    response = await axios.get(`${REVIEWS_API}`)
   }
   else {
     response = await axios.get(`${REVIEWS_API}/${rid}`)
   }
   const reviews = response.data;
- return reviews;
+  return reviews;
 }
 
 export const deleteReview = async (rid) => {
@@ -58,16 +58,22 @@ export const updateReview = async (review) => {
 }
 
 export const createTag = async (tag) => {
- const response = await axios.post(TAGS_API, tag)
- return response.data;
+  const response = await axios.post(TAGS_API, tag)
+  return response.data;
 }
 
 export const findTag = async (tid) => {
- const response = await axios.get(`${TAGS_API}/${tid}`)
-
- const tags = response.data;
- return tags;
+  let response = ""
+  if (tid === undefined) {
+    response = await axios.get(`${TAGS_API}`)
+  }
+  else {
+    response = await axios.get(`${TAGS_API}/${tid}`)
+  }
+  const tags = response.data;
+  return tags;
 }
+
 export const findAlbum = async (aid) => {
   const response = await axios.get(`${SPOTIFY_API}/album/${aid}`)
   const album = response.data;
@@ -75,27 +81,27 @@ export const findAlbum = async (aid) => {
 }
 
 export const findArtistAlbums = async (artistId) => {
- const response = await axios.get(`${SPOTIFY_API}/albums/${artistId}`)
- const albums = response.data;
- return albums;
+  const response = await axios.get(`${SPOTIFY_API}/albums/${artistId}`)
+  const albums = response.data;
+  return albums;
 }
 
 export const findNewreleases = async () => {
- const response = await axios.get(SPOTIFY_API + "/newreleases");
- const newreleases = response.data;
- return newreleases;
+  const response = await axios.get(SPOTIFY_API + "/newreleases");
+  const newreleases = response.data;
+  return newreleases;
 }
 
 export const findSearchResults = async (textInput) => {
- const response = await axios.get(SPOTIFY_API + "/search", textInput);
- const results = response.data;
- return results;
+  const response = await axios.get(SPOTIFY_API + "/search", textInput);
+  const results = response.data;
+  return results;
 }
 
 export const findPlaylist = async (pid) => {
- const response = await axios.get(`${SPOTIFY_API}/playlist/${pid}`)
- const playlist = response.data;
- return playlist;
+  const response = await axios.get(`${SPOTIFY_API}/playlist/${pid}`)
+  const playlist = response.data;
+  return playlist;
 }
 
 

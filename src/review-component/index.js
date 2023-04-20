@@ -3,7 +3,7 @@ import StarRating from "../star-rating";
 import { Link } from "react-router-dom";
 import ReviewInteractionsComponent from "./review-interactions";
 import ReviewActionsComponent from "./review-actions";
-//import TagsComponent from "./tags";
+import TagsComponent from "./tags";
 import * as service from "../services/service";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -28,6 +28,7 @@ function ReviewComponent() {
             {"name": ""},
         ],
     })
+    const [tags, setReviewTags] = useState([])
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(findReviewsThunk(id));
@@ -38,6 +39,7 @@ function ReviewComponent() {
         if (reviews.albumId !== undefined) {
             setAlbumPromise(service.findAlbum(reviews.albumId))
         }
+
     }, [reviews.body, reviews.rating, reviews.albumId])
     useEffect(() => {
         if (albumPromise !== null) {
@@ -92,7 +94,7 @@ function ReviewComponent() {
                                 <div className="h2-inline mb-2 center" style={{ "height": 40 }}>
                                     <StarRating rating={reviews.rating} editing={editing} setParentRating={setRating}></StarRating>
                                 </div>
-                                {/* <TagsComponent tags={reviewTags} editing={editing} setParentTags={setReviewTags} /> */}
+                                <TagsComponent review={reviews} editing={editing} setParentTags={setReviewTags} /> 
                             </div>
                         </div>
                         <div className="mt-3">
