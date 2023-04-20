@@ -19,7 +19,7 @@ const StarRating = ({ rating, editing, setParentRating }) => {
                                 <SingleStar key={i} filledIn={currRating >= i} />
                             </button>
                         }
-                        {!editing && <SingleStar filledIn={currRating >= i} />}
+                        {!editing && <SingleStar key={i} filledIn={currRating >= i} />}
                     </>
                 )
             })

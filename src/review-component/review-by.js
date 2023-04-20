@@ -15,6 +15,7 @@ const ReviewByComponent = ({ review }) => {
         }
     },[dispatch, review.userId])
     useEffect(() => {
+        //let dateObj = new Date(review.timestamp)
         setDate(new Date(review.timestamp).toDateString())
     },[review])
     const { users } = useSelector(state => state.users)

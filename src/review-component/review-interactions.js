@@ -12,7 +12,9 @@ const ReviewInteractionsComponent = ({ review }) => {
         dispatch(updateReviewThunk({ 
             ...review,
             upvotes: upvoted ? upvotes - 1 : upvotes + 1,
-            upvoted: !upvoted
+            upvoted: !upvoted,
+            downvotes: downvotes,
+            downvoted: downvoted
         }))
         setUpvotes(upvotes => upvoted ? upvotes - 1 : upvotes + 1);
         setUpvoted(upvoted => !upvoted);
@@ -21,7 +23,9 @@ const ReviewInteractionsComponent = ({ review }) => {
         dispatch(updateReviewThunk({
             ...review,
             downvotes: downvoted ? downvotes - 1 : downvotes + 1,
-            downvoted: !downvoted
+            downvoted: !downvoted,
+            upvotes: upvotes,
+            upvoted: upvoted
         }))
         setDownvotes(downvotes => downvoted ? downvotes - 1 : downvotes + 1);
         setDownvoted(downvoted => !downvoted);
