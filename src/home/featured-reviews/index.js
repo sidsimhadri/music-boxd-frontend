@@ -6,6 +6,9 @@ import { findReviewsThunk } from "../../services/thunks";
 const FeaturedReviews = () => {
     const dispatch = useDispatch()
     const { reviews, loading } = useSelector(state => state.reviews)
+    if (!Array.isArray(reviews) && !loading) {
+        dispatch(findReviewsThunk())
+    }
     useEffect(() => {
         dispatch(findReviewsThunk())
     }, [dispatch])
