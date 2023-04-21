@@ -1,19 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ReviewItem from "./review-item";
 import { useDispatch, useSelector } from "react-redux";
-import { findReviewsThunk } from "../services/thunks";
+import { findReviewsByBodyThunk } from "../services/thunks";
 
-const ReviewSearchComponent = () => {
-    const reviews = useSelector((state) => state.reviews.reviews);
+const ReviewSearchComponent = ({ reviewId }) => {
+    const reviews = useSelector((state) =>
+        state.reviews.reviews
+        
+    );
     const loading = useSelector((state) => state.loading);
     const dispatch = useDispatch();
-
     useEffect(() => {
-        dispatch(findReviewsThunk());
-    }, [dispatch]);
+        dispatch(findReviewsByBodyThunk(reviewId));
+    }, [dispatch, reviewId]);
 
     console.log("reviews:", reviews);
     console.log("loading:", loading);
+
+
 
     return (
         <div className="container-fluid">
@@ -25,10 +29,13 @@ const ReviewSearchComponent = () => {
                         </div>
                     </div>
                 )}
-                {reviews &&
-                    reviews.map(review => (
+                {reviews && reviews.length > 0 ? (
+                    reviews.map((review) => (
                         <ReviewItem key={review._id} review={review} />
-                    ))}
+                    ))
+                ) : (
+                    <div>No reviews found</div>
+                )}
             </div>
         </div>
     );

@@ -37,6 +37,7 @@ function App() {
             <Route path="/albums/:albumId" element={<AlbumReviewsComponent />}/>
 
           <Route path="/search/:query" element={<Search />}/>
+          <Route path="/search" element={<Search />}/>
 
             <Route path="/artists/:artistId" element={<ArtistAlbumsComponent />}/>
             <Route path="/albums/:albumId" element={<AlbumReviewsComponent />}/>
