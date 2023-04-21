@@ -1,0 +1,13 @@
+.black-bg{
+background: black;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.item {
+  flex: 1;
+}
