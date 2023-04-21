@@ -7,7 +7,7 @@
 }
 
 .album-cover-trending-release {
-    float: left;
+    position: absolute;
     margin-right: 10px;
     height: 100px;
     width: 100px;
@@ -27,6 +27,11 @@
 
 .center {
     align-items: center;
+}
+
+.tr-nudge-left {
+    position: relative;
+    margin-left: 120px;
 }
 
 .font-header {
