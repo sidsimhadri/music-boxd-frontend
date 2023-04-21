@@ -11,7 +11,7 @@ function SearchComponent() {
       <div className="row mt-2">
         <TrackStarHeader />
       </div>
-      <ReviewSearchComponent reviewId={query} />
+      {/* <ReviewSearchComponent reviewId={query} /> */}
       <AlbumSearchComponent query={query}/>
 
     </>
