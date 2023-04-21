@@ -52,17 +52,17 @@ function ArtistAlbumsComponent() {
              <div className="col-10">
               <h4 className="row">
               <div className="col-3">Album:</div>
-                <div className="col-4">
+                <div className="col-9">
                   <Link className="text-white" to={`/albums/${album.id}`} style={{ textDecoration: "none" }}>{album.name}</Link>
                 </div>
               </h4>
               <h5 className="row">
               <div className="col-3">Artist:</div>
-               <div className="col-4"> <Link to={`/artists/${album.artists[0].id}`} style={{ textDecoration: "none" }}>{album.artists[0].name}</Link></div>
+               <div className="col-9"> <Link to={`/artists/${album.artists[0].id}`} style={{ textDecoration: "none" }}>{album.artists[0].name}</Link></div>
               </h5>
-              <h5 className="row">
-              <div className="col-3">Release date:</div> <div className="col-3 blue-text">{album.release_date}</div>
-              </h5>
+              <div className="row">
+              <h5 className="col-3">Release date:</h5> <div className="col-9 mt-1 salmon-text"><h6>{album.release_date}</h6></div>
+              </div>
              </div>
              <div className="col-2">
                <img src={album.images[0].url} width="120px" height="120px" style={{ borderRadius: "10%" }} alt={album.name}/>
