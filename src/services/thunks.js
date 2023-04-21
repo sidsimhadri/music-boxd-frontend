@@ -87,6 +87,7 @@ export const findNewreleasesThunk = createAsyncThunk(
   await service.findNewreleases()
 )
 
+
 export const findSearchResultsThunk = createAsyncThunk(
   'spotify/search', async () =>
   await service.findSearchResults()

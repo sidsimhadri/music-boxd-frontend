@@ -6,7 +6,11 @@ import ReviewComponent from "./review-component";
 import ArtistAlbumsComponent from "./artists";
 import AlbumReviewsComponent from "./albums";
 import LoginComponent from "./login";
+
+import Search from "./search";
+
 import SignupComponent from "./signup";
+
 import { configureStore }
   from '@reduxjs/toolkit';
 import { Provider } from "react-redux";
@@ -20,19 +24,25 @@ const store = configureStore({
 });
 function App() {
   return (
-    <Provider store={store}>
-      <BrowserRouter>
-        <div className="container">
-          <Routes>
-            <Route index path="/" element={<HomeComponent />} />
-            <Route path="/profile" element={<ProfileComponent />} />
-            <Route path="/reviews/:id" element={<ReviewComponent />} />
+
+          <Provider store={store}>
+    <BrowserRouter>
+      <div className="container">
+        <Routes>
+          <Route index path="/" element={<HomeComponent />}/>
+          <Route path="/profile" element={<ProfileComponent />}/>
+          <Route path="/reviews/:id" element={<ReviewComponent />}/>
+          <Route path="/login" element={<LoginComponent />}/>
+           <Route path="/artists/:artistId" element={<ArtistAlbumsComponent />}/>
+            <Route path="/albums/:albumId" element={<AlbumReviewsComponent />}/>
+
+          <Route path="/search/:query" element={<Search />}/>
+
             <Route path="/artists/:artistId" element={<ArtistAlbumsComponent />}/>
             <Route path="/albums/:albumId" element={<AlbumReviewsComponent />}/>
-            <Route path="/login" element={<LoginComponent />} />
-            <Route path="/signup" element={<SignupComponent />} />
-          </Routes>
-        </div>
+        </Routes>
+      </div>
+
       </BrowserRouter>
     </Provider>
 
