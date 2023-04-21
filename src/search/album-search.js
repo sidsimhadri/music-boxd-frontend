@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AlbumItem from "./album-item.js";
-import { useDispatch, useSelector } from "react-redux";
-import { findReviewsThunk } from "../services/thunks";
+// import { useDispatch, useSelector } from "react-redux";
+// import { findReviewsThunk } from "../services/thunks";
 import * as service from "../services/service"
 
 const AlbumSearchComponent = ({ query }) => {
