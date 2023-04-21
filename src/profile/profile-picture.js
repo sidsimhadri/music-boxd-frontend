@@ -5,7 +5,7 @@ const ProfilePictureComponent = ({user}) => {
 
                 <img className="profile-picture larger float-left" alt = "" 
                 //  style={{width: '70%', height: 'auto'}}
-                 src={user.image} alt="" />
+                 src={user.image} />
                 <input type="file" id="choose-profile-picture" />
             </button>
         </>

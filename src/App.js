@@ -3,6 +3,8 @@ import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router";
 import ProfileComponent from "./profile";
 import ReviewComponent from "./review-component";
+import ArtistAlbumsComponent from "./artists";
+import AlbumReviewsComponent from "./albums";
 import LoginComponent from "./login";
 
 import Search from "./search";
@@ -17,10 +19,12 @@ import userReducer
   from "./services/reducers.js/user-reducer";
 import tagReducer
   from "./services/reducers.js/tag-reducer";
-  const store = configureStore({
- reducer: {reviews: reviewReducer, users: userReducer, tags: tagReducer}});
+const store = configureStore({
+  reducer: { reviews: reviewReducer, users: userReducer, tags: tagReducer }
+});
 function App() {
   return (
+
           <Provider store={store}>
     <BrowserRouter>
       <div className="container">
@@ -29,15 +33,19 @@ function App() {
           <Route path="/profile" element={<ProfileComponent />}/>
           <Route path="/reviews/:id" element={<ReviewComponent />}/>
           <Route path="/login" element={<LoginComponent />}/>
+           <Route path="/artists/:artistId" element={<ArtistAlbumsComponent />}/>
+            <Route path="/albums/:albumId" element={<AlbumReviewsComponent />}/>
 
           <Route path="/search/:query" element={<Search />}/>
           <Route path="/search" element={<Search />}/>
 
-          <Route path="/signup" element={<SignupComponent />}/>
+            <Route path="/artists/:artistId" element={<ArtistAlbumsComponent />}/>
+            <Route path="/albums/:albumId" element={<AlbumReviewsComponent />}/>
         </Routes>
       </div>
+
       </BrowserRouter>
-      </Provider>
+    </Provider>
 
   );
 }
