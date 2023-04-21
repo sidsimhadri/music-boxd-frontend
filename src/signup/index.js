@@ -25,10 +25,11 @@ function SignUp() {
         e.preventDefault();
         const newUser = {
             username: userData.userName,
+            password: userData.password,
             id: Date.now().toString(),
             followers: 0,
             following: 0,
-            role: 'general',
+            role: 'user',
             // ...userData
         }
         dispatch(createUserThunk(newUser));

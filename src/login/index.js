@@ -1,9 +1,33 @@
-import React from 'react';
+// import React from 'react';
 import '../vendors/bootstrap.min.css';
 import TrackStarLogo from '../trackstar-header/trackstar-logo';
 import { Link } from "react-router-dom";
 
-function Login() {
+import React, { useState } from "react";
+import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { loginThunk } from "../services/auth-thunks";
+import { useSelector } from "react-redux";
+
+function LoginScreen() {
+    const currentUser = useSelector((state) => {
+        console.log(state.auth.currentUser)
+        return state.auth.currentUser
+    
+      });
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const handleLogin = async () => {
+        try {
+            await dispatch(loginThunk({ username, password }));
+            
+            navigate("/profile");
+        } catch (e) {
+            alert(e);
+        }
+    };
     return (
         <>
             <TrackStarLogo />
@@ -14,13 +38,19 @@ function Login() {
                     </div>
                     <form>
                         <div className="form-group">
-                            <label htmlFor="email" className="text-muted small">Email address</label>
-                            <input type="email" className="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" />
+                            <label htmlFor="username" className="text-muted small">Username</label>
+                            <input className="form-control" id="username" aria-describedby="emailHelp" placeholder="Enter username"
+                                type="text" value={username}
+                                onChange={(event) => setUsername(event.target.value)}
+                            />
                         </div>
 
                         <div className="form-group mt-2">
                             <label htmlFor="password" className="text-muted small">Password</label>
-                            <input type="password" className="form-control" id="password" placeholder="Password" />
+                            <input className="form-control" id="password" placeholder="Password" 
+                                type="password" value={password}
+                                onChange={(event) => setPassword(event.target.value)}
+                            />
                         </div>
 
                         <div className="form-group form-check mt-2">
@@ -28,7 +58,7 @@ function Login() {
                             <label className="form-check-label" htmlFor="remember-me">Remember me</label>
                         </div>
                         <Link to="/">
-                        <button type="submit" className="btn btn-success  mt-2 btn-block">Login</button>
+                            <button type="submit" className="btn btn-success  mt-2 btn-block" onClick={handleLogin}>Login</button>
                         </Link>
                         <div className="nunito mt-2">
                             <span>
@@ -46,7 +76,7 @@ function Login() {
                 </div>
             </div>
         </>
+
     );
 }
-
-export default Login;
+export default LoginScreen;

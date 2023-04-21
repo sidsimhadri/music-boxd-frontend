@@ -17,11 +17,14 @@ import { Provider } from "react-redux";
 import reviewReducer from "./services/reducers.js/review-reducer";
 import userReducer
   from "./services/reducers.js/user-reducer";
+import authReducer
+  from "./services/reducers.js/auth-reducer";
 import tagReducer
   from "./services/reducers.js/tag-reducer";
-const store = configureStore({
-  reducer: { reviews: reviewReducer, users: userReducer, tags: tagReducer }
-});
+
+  const store = configureStore({
+ reducer: {reviews: reviewReducer, users: userReducer, tags: tagReducer, auth: authReducer}});
+
 function App() {
   return (
 
@@ -33,6 +36,10 @@ function App() {
           <Route path="/profile" element={<ProfileComponent />}/>
           <Route path="/reviews/:id" element={<ReviewComponent />}/>
           <Route path="/login" element={<LoginComponent />}/>
+
+          <Route path="/signup" element={<SignupComponent />}/>
+          
+
            <Route path="/artists/:artistId" element={<ArtistAlbumsComponent />}/>
             <Route path="/albums/:albumId" element={<AlbumReviewsComponent />}/>
 
@@ -41,6 +48,7 @@ function App() {
 
             <Route path="/artists/:artistId" element={<ArtistAlbumsComponent />}/>
             <Route path="/albums/:albumId" element={<AlbumReviewsComponent />}/>
+
         </Routes>
       </div>
 
