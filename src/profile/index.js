@@ -9,14 +9,15 @@ import LatestReviewsComponent from './latest-reviews';
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-import { profileThunk, logoutThunk, updateUserThunk }
+import { profileThunk, logoutThunk}
   from "../services/auth-thunks";
 function ProfileScreen() {
   const navigate = useNavigate()
     const currentUser = useSelector((state) =>
+        
         state.auth.currentUser
     );
-
+    console.log(currentUser)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(profileThunk());
@@ -32,6 +33,13 @@ function ProfileScreen() {
             setProfile(currentUser.currentUser)
         }
     }, [currentUser])
+
+    useEffect(() => {
+      if (currentUser && currentUser.currentUser.isCurator) {
+        console.log(currentUser.currentUser)
+        navigate("/curator");
+      }
+    }, [currentUser]);
 
     useEffect(() => {
         if (profile !== undefined) {
