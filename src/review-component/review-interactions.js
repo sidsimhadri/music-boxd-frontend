@@ -1,15 +1,20 @@
 import { useDispatch } from "react-redux";
 import { updateReviewThunk } from "../services/thunks";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import {deleteReviewThunk } from "../services/thunks";
+import { useNavigate } from "react-router";
 
 const ReviewInteractionsComponent = ({ review }) => {
     const dispatch = useDispatch()
-    const [upvoted, setUpvoted] = useState(review.upvoted); 
-    const [downvoted, setDownvoted] = useState(review.downvoted); 
-    const [upvotes, setUpvotes] = useState(review.upvotes); 
-    const [downvotes, setDownvotes] = useState(review.downvotes); 
+    const [upvoted, setUpvoted] = useState(review.upvoted);
+    const [downvoted, setDownvoted] = useState(review.downvoted);
+    const [upvotes, setUpvotes] = useState(review.upvotes);
+    const [downvotes, setDownvotes] = useState(review.downvotes);
+
+    const navigate = useNavigate();
     const upvoteHandler = ({ review }) => {
-        dispatch(updateReviewThunk({ 
+        dispatch(updateReviewThunk({
             ...review,
             upvotes: upvoted ? upvotes - 1 : upvotes + 1,
             upvoted: !upvoted,
@@ -30,6 +35,19 @@ const ReviewInteractionsComponent = ({ review }) => {
         setDownvotes(downvotes => downvoted ? downvotes - 1 : downvotes + 1);
         setDownvoted(downvoted => !downvoted);
     }
+    const deleteHandler = () => {
+        dispatch(deleteReviewThunk(review._id))
+        navigate('/');
+    }
+
+    const currentUser = useSelector((state) => {
+
+        return state.auth.currentUser
+
+    });
+
+
+
     return (<>
         <button className={"btn me-2 " + (upvoted ? "btn-success" : "btn-outline-success")}
             onClick={() => upvoteHandler({ review })}>
@@ -39,6 +57,13 @@ const ReviewInteractionsComponent = ({ review }) => {
             onClick={() => downvoteHandler({ review })}>
             <i className="fa fa-arrow-down"></i><span className="nunito"> {downvotes} </span>
         </button>
+        console.log(currentUser.currentUser.isAdmin)
+        {currentUser.currentUser.isAdmin && (
+            <>
+               
+                <button className="btn btn-danger" onClick={deleteHandler}>Delete</button>
+            </>)}
+
     </>);
 }
 

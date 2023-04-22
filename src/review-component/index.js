@@ -8,9 +8,10 @@ import * as service from "../services/service";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { findReviewsThunk, updateReviewThunk } from "../services/thunks";
+import { findReviewsThunk, updateReviewThunk, deleteReviewThunk } from "../services/thunks";
 import { profileThunk } from "../services/auth-thunks";
 import ReviewByComponent from "./review-by";
+import { useNavigate } from "react-router";
 
 function ReviewComponent() {
     const { id } = useParams();
@@ -37,6 +38,7 @@ function ReviewComponent() {
     const [artistLink, setArtistLink] = useState("/")
     const [tags, setReviewTags] = useState([])
     const dispatch = useDispatch()
+ 
     useEffect(() => {
         dispatch(findReviewsThunk(id));
     }, [dispatch, id])
@@ -82,6 +84,7 @@ function ReviewComponent() {
         }
         setEditing(editing => !editing)
     }
+
     return (
         <>
             <div className="row mt-2">
