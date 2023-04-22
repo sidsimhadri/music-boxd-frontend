@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { updateReviewThunk } from "../services/thunks";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import {deleteReviewThunk } from "../services/thunks";
 import { useNavigate } from "react-router";
@@ -11,6 +11,7 @@ const ReviewInteractionsComponent = ({ review }) => {
     const [downvoted, setDownvoted] = useState(review.downvoted);
     const [upvotes, setUpvotes] = useState(review.upvotes);
     const [downvotes, setDownvotes] = useState(review.downvotes);
+    const [isAdmin, setIsAdmin] = useState(false);
 
     const navigate = useNavigate();
     const upvoteHandler = ({ review }) => {
@@ -39,14 +40,15 @@ const ReviewInteractionsComponent = ({ review }) => {
         dispatch(deleteReviewThunk(review._id))
         navigate('/');
     }
-
     const currentUser = useSelector((state) => {
-
         return state.auth.currentUser
-
     });
 
-
+    useEffect(() => {
+        if (currentUser !== undefined) {
+            setIsAdmin(currentUser.currentUser.admin)
+        }
+    },[currentUser])
 
     return (<>
         <button className={"btn me-2 " + (upvoted ? "btn-success" : "btn-outline-success")}
@@ -57,10 +59,8 @@ const ReviewInteractionsComponent = ({ review }) => {
             onClick={() => downvoteHandler({ review })}>
             <i className="fa fa-arrow-down"></i><span className="nunito"> {downvotes} </span>
         </button>
-        console.log(currentUser.currentUser.isAdmin)
-        {currentUser.currentUser.isAdmin && (
+        {isAdmin && (
             <>
-               
                 <button className="btn btn-danger" onClick={deleteHandler}>Delete</button>
             </>)}
 
