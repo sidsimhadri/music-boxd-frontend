@@ -90,7 +90,7 @@ function AlbumReviewsComponent() {
     useEffect(() => {
                 if (albumProm !== null) {
                     albumProm.then((response) => {
-                    console.log(response[0])
+                    //console.log(response[0])
                      setAlbumReviews(response)
                     // albumReviewslist = response
                     })

@@ -17,7 +17,7 @@ function ProfileScreen() {
 
         state.auth.currentUser
     );
-    console.log(currentUser)
+    //console.log(currentUser)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(profileThunk());
@@ -68,8 +68,8 @@ function ProfileScreen() {
     // console.log(Array.isArray(albums.albums.items))
     // console.log(albums)
     // console.log(albums.albums.items)
-    console.log(albums);
-    console.log(albums.albums && albums.albums.items);
+    //console.log(albums);
+    //console.log(albums.albums && albums.albums.items);
 
     return (<>
 

@@ -9,49 +9,45 @@ import LatestReviewsComponent from './latest-reviews';
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-import { profileThunk, logoutThunk}
+import { profileThunk, logoutThunk }
   from "../services/auth-thunks";
 function ProfileScreen() {
   const navigate = useNavigate()
-    const currentUser = useSelector((state) =>
-        
-        state.auth.currentUser
-    );
-    console.log(currentUser)
-    const dispatch = useDispatch()
-    useEffect(() => {
-        dispatch(profileThunk());
-    }, []);
+  const currentUser = useSelector((state) =>
+    state.auth.currentUser
+  );
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(profileThunk());
+  }, []);
 
-    const [profile, setProfile] = useState({
-        "username": "",
-    })
+  const [profile, setProfile] = useState({
+    "username": "",
+    "isCurator": false,
+  })
 
-    const [profileName, setProfileName] = useState("")
-    useEffect(() => {
-        if (currentUser !== null && currentUser !== undefined) {
-            setProfile(currentUser.currentUser)
-        }
-    }, [currentUser])
+  const [profileName, setProfileName] = useState("")
+  useEffect(() => {
+    if (currentUser !== null && currentUser !== undefined) {
+      setProfile(currentUser.currentUser)
+    }
+  }, [currentUser])
 
-    useEffect(() => {
-      if (currentUser && currentUser.currentUser.isCurator) {
-        console.log(currentUser.currentUser)
-        navigate("/curator");
+  useEffect(() => {
+    if (profile !== undefined && profile.role === "curator") {
+      navigate("/curator");
+    }
+  }, [profile, navigate]);
+
+  useEffect(() => {
+    if (profile !== undefined) {
+      if (profile.username !== undefined && profile.username !== null) {
+        setProfileName(profile.username)
       }
-    }, [currentUser]);
-
-    useEffect(() => {
-        if (profile !== undefined) {
-            if (profile.username !== undefined && profile.username !== null) {
-                setProfileName(profile.username)
-            }
-        }
-    }, [profile])
+    }
+  }, [profile])
 
   return (<>
-
-
     <div>
       <div className="row mt-2">
         <TrackStarHeader />
@@ -73,7 +69,7 @@ function ProfileScreen() {
         </div>
 
       )}
-      <div className  = "float-right mt-2">
+      <div className="float-right mt-2">
 
         <button className="me-2 btn btn-dark"
           onClick={() => {
@@ -83,8 +79,6 @@ function ProfileScreen() {
           Logout</button>
       </div>
     </div>
-
-
   </>); // see below
 }
 export default ProfileScreen;

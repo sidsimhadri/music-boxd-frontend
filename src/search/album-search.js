@@ -32,8 +32,8 @@ const AlbumSearchComponent = ({ query }) => {
     // console.log(Array.isArray(albums.albums.items))
     // console.log(albums)
     // console.log(albums.albums.items)
-    console.log(albums);
-    console.log(albums.albums && albums.albums.items);
+    //console.log(albums);
+    //console.log(albums.albums && albums.albums.items);
 
 
     return (
