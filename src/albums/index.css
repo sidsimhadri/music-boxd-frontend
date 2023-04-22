@@ -2,6 +2,10 @@
 background: black;
 }
 
+.white-bg{
+background: white;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -10,4 +14,32 @@ background: black;
 
 .item {
   flex: 1;
+}
+
+.font-15{
+font-size: 15px;
+}
+
+.center-align{
+align: center;
+}
+
+.mar-neg-4{
+margin-top: -1px;
+}
+
+.pink-bg{
+background: #b72a72;
+}
+
+.salmon-bg{
+background: salmon;
+}
+
+.font-25{
+font-size: 25px;
+}
+
+.gold-bg{
+background: MediumVioletRed;
 }

@@ -109,6 +109,7 @@ function ProfileScreen() {
                     Logout</button>
             </div>
         </div>
+        <h3 className = "nunito text-success mt-4">New Releases: </h3>
 
         {albums && albums.albums && albums.albums.items.length > 0 ? (
             albums.albums.items.map((album) => (
