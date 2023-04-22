@@ -8,13 +8,17 @@ import * as service from "../services/service";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { findReviewsThunk, updateReviewThunk } from "../services/thunks";
+import { findReviewsThunk, updateReviewThunk, deleteReviewThunk } from "../services/thunks";
+import { profileThunk } from "../services/auth-thunks";
 import ReviewByComponent from "./review-by";
+import { useNavigate } from "react-router";
 
 function ReviewComponent() {
     const { id } = useParams();
     const { reviews, loading } = useSelector(state => state.reviews)
+    const currentUser = useSelector((state) => state.auth.currentUser)
     const [editing, setEditing] = useState(false)
+    const [isUser, setIsUser] = useState(false)
     const [reviewBody, setBody] = useState(reviews.body)
     const [reviewRating, setRating] = useState(reviews.rating)
     const [albumPromise, setAlbumPromise] = useState(null)
@@ -28,20 +32,35 @@ function ReviewComponent() {
             { "name": "" },
         ],
     })
+    const [profile, setProfile] = useState({
+        "username": "",
+    })
     const [artistLink, setArtistLink] = useState("/")
     const [tags, setReviewTags] = useState([])
     const dispatch = useDispatch()
+ 
     useEffect(() => {
         dispatch(findReviewsThunk(id));
     }, [dispatch, id])
     useEffect(() => {
+        if (currentUser !== null && currentUser !== undefined) {
+            setProfile(currentUser.currentUser)
+        }
+    }, [currentUser])
+    useEffect(() => {
+        if (profile !== undefined && reviews.userId !== undefined) {
+            setIsUser(profile._id === reviews.userId)
+        }
+    }, [profile, reviews.userId])
+    useEffect(() => {
         setBody(reviews.body)
         setRating(reviews.rating)
+        setReviewTags(reviews.tags)
         if (reviews.albumId !== undefined) {
             setAlbumPromise(service.findAlbum(reviews.albumId))
         }
 
-    }, [reviews.body, reviews.rating, reviews.albumId])
+    }, [reviews.body, reviews.rating, reviews.albumId, reviews.tags])
     useEffect(() => {
         if (albumPromise !== null) {
             albumPromise.then((response) => {
@@ -60,10 +79,12 @@ function ReviewComponent() {
                 ...reviews,
                 body: reviewBody,
                 rating: reviewRating,
+                tags: tags,
             }))
         }
         setEditing(editing => !editing)
     }
+
     return (
         <>
             <div className="row mt-2">
@@ -106,7 +127,7 @@ function ReviewComponent() {
                         <div className="mt-3">
                             <ReviewInteractionsComponent review={reviews} />
                             {
-                                reviews.currentUser &&
+                                isUser &&
                                 <button className={"btn " + (editing ? "btn-info" : "btn-outline-info")}
                                     onClick={() => editingHandler()}>
                                     <i className={"fa " + (editing ? "fa-check" : "fa-edit")}></i>
@@ -119,7 +140,7 @@ function ReviewComponent() {
                         </div>
                     </div>
                     <div className="col-md-4 col-lg-3 d-none d-md-block nunito">
-                        <ReviewActionsComponent review={reviews} />
+                        <ReviewActionsComponent review={reviews} currentUser={currentUser}/>
                     </div>
                 </div>
             }

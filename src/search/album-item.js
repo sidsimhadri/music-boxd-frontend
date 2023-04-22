@@ -1,21 +1,30 @@
-// import React from "react";
-// import { Link } from "react-router-dom";
-// import { Col } from "react-bootstrap";
+import React from "react";
 
-// const AlbumItem = ({ album }) => {
-//   return (
-//     <Col className="mb-4">
-//       <div className="card">
-//         <Link to={`/albums/${album.id}`}>
-//           <img src={album.image} className="card-img-top" alt={album.title} />
-//         </Link>
-//         <div className="card-body">
-//           <h5 className="card-title">{album.title}</h5>
-//           <p className="card-text">{album.artist} ({album.year})</p>
-//         </div>
-//       </div>
-//     </Col>
-//   );
-// };
+const AlbumItem = ({ album }) => {
+    const { name, release_date, images, artists } = album;
 
-// export default AlbumItem
+    return (
+        <>
+            <div className="container">
+                <div className="row justify-content-center">
+                    <div className="card mt-5 ml-3 col-7">
+                        <img src={images[0].url} className="card-img-top mt-3 card-img" alt={name} />
+                        <div className="card-body">
+                            <h5 className="card-title">{name}</h5>
+                            <p className="card-text">
+                                {artists.map((artist) => (
+                                    <span key={artist.id} className="card-text">
+                                        {artist.name}
+                                    </span>
+                                ))}
+                            </p>
+                            <p className="card-text">Released: {release_date}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </>
+    );
+};
+
+export default AlbumItem;

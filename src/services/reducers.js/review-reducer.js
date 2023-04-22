@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { findReviewsThunk, deleteReviewThunk, createReviewThunk, updateReviewThunk } from "../thunks"
+
+import { findReviewsThunk, findReviewsByBodyThunk, deleteReviewThunk, createReviewThunk, updateReviewThunk}  from "../thunks"
+
 
 const initialState = {
   reviews: [],
@@ -7,10 +9,15 @@ const initialState = {
 }
 
 const reviewSlice = createSlice({
-  name: 'reviews',
-  initialState,
-  extraReducers: {
-    [findReviewsThunk.pending]:
+ name: 'reviews',
+ initialState,
+ extraReducers: {
+  [findReviewsByBodyThunk.fulfilled]:
+      (state, { payload }) => {
+         state.loading = false
+         state.reviews = payload
+      },
+   [findReviewsThunk.pending]:
       (state) => {
         state.loading = true
         state.reviews = []
