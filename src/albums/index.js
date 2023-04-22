@@ -9,7 +9,6 @@ import "./index.css";
 
 function AlbumReviewsComponent() {
     const { albumId } = useParams()
-    console.log(albumId)
     let album=""
     const [albumInfoLoading, setAlbumInfoLoading] = useState(true)
     const [albumInfo, setAlbumInfo] = useState(null)
@@ -32,9 +31,6 @@ function AlbumReviewsComponent() {
       }
     },[albumInfo])
 
-      console.log(albumInfo)
-      console.log(album)
-
     const [reviewsLoading, setReviewsLoading] = useState(true);
     const [albumReviews, setAlbumReviews] = useState(null);
     //const [albumItems, setAlbumItems] = useState([])
@@ -50,8 +46,6 @@ function AlbumReviewsComponent() {
         setReviewsLoading(false)
       }
     }, [albumReviews])
-
-    console.log(albumReviews);
 
     return (<>
     <div className="row mt-2">

@@ -32,10 +32,10 @@ function App() {
     <BrowserRouter>
       <div className="container">
         <Routes>
-          <Route index path="/" element={<HomeComponent />}/>
+          <Route path="/" element={<HomeComponent />}/>
           <Route path="/profile" element={<ProfileComponent />}/>
           <Route path="/reviews/:id" element={<ReviewComponent />}/>
-          <Route path="/login" element={<LoginComponent />}/>
+          <Route index path="/login" element={<LoginComponent />}/>
 
           <Route path="/signup" element={<SignupComponent />}/>
           

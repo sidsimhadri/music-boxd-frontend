@@ -14,9 +14,6 @@ const ReviewSearchComponent = ({ reviewId }) => {
         dispatch(findReviewsByBodyThunk(reviewId));
     }, [dispatch, reviewId]);
 
-    console.log("reviews:", reviews);
-    console.log("loading:", loading);
-
 
 
     return (

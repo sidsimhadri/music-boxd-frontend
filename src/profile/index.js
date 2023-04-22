@@ -22,7 +22,6 @@ function ProfileScreen() {
     isFollowing: true,
   };
   const currentUser = useSelector((state) => {
-    console.log(state.auth.currentUser)
     return state.auth.currentUser
 
   });
@@ -34,6 +33,7 @@ function ProfileScreen() {
     async function funky() {
       const { payload } = await dispatch(profileThunk());
       setProfile(payload);
+      console.log(payload)
     }
     funky()
   }, []);

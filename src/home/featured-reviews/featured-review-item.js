@@ -8,8 +8,6 @@ import { Link } from "react-router-dom";
 import TagsComponent from "../../review-component/tags";
 
 const FeaturedReviewItem = ({ review }) => {
-    console.log(review)
-    console.log(review.albumId)
 
     const dispatch = useDispatch()
     const [albumPromise, setAlbumPromise] = useState(null)
@@ -23,7 +21,6 @@ const FeaturedReviewItem = ({ review }) => {
             { "id": "", "name": "" },
         ],
     })
-    console.log(album)
     let dateObj = new Date(review.timestamp) 
     const date = dateObj.toDateString()
     const [user, setUser] = useState({

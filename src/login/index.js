@@ -11,7 +11,6 @@ import { useSelector } from "react-redux";
 
 function LoginScreen() {
     const currentUser = useSelector((state) => {
-        console.log(state.auth.currentUser)
         return state.auth.currentUser
     
       });
