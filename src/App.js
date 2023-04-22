@@ -22,39 +22,31 @@ import authReducer
 import tagReducer
   from "./services/reducers.js/tag-reducer";
 
-  const store = configureStore({
- reducer: {reviews: reviewReducer, users: userReducer, tags: tagReducer, auth: authReducer}});
+const store = configureStore({
+  reducer: { reviews: reviewReducer, users: userReducer, tags: tagReducer, auth: authReducer }
+});
 
 function App() {
   return (
-
-          <Provider store={store}>
-    <BrowserRouter>
-      <div className="container">
-        <Routes>
-          <Route path="/" element={<HomeComponent />}/>
-          <Route path="/profile" element={<ProfileComponent />}/>
-          <Route path="/reviews/:id" element={<ReviewComponent />}/>
-          <Route index path="/login" element={<LoginComponent />}/>
-
-          <Route path="/signup" element={<SignupComponent />}/>
-          
-
-           <Route path="/artists/:artistId" element={<ArtistAlbumsComponent />}/>
-            <Route path="/albums/:albumId" element={<AlbumReviewsComponent />}/>
-
-          <Route path="/search/:query" element={<Search />}/>
-          <Route path="/search" element={<Search />}/>
-
-            <Route path="/artists/:artistId" element={<ArtistAlbumsComponent />}/>
-            <Route path="/albums/:albumId" element={<AlbumReviewsComponent />}/>
-
-        </Routes>
-      </div>
-
+    <Provider store={store}>
+      <BrowserRouter>
+        <div className="container">
+          <Routes>
+            <Route index path="/" element={<HomeComponent />} />
+            <Route path="/profile" element={<ProfileComponent />} />
+            <Route path="/reviews/:id" element={<ReviewComponent />} />
+            <Route path="/login" element={<LoginComponent />} />
+            <Route path="/signup" element={<SignupComponent />} />
+            <Route path="/artists/:artistId" element={<ArtistAlbumsComponent />} />
+            <Route path="/albums/:albumId" element={<AlbumReviewsComponent />} />
+            <Route path="/search/:query" element={<Search />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/artists/:artistId" element={<ArtistAlbumsComponent />} />
+            <Route path="/albums/:albumId" element={<AlbumReviewsComponent />} />
+          </Routes>
+        </div>
       </BrowserRouter>
     </Provider>
-
   );
 }
 export default App;
