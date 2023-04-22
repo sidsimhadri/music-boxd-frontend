@@ -12,31 +12,35 @@ import { useNavigate } from "react-router";
 import { profileThunk, logoutThunk, updateUserThunk }
   from "../services/auth-thunks";
 function ProfileScreen() {
-  let user = {
-    image: "../../images/benson.jpeg",
-    handle: "jackfurci",
-    followers: 200,
-    following: 50,
-    reviews: 20,
-    likes: 450,
-    isFollowing: true,
-  };
-  const currentUser = useSelector((state) => {
-    return state.auth.currentUser
+  const navigate = useNavigate()
+    const currentUser = useSelector((state) =>
+        state.auth.currentUser
+    );
 
-  });
-  const [profile, setProfile] = useState(currentUser);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const save = () => { dispatch(updateUserThunk(profile)); };
-  useEffect(() => {
-    async function funky() {
-      const { payload } = await dispatch(profileThunk());
-      setProfile(payload);
-      console.log(payload)
-    }
-    funky()
-  }, []);
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(profileThunk());
+    }, []);
+
+    const [profile, setProfile] = useState({
+        "username": "",
+    })
+
+    const [profileName, setProfileName] = useState("")
+    useEffect(() => {
+        if (currentUser !== null && currentUser !== undefined) {
+            setProfile(currentUser.currentUser)
+        }
+    }, [currentUser])
+
+    useEffect(() => {
+        if (profile !== undefined) {
+            if (profile.username !== undefined && profile.username !== null) {
+                setProfileName(profile.username)
+            }
+        }
+    }, [profile])
+
   return (<>
 
 
@@ -49,11 +53,11 @@ function ProfileScreen() {
 
           <div className="mt-2 row">
             <div className="col-5 d-none d-lg-flex flex-column justify-content-center align-items-center relative">
-              <ProfilePictureComponent user={user} />
-              <FollowUnfollowButton following={user.isFollowing} />
+              {/* <ProfilePictureComponent user={user} /> */}
+              <FollowUnfollowButton following={profileName.isFollowing} />
             </div>
             <div className="col-12 col-lg-7">
-              <ProfileHeaderComponent user={user} />
+              <ProfileHeaderComponent user={profile} />
               <h2 className="nunito text-white">Latest Ratings: </h2>
               <LatestReviewsComponent />
             </div>
