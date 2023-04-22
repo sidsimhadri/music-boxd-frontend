@@ -8,12 +8,14 @@ import * as service from "../services/service";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { findReviewsThunk, updateReviewThunk } from "../services/thunks";
+import { findReviewsThunk, updateReviewThunk, deleteReviewThunk } from "../services/thunks";
 import ReviewByComponent from "./review-by";
+import { useNavigate } from "react-router";
 
 function ReviewComponent() {
     const { id } = useParams();
     const { reviews, loading } = useSelector(state => state.reviews)
+
     const [editing, setEditing] = useState(false)
     const [reviewBody, setBody] = useState(reviews.body)
     const [reviewRating, setRating] = useState(reviews.rating)
@@ -31,6 +33,7 @@ function ReviewComponent() {
     const [artistLink, setArtistLink] = useState("/")
     const [tags, setReviewTags] = useState([])
     const dispatch = useDispatch()
+ 
     useEffect(() => {
         dispatch(findReviewsThunk(id));
     }, [dispatch, id])
@@ -64,6 +67,7 @@ function ReviewComponent() {
         }
         setEditing(editing => !editing)
     }
+
     return (
         <>
             <div className="row mt-2">
@@ -120,6 +124,7 @@ function ReviewComponent() {
                     </div>
                     <div className="col-md-4 col-lg-3 d-none d-md-block nunito">
                         <ReviewActionsComponent review={reviews} />
+                        
                     </div>
                 </div>
             }

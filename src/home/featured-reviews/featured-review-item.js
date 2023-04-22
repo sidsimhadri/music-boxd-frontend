@@ -28,6 +28,8 @@ const FeaturedReviewItem = ({ review }) => {
         "profilePic": "",
     })
     const [artistLink , setArtistLink] = useState("/")
+  
+
     useEffect(() => {
         setAlbumPromise(service.findAlbum(review.albumId))
     },[review.albumId])

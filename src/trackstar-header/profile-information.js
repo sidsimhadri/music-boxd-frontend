@@ -8,7 +8,7 @@ function ProfileInformation() {
     const currentUser = useSelector((state) =>
         state.auth.currentUser
     );
-
+    console.log(currentUser)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(profileThunk());
