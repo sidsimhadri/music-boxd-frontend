@@ -45,8 +45,8 @@ const ReviewInteractionsComponent = ({ review }) => {
     });
 
     useEffect(() => {
-        if (currentUser !== undefined) {
-            setIsAdmin(currentUser.currentUser.admin)
+        if (currentUser !== undefined && currentUser !== null) {
+            setIsAdmin(currentUser.currentUser.isAdmin)
         }
     },[currentUser])
 
@@ -59,7 +59,7 @@ const ReviewInteractionsComponent = ({ review }) => {
             onClick={() => downvoteHandler({ review })}>
             <i className="fa fa-arrow-down"></i><span className="nunito"> {downvotes} </span>
         </button>
-        {currentUser.currentUser.isAdmin && (
+        {isAdmin && (
             <>
                 <button className="btn btn-danger" onClick={deleteHandler}>Delete</button>
             </>)}
