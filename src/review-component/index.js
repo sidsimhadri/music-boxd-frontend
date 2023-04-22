@@ -53,11 +53,12 @@ function ReviewComponent() {
     useEffect(() => {
         setBody(reviews.body)
         setRating(reviews.rating)
+        setReviewTags(reviews.tags)
         if (reviews.albumId !== undefined) {
             setAlbumPromise(service.findAlbum(reviews.albumId))
         }
 
-    }, [reviews.body, reviews.rating, reviews.albumId])
+    }, [reviews.body, reviews.rating, reviews.albumId, reviews.tags])
     useEffect(() => {
         if (albumPromise !== null) {
             albumPromise.then((response) => {
@@ -76,6 +77,7 @@ function ReviewComponent() {
                 ...reviews,
                 body: reviewBody,
                 rating: reviewRating,
+                tags: tags,
             }))
         }
         setEditing(editing => !editing)
@@ -135,7 +137,7 @@ function ReviewComponent() {
                         </div>
                     </div>
                     <div className="col-md-4 col-lg-3 d-none d-md-block nunito">
-                        <ReviewActionsComponent review={reviews} />
+                        <ReviewActionsComponent review={reviews} currentUser={currentUser}/>
                     </div>
                 </div>
             }

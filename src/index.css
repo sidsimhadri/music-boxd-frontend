@@ -58,3 +58,7 @@
   cursor: pointer;
   padding: 0px;
 }
+
+.rounded-corner {
+  border-radius: 7px;
+}
