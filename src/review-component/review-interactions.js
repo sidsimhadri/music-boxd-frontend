@@ -59,7 +59,6 @@ const ReviewInteractionsComponent = ({ review }) => {
         </button>
         {currentUser.currentUser.isAdmin && (
             <>
-               
                 <button className="btn btn-danger" onClick={deleteHandler}>Delete</button>
             </>)}
 
