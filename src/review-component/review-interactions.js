@@ -57,7 +57,6 @@ const ReviewInteractionsComponent = ({ review }) => {
             onClick={() => downvoteHandler({ review })}>
             <i className="fa fa-arrow-down"></i><span className="nunito"> {downvotes} </span>
         </button>
-        console.log(currentUser.currentUser.isAdmin)
         {currentUser.currentUser.isAdmin && (
             <>
                
