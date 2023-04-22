@@ -101,6 +101,18 @@ export const findTag = async (tid) => {
   return tags;
 }
 
+export const findTagByName = async (name) => {
+  let response = ""
+  if (name === undefined) {
+    response = await axios.get(`${TAGS_API}`)
+  }
+  else {
+    response = await axios.get(`${TAGS_API}/name/${name}`)
+  }
+  const tags = response.data;
+  return tags;
+} 
+
 export const findAlbum = async (aid) => {
   const response = await axios.get(`${SPOTIFY_API}/album/${aid}`)
   const album = response.data;
