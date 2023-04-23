@@ -32,7 +32,7 @@ function LoginScreen() {
             <TrackStarLogo />
             <div className="container d-flex justify-content-center align-items-center" style={{ minHeight: '75vh' }}>
                 <div className="p-4 bg-dark rounded shadow-sm" style={{ width: '350px', height: '400px' }}>
-                    <div className="text-center mb-4">
+                    <div className="text-center nunito text-white mb-4">
                         <h1 className="mt-2">Login</h1>
                     </div>
                     <form>
