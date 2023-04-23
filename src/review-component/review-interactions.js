@@ -62,7 +62,7 @@ const ReviewInteractionsComponent = ({ review }) => {
     }
     useEffect(() => {
         if (currentUser !== undefined && currentUser !== null) {
-            setIsAdmin(currentUser.currentUser.isAdmin)
+            setIsAdmin(currentUser.currentUser.role === "admin")
             if (review.upvotesArr !== undefined) {
                 setUpvotesArr(review.upvotesArr)
                 setUpvoted(review.upvotesArr.includes(currentUser.currentUser._id))
