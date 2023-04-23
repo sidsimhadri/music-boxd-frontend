@@ -82,7 +82,7 @@ function ProfileScreen() {
                 <div>
                     <div class="d-flex justify-content-left mt-3 align-items-center">
                         <h2 class="text-left nunito text-danger  me-2">Admin</h2>
-                        <i class="fa fa-user-secret text-danger pb-2 fs-4" ></i>
+                        <i class="fa fa-user-secret  text-danger pb-2 fs-5" ></i>
                     </div>
 
                     <div className="mt-2 row">
