@@ -8,6 +8,7 @@ import ReviewComponent from "./review-component";
 import ArtistAlbumsComponent from "./artists";
 import AlbumReviewsComponent from "./albums";
 import LoginComponent from "./login";
+import CreateReviewComponent from "./home/create-review/create-review-item";
 
 import Search from "./search";
 
@@ -47,6 +48,8 @@ function App() {
             <Route path="/search" element={<Search />} />
             <Route path="/artists/:artistId" element={<ArtistAlbumsComponent />} />
             <Route path="/albums/:albumId" element={<AlbumReviewsComponent />} />
+            <Route path="/createReview/:aid" element={<CreateReviewComponent />} />
+
           </Routes>
         </div>
       </BrowserRouter>
