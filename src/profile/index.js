@@ -34,7 +34,7 @@ function ProfileScreen() {
     }, [currentUser])
 
     useEffect(() => {
-      if (profile.role === "admin") {
+      if (profile !== undefined && profile.role === "admin") {
         navigate("/admin");
       }
     }, [profile, navigate]);
