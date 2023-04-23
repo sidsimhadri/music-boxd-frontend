@@ -17,7 +17,6 @@ function ProfileScreen() {
         
         state.auth.currentUser
     );
-    console.log(currentUser)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(profileThunk());
@@ -25,8 +24,8 @@ function ProfileScreen() {
 
     const [profile, setProfile] = useState({
         "username": "",
+        "role": "user",
     })
-
     const [profileName, setProfileName] = useState("")
     useEffect(() => {
         if (currentUser !== null && currentUser !== undefined) {
@@ -35,11 +34,10 @@ function ProfileScreen() {
     }, [currentUser])
 
     useEffect(() => {
-      if (currentUser && currentUser.currentUser.isCurator) {
-        console.log(currentUser.currentUser)
-        navigate("/curator");
+      if (profile !== undefined && profile.role === "admin") {
+        navigate("/admin");
       }
-    }, [currentUser]);
+    }, [profile, navigate]);
 
     useEffect(() => {
         if (profile !== undefined) {
@@ -60,6 +58,7 @@ function ProfileScreen() {
         <div>
 
           <div className="mt-2 row">
+       
             <div className="col-5 d-none d-lg-flex flex-column justify-content-center align-items-center relative">
               {/* <ProfilePictureComponent user={user} /> */}
               <FollowUnfollowButton following={profileName.isFollowing} />

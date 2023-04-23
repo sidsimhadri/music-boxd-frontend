@@ -3,12 +3,15 @@ import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router";
 import ProfileComponent from "./profile";
 import CuratorComponent from "./profile/curator.js";
+import AdminComponent from "./profile/admin.js";
 import ReviewComponent from "./review-component";
 import ArtistAlbumsComponent from "./artists";
 import AlbumReviewsComponent from "./albums";
 import LoginComponent from "./login";
+import CreateReviewComponent from "./home/create-review/create-review-item";
 
 import Search from "./search";
+import TagsSearch from "./tags-search";
 
 import SignupComponent from "./signup";
 
@@ -36,6 +39,7 @@ function App() {
             <Route index path="/" element={<HomeComponent />} />
             <Route path="/profile" element={<ProfileComponent />} />
             <Route path="/curator" element={<CuratorComponent />} />
+            <Route path="/admin" element={<AdminComponent />} />
             <Route path="/reviews/:id" element={<ReviewComponent />} />
             <Route path="/login" element={<LoginComponent />} />
             <Route path="/signup" element={<SignupComponent />} />
@@ -43,8 +47,12 @@ function App() {
             <Route path="/albums/:albumId" element={<AlbumReviewsComponent />} />
             <Route path="/search/:query" element={<Search />} />
             <Route path="/search" element={<Search />} />
+            <Route path="/tagsSearch" element={<TagsSearch />} />
+            <Route path="/tagsSearch/:tid" element={<TagsSearch />} />
             <Route path="/artists/:artistId" element={<ArtistAlbumsComponent />} />
             <Route path="/albums/:albumId" element={<AlbumReviewsComponent />} />
+            <Route path="/createReview/:aid" element={<CreateReviewComponent />} />
+
           </Routes>
         </div>
       </BrowserRouter>

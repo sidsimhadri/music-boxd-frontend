@@ -7,10 +7,8 @@
 }
 
 .album-cover-trending-release {
-    float: left;
-    margin-right: 10px;
-    height: 100px;
-    width: 100px;
+    height: 90%;
+    width: 90%;
 }
 
 .album-cover-review-image {
@@ -27,6 +25,11 @@
 
 .center {
     align-items: center;
+}
+
+.tr-nudge-left {
+    position: relative;
+    margin-left: 120px;
 }
 
 .font-header {
@@ -106,9 +109,14 @@ input.form-control:focus::placeholder {
     color: salmon;
 }
 
+
 @media screen and (max-width: 768px) {
   .album-cover-review-image {
      height: 120px;
      width: 120px;
   }
+
+.text-white{
+color: white;
+
 }

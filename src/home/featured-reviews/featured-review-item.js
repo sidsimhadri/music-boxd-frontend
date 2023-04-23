@@ -1,11 +1,15 @@
 import StarRating from "../../star-rating";
 import ReviewInteractionsComponent from "../../review-component/review-interactions";
 import * as service from "../../services/service";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import TagsComponent from "../../review-component/tags";
+
 import "../index.css";
+
+import { updateReviewThunk } from "../../services/thunks";
+
 
 const FeaturedReviewItem = ({ review }) => {
 
@@ -21,12 +25,39 @@ const FeaturedReviewItem = ({ review }) => {
             { "id": "", "name": "" },
         ],
     })
+    const [reviewBody, setBody] = useState(review.body)
+    const [reviewRating, setRating] = useState(review.rating)
+    const [reviewTags, setReviewTags] = useState(review.tags)
+
+    useEffect(() => {
+            setBody(review.body)
+            setRating(review.rating)
+            setReviewTags(review.tags)
+        }, [review.body, review.rating, review.tags])
     let dateObj = new Date(review.timestamp)
     const date = dateObj.toDateString()
     const [user, setUser] = useState({
         "username": "",
         "profilePic": "",
     })
+    const [editing, setEditing] = useState(false)
+    const dispatch = useDispatch()
+
+    const currentUser = useSelector((state) => state.auth.currentUser)
+    const [isUser, setIsUser] = useState(false)
+    const [profile, setProfile] = useState({
+            "username": "",
+        })
+    useEffect(() => {
+            if (currentUser !== null && currentUser !== undefined) {
+                setProfile(currentUser.currentUser)
+            }
+        }, [currentUser])
+        useEffect(() => {
+            if (profile !== undefined && review.userId !== undefined) {
+                setIsUser(profile._id === review.userId)
+            }
+        }, [profile, review.userId])
     const [artistLink , setArtistLink] = useState("/")
     useEffect(() => {
         setAlbumPromise(service.findAlbum(review.albumId))
@@ -55,28 +86,51 @@ const FeaturedReviewItem = ({ review }) => {
             setArtistLink(`/artists/${album.artists[0].id}`)
         }
     }, [album])
+
+    console.log(isUser);
+    console.log(reviewTags);
     return (
         <>
             <div className="card border-dark mb-3" style={{ "maxWidth": "80%" }}>
                 <div className="row card-body">
                     <div className="col-8">
-                        <Link className="link-white" to={`/reviews/${review._id}`}>
-                            <h4 className="card-title small-margin-bottom volkhov text-white"><i><Link className="link-salmon" to={`/albums/${album.id}`} style={{ textDecoration: "none" }}>{album.name}</Link></i></h4>
+
+                        <Link className="link-white" to={{pathname: `/reviews/${review._id}`,
+                                                          search: `?editing=${editing}`
+                                                         }}>
+                            <h4 className="card-title small-margin-bottom volkhov text-white"><i><Link className="link-salmon" to="/albums/">{album.name}</Link></i></h4>
+
                             <h6 className="text-white nunito no-margin-bottom"><Link className="link-salmon" to={artistLink}>{album.artists[0].name}</Link> • {album.release_date}</h6>
                             <div className="row no-margin-left d-flex center">
                                 <div className="col-1">
                                     <img className="profile-picture me-2" src={user.profilePicture} alt="" />
                                 </div>
                                 <div className="col-8 ms-3">
-                                    <StarRating rating={review.rating} />
+                                    <StarRating rating={review.rating}></StarRating>
                                     <h6 className="text-muted nunito"><Link className="link-salmon" to="/profile">@{user.username}</Link> - {date}</h6>
                                 </div>
                             </div>
-                            <p className="card-text nunito">{review.body}</p>
+
+                            {!editing && <div className="nunito text-white"> {reviewBody} </div>}
+                                                            {editing &&
+                                                                <div>
+                                                                    <textarea className="form-control border-0 bg-dark text-white mb-1" value={reviewBody}
+                                                                        onChange={(event) => setBody(event.target.value)}></textarea>
+                                                                </div>
+                                                            }
+                                                            </Link>
                             <div className="mb-2">
                                 <TagsComponent review={review} /></div>
-                        </Link>
                         <ReviewInteractionsComponent review={review} />
+                        { isUser &&
+                                  <Link to={{pathname: `/reviews/${review._id}`,
+                                             search: `?editing=${!editing}`
+                                            }}
+                                    className={"btn btn-outline-info"}>
+                                    <i className={"fa fa-edit"}></i>
+                                    <span className="ms-2 nunito">Edit</span>
+                                  </Link>
+                        }
                     </div>
                     <img className="album-cover-review-image col-4" src={album.images[0].url} alt={review.title} />
                 </div>

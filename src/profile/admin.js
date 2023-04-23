@@ -81,8 +81,8 @@ function ProfileScreen() {
             {profile && (
                 <div>
                     <div class="d-flex justify-content-left mt-3 align-items-center">
-                        <h2 class="text-left nunito text-success  me-2">Curator</h2>
-                        <i class="fa fa-check-circle text-success pb-2 fs-4" ></i>
+                        <h2 class="text-left nunito text-danger  me-2">Admin</h2>
+                        <i class="fa fa-user-secret  text-danger pb-2 fs-5" ></i>
                     </div>
 
                     <div className="mt-2 row">
@@ -109,15 +109,6 @@ function ProfileScreen() {
                     Logout</button>
             </div>
         </div>
-        <h3 className = "nunito text-success mt-4">New Releases: </h3>
-
-        {albums && albums.albums && albums.albums.items.length > 0 ? (
-            albums.albums.items.map((album) => (
-                <AlbumItem key={album.id} album={album} />
-            ))
-        ) : (
-            <p>No results found.</p>
-        )}
 
 
     </>); // see below
