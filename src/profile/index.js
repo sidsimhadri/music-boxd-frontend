@@ -6,6 +6,7 @@ import { useNavigate } from "react-router";
 import * as service from "../services/service"
 import { profileThunk, logoutThunk, updateUserThunk }
   from "../services/auth-thunks";
+import LatestReviewItem from "./latest-reviews/latest-review-item"
 function ProfileScreen() {
   const navigate = useNavigate()
   const currentUser = useSelector((state) =>
@@ -26,18 +27,17 @@ function ProfileScreen() {
   const [profileName, setProfileName] = useState("")
   const [profileImage, setProfileImage] = useState("https://i.pinimg.com/736x/83/bc/8b/83bc8b88cf6bc4b4e04d153a418cde62.jpg")
   const [nameEditing, setNameEditing] = useState(false);
-  const [reviewCount, setReviewCount] = useState(0);
+  const [reviews, setReviews] = useState([]);
   const [reviewCountPromise, setReviewCountPromise] = useState(null);
   useEffect(() => {
     if (profile._id !== "") {
-      console.log(profile._id)
       setReviewCountPromise(service.findReviewsByUserId(profile._id))
     }
   },[profile])
   useEffect(() => {
     if (reviewCountPromise !== null) {
       reviewCountPromise.then((response) => {
-        setReviewCount(response.length)
+        setReviews(response)
       })
     }
   }, [reviewCountPromise])
@@ -115,9 +115,20 @@ function ProfileScreen() {
                     Following: {profile.following.length}
                   </span>
                   <span class="badge bg-light follow-info nunito me-2">
-                    Reviews: {reviewCount}
+                    Reviews: {reviews.length}
                   </span>
                 </li>
+                </ul>
+                <ul className="list-group">
+                {
+                    reviews.map(review => {
+                        return (
+                          <li className="list-group-item">
+                            <LatestReviewItem review={review} />
+                            </li>
+                        )
+                    })
+                }
               </ul>
             </div>
           </div>

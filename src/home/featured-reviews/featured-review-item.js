@@ -23,8 +23,8 @@ const FeaturedReviewItem = ({ review }) => {
     })
     const [reviewBody, setBody] = useState(review.body)
     useEffect(() => {
-            setBody(review.body)
-        }, [review.body])
+        setBody(review.body)
+    }, [review.body])
     let dateObj = new Date(review.timestamp)
     const date = dateObj.toDateString()
     const [user, setUser] = useState({
@@ -34,32 +34,32 @@ const FeaturedReviewItem = ({ review }) => {
     const [editing, setEditing] = useState(false)
     const dispatch = useDispatch()
     const editingHandler = () => {
-            if (editing) {
-                dispatch(updateReviewThunk({
-                    ...review,
-                    body: review.body,
-                    rating: review.rating,
-                    tags: review.tags,
-                }))
-            }
-            setEditing(editing => !editing)
+        if (editing) {
+            dispatch(updateReviewThunk({
+                ...review,
+                body: review.body,
+                rating: review.rating,
+                tags: review.tags,
+            }))
         }
+        setEditing(editing => !editing)
+    }
     const currentUser = useSelector((state) => state.auth.currentUser)
     const [isUser, setIsUser] = useState(false)
     const [profile, setProfile] = useState({
-            "username": "",
-        })
+        "username": "",
+    })
     useEffect(() => {
-            if (currentUser !== null && currentUser !== undefined) {
-                setProfile(currentUser.currentUser)
-            }
-        }, [currentUser])
-        useEffect(() => {
-            if (profile !== undefined && review.userId !== undefined) {
-                setIsUser(profile._id === review.userId)
-            }
-        }, [profile, review.userId])
-    const [artistLink , setArtistLink] = useState("/")
+        if (currentUser !== null && currentUser !== undefined) {
+            setProfile(currentUser.currentUser)
+        }
+    }, [currentUser])
+    useEffect(() => {
+        if (profile !== undefined && review.userId !== undefined) {
+            setIsUser(profile._id === review.userId)
+        }
+    }, [profile, review.userId])
+    const [artistLink, setArtistLink] = useState("/")
     useEffect(() => {
         setAlbumPromise(service.findAlbum(review.albumId))
     }, [review.albumId])
@@ -77,7 +77,7 @@ const FeaturedReviewItem = ({ review }) => {
         if (userPromise !== null) {
             userPromise.then((response) => {
                 if (response !== null) {
-                setUser(response)
+                    setUser(response)
                 }
             })
         }
@@ -107,24 +107,24 @@ const FeaturedReviewItem = ({ review }) => {
                                 </div>
                             </div>
                             {!editing && <div className="nunito text-white"> {reviewBody} </div>}
-                                                            {editing &&
-                                                                <div>
-                                                                    <textarea className="form-control border-0 bg-dark text-white mb-1" value={reviewBody}
-                                                                        onChange={(event) => setBody(event.target.value)}></textarea>
-                                                                </div>
-                                                            }
+                            {editing &&
+                                <div>
+                                    <textarea className="form-control border-0 bg-dark text-white mb-1" value={reviewBody}
+                                        onChange={(event) => setBody(event.target.value)}></textarea>
+                                </div>
+                            }
                             <div className="mb-2">
                                 <TagsComponent review={review} /></div>
                         </Link>
                         <ReviewInteractionsComponent review={review} />
-                        { isUser &&
-                                  <button className={"btn " + (editing ? "btn-info" : "btn-outline-info")} onClick={() => editingHandler()}>
-                                      <i className={"fa " + (editing ? "fa-check" : "fa-edit")}></i>
-                                      <span className="nunito">
-                                          {!editing && " Edit"}
-                                          {editing && " Save"}
-                                      </span>
-                                  </button>
+                        {isUser &&
+                            <button className={"btn " + (editing ? "btn-info" : "btn-outline-info")} onClick={() => editingHandler()}>
+                                <i className={"fa " + (editing ? "fa-check" : "fa-edit")}></i>
+                                <span className="nunito">
+                                    {!editing && " Edit"}
+                                    {editing && " Save"}
+                                </span>
+                            </button>
                         }
                     </div>
                     <img className="album-cover-review-image col-4" src={album.images[0].url} alt={review.title} />
