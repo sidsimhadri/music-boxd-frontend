@@ -17,7 +17,6 @@ function ProfileScreen() {
         
         state.auth.currentUser
     );
-    console.log(currentUser)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(profileThunk());
@@ -25,8 +24,8 @@ function ProfileScreen() {
 
     const [profile, setProfile] = useState({
         "username": "",
+        "role": "user",
     })
-
     const [profileName, setProfileName] = useState("")
     useEffect(() => {
         if (currentUser !== null && currentUser !== undefined) {
@@ -35,15 +34,10 @@ function ProfileScreen() {
     }, [currentUser])
 
     useEffect(() => {
-      // if (currentUser && currentUser.currentUser.isCurator) {
-      //   console.log(currentUser.currentUser)
-      //   navigate("/curator");
-      // }
-      if (currentUser && currentUser.currentUser.isAdmin) {
-        console.log(currentUser.currentUser)
+      if (profile !== undefined && profile.role === "admin") {
         navigate("/admin");
       }
-    }, [currentUser]);
+    }, [profile, navigate]);
 
     useEffect(() => {
         if (profile !== undefined) {

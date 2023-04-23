@@ -10,6 +10,7 @@ import AlbumReviewsComponent from "./albums";
 import LoginComponent from "./login";
 
 import Search from "./search";
+import TagsSearch from "./tags-search";
 
 import SignupComponent from "./signup";
 
@@ -45,6 +46,8 @@ function App() {
             <Route path="/albums/:albumId" element={<AlbumReviewsComponent />} />
             <Route path="/search/:query" element={<Search />} />
             <Route path="/search" element={<Search />} />
+            <Route path="/tagsSearch" element={<TagsSearch />} />
+            <Route path="/tagsSearch/:tid" element={<TagsSearch />} />
             <Route path="/artists/:artistId" element={<ArtistAlbumsComponent />} />
             <Route path="/albums/:albumId" element={<AlbumReviewsComponent />} />
           </Routes>

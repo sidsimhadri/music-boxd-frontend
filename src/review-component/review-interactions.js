@@ -62,7 +62,7 @@ const ReviewInteractionsComponent = ({ review }) => {
     }
     useEffect(() => {
         if (currentUser !== undefined && currentUser !== null) {
-            setIsAdmin(currentUser.currentUser.isAdmin)
+            setIsAdmin(currentUser.currentUser.role === "admin")
             if (review.upvotesArr !== undefined) {
                 setUpvotesArr(review.upvotesArr)
                 setUpvoted(review.upvotesArr.includes(currentUser.currentUser._id))
@@ -84,7 +84,7 @@ const ReviewInteractionsComponent = ({ review }) => {
         </button>
         {isAdmin && (
             <>
-                <button className="btn btn-danger" onClick={deleteHandler}>Delete</button>
+                <button className="btn btn-danger me-2" onClick={deleteHandler}>Delete</button>
             </>)}
     </>);
 }

@@ -1,19 +1,28 @@
-import StarRating from "../../star-rating/index.js";
 import { Link } from "react-router-dom";
+import * as service from "../../services/service"
+import { useState, useEffect } from "react";
 
-const TrendingReleaseItem = ({ release }) => {
+const TrendingReleaseItem = ({ release }) => { 
+    const [reviewArr, setReviewArr] = useState([]);
+    const releaseDate = new Date(release.release_date)
+    const dateStr = releaseDate.toDateString()
+    const promise = service.findReviewsByAlbumId(release.id)
+    useEffect(() => {
+        promise.then((response) => {
+            setReviewArr(response)
+        })
+    }, [promise])
     return (<>
-        <div className="list-group-item no-rounded-tops">
-            <img className="album-cover-trending-release" src={release.image} alt={release.title} />
-            <Link className="link-salmon" to="/"><h6 className="mb-0 volkhov">{release.title}</h6></Link>
+        <div className="list-group-item container no-rounded-tops">
+            <img className="album-cover-trending-release mb-1" src={release.images[0].url} alt={release.title} />
+            <Link className="link-salmon" to="/"><h6 className="mb-0 volkhov">{release.name}</h6></Link>
             <div>
-                <span><Link className="link-salmon float-left text-small nunito" to="/">{release.artist}</Link></span>
-                <span className="text-muted text-small float-left nunito ps-1">• {release.year}</span>
-            </div><br />
-            <div className="text-muted text-small nunito">
-                Reviews: {release.reviews}
+                <div><Link className="link-salmon text-small nunito" style={{ "wordBreak": "break-word" }} to="/">{release.artists[0].name}</Link></div>
+                <span className="text-muted text-small nunito" style={{ "wordBreak": "keep-all" }}>{dateStr}</span>
             </div>
-            <StarRating rating={release.averageRating} />
+            <div className="text-muted text-small nunito">
+                Reviews: {reviewArr.length}
+            </div>
         </div></>
     );
 }

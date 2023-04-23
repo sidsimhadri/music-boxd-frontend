@@ -104,10 +104,17 @@ const FeaturedReviewItem = ({ review }) => {
                                     <h6 className="text-muted nunito"><Link className="link-salmon" to="/profile">@{user.username}</Link> - {date}</h6>
                                 </div>
                             </div>
-                            <div className="nunito text-white"> {reviewBody} </div>
+
+                            {!editing && <div className="nunito text-white"> {reviewBody} </div>}
+                                                            {editing &&
+                                                                <div>
+                                                                    <textarea className="form-control border-0 bg-dark text-white mb-1" value={reviewBody}
+                                                                        onChange={(event) => setBody(event.target.value)}></textarea>
+                                                                </div>
+                                                            }
+                                                            </Link>
                             <div className="mb-2">
-                                <TagsComponent review={review}/></div>
-                        </Link>
+                                <TagsComponent review={review} /></div>
                         <ReviewInteractionsComponent review={review} />
                         { isUser &&
                                   <Link to={{pathname: `/reviews/${review._id}`,
