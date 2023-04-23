@@ -66,6 +66,11 @@ export const findReviewsByAlbumId = async (aid) => {
   const reviews = response.data;
   return reviews;
 }
+export const findReviewByBody = async (search) => {
+ const response = await axios.get(`${REVIEWS_API}/body/${search}`)
+ const reviews = response.data;
+ return reviews;
+}
 
 export const deleteReview = async (rid) => {
   const response = await axios
@@ -96,6 +101,18 @@ export const findTag = async (tid) => {
   return tags;
 }
 
+export const findTagByName = async (name) => {
+  let response = ""
+  if (name === undefined) {
+    response = await axios.get(`${TAGS_API}`)
+  }
+  else {
+    response = await axios.get(`${TAGS_API}/name/${name}`)
+  }
+  const tags = response.data;
+  return tags;
+} 
+
 export const findAlbum = async (aid) => {
   const response = await axios.get(`${SPOTIFY_API}/album/${aid}`)
   const album = response.data;
@@ -122,14 +139,14 @@ export const findSearchResults = async (textInput) => {
 }
 
 export const searchArtists = async (textInput) => {
- const response = await axios.get(SPOTIFY_API + "/searchArtists", textInput);
+ const response = await axios.get(SPOTIFY_API + "/searchArtists/", textInput);
  const results = response.data;
  return results;
 }
 
 export const searchAlbums = async (textInput) => {
- const response = await axios.get(SPOTIFY_API + "/searchAlbums", textInput);
- const results = response.data;
+   const response = await axios.get(`${SPOTIFY_API}/searchAlbums/${textInput}`)
+  const results = response.data;
  return results;
 }
 

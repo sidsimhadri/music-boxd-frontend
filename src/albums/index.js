@@ -57,7 +57,6 @@ function UserDetail({ userId }) {
 
 function AlbumReviewsComponent() {
     const { albumId } = useParams()
-    console.log(albumId)
     let album=""
     //let albumReviewslist=[]
     const [albumInfoLoading, setAlbumInfoLoading] = useState(true)
@@ -82,9 +81,6 @@ function AlbumReviewsComponent() {
       }
     },[albumInfo])
 
-      console.log(albumInfo)
-      console.log(album)
-
     const [reviewsLoading, setReviewsLoading] = useState(true);
     const [albumReviews, setAlbumReviews] = useState(null);
     const [albumProm, setAlbumProm] = useState(null);
@@ -108,9 +104,7 @@ function AlbumReviewsComponent() {
       }
     }, [albumReviews])
 
-    console.log(albumProm);
-    console.log(albumReviews);
-   //console.log(albumReviewslist);
+
     return (<>
     <div className="row mt-2">
                 <TrackStarHeader />

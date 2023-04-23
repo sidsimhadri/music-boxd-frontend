@@ -1,30 +1,53 @@
-// import React, { useEffect } from "react";
-// import AlbumItem from "./album-item";
+import React, { useEffect, useState } from "react";
+import AlbumItem from "./album-item.js";
 // import { useDispatch, useSelector } from "react-redux";
-// import { findAlbums } from "../services/thunks";
+// import { findReviewsThunk } from "../services/thunks";
+import * as service from "../services/service"
 
-// const AlbumSearchComponent = () => {
-//   const { albums, loading } = useSelector(
-//     state => state.albumsData
-//   );
+const AlbumSearchComponent = ({ query }) => {
+    const [albumsPromise, setAlbumsPromise] = useState(null)
+    const [albums, setAlbums] = useState([{
+        "name": "",
+        "release_date": "",
+        "images": [
+            { "url": "" },
+        ],
+        "artists": [
+            { "name": "" },
+        ],
+    }])
+    useEffect(() => {
+        if (query !== undefined) {
+            setAlbumsPromise(service.searchAlbums(query));
+        }
+    }, [query]);
 
-//   const dispatch = useDispatch();
+    useEffect(() => {
+        if (albumsPromise !== null) {
+            albumsPromise.then((response) => {
+                setAlbums(response.body)
+            })
+        }
+    }, [albumsPromise])
+    // console.log(Array.isArray(albums.albums.items))
+    // console.log(albums)
+    // console.log(albums.albums.items)
+    console.log(albums);
+    console.log(albums.albums && albums.albums.items);
 
-//   useEffect(() => {
-//     dispatch(fetchAlbums());
-//   }, [dispatch]);
 
-//   return (
-//     <div className="container-fluid">
-//       <div className="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4">
-//         {loading && <p>Loading...</p>}
-//         {albums &&
-//           albums.map(album => (
-//             <AlbumItem key={album.id} album={album} />
-//           ))}
-//       </div>
-//     </div>
-//   );
-// };
+    return (
+        <>
+            {albums && albums.albums && albums.albums.items.length > 0 ? (
+            albums.albums.items.map((album) => (
+                <AlbumItem key={album.id} album={album} />
+            ))
+        ) : (
+            <p>No results found.</p>
+        )}
 
-// export default AlbumSearchComponent;
+        </>
+    );
+};
+
+export default AlbumSearchComponent;

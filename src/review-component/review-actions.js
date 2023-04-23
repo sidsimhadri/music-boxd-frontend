@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-const ReviewActionsComponent = ({ review }) => {
+const ReviewActionsComponent = ({ review, currentUser }) => {
     return (
         <>
             <h2 className="text-white">Actions</h2>
@@ -10,7 +10,7 @@ const ReviewActionsComponent = ({ review }) => {
                 <li className="list-group-item d-flex justify-content-between align-items-center">
                     <Link className="link-salmon">Review this album</Link>
                 </li>
-                {!review.currentUser &&
+                {!currentUser &&
                     <li className="list-group-item d-flex justify-content-between align-items-center">
                         <Link className="link-salmon">Follow this reviewer</Link>
                     </li>

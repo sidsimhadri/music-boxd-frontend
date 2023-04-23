@@ -33,6 +33,12 @@ export const findReviewsThunk = createAsyncThunk(
   }
 )
 
+
+export const findReviewsByBodyThunk = createAsyncThunk(
+  'reviews/findReviewsByBody', async (body) =>
+    await service.findReviewByBody(body)
+)
+
 export const findReviewsByAlbumIdThunk = createAsyncThunk(
   'reviews/findReviewsByAlbumId', async (aid) => {
     return await service.findReviewsByAlbumId(aid)
