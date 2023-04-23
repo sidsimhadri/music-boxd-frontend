@@ -12,8 +12,8 @@ const ReviewSearchComponent = () => {
         dispatch(findReviewsThunk());
     }, [dispatch]);
 
-    console.log("reviews:", reviews);
-    console.log("loading:", loading);
+    //console.log("reviews:", reviews);
+    //console.log("loading:", loading);
 
     return (
         <div className="container-fluid">

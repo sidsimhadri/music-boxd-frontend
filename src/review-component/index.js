@@ -37,7 +37,8 @@ function ReviewComponent() {
     useEffect(() => {
         setBody(reviews.body)
         setRating(reviews.rating)
-        if (reviews.albumId !== undefined) {
+        if (reviews.albumId !== undefined) 
+        {
             setAlbumPromise(service.findAlbum(reviews.albumId))
         }
 

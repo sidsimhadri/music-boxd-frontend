@@ -6,13 +6,6 @@
     float: right;
 }
 
-.album-cover-trending-release {
-    float: left;
-    margin-right: 10px;
-    height: 100px;
-    width: 100px;
-}
-
 .album-cover-small-review {
     margin-right: 10px;
     height: 100px;

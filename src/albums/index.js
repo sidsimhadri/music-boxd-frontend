@@ -9,7 +9,7 @@ import "./index.css";
 
 function AlbumReviewsComponent() {
     const { albumId } = useParams()
-    console.log(albumId)
+    //console.log(albumId)
     let album=""
     const [albumInfoLoading, setAlbumInfoLoading] = useState(true)
     const [albumInfo, setAlbumInfo] = useState(null)
@@ -32,8 +32,8 @@ function AlbumReviewsComponent() {
       }
     },[albumInfo])
 
-      console.log(albumInfo)
-      console.log(album)
+      //console.log(albumInfo)
+      //console.log(album)
 
     const [reviewsLoading, setReviewsLoading] = useState(true);
     const [albumReviews, setAlbumReviews] = useState(null);
@@ -51,7 +51,7 @@ function AlbumReviewsComponent() {
       }
     }, [albumReviews])
 
-    console.log(albumReviews);
+    //console.log(albumReviews);
 
     return (<>
     <div className="row mt-2">

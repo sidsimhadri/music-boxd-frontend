@@ -8,9 +8,6 @@ import { Link } from "react-router-dom";
 import TagsComponent from "../../review-component/tags";
 
 const FeaturedReviewItem = ({ review }) => {
-    console.log(review)
-    console.log(review.albumId)
-
     const dispatch = useDispatch()
     const [albumPromise, setAlbumPromise] = useState(null)
     const [album, setAlbum] = useState({
@@ -23,22 +20,21 @@ const FeaturedReviewItem = ({ review }) => {
             { "id": "", "name": "" },
         ],
     })
-    console.log(album)
-    let dateObj = new Date(review.timestamp) 
+    let dateObj = new Date(review.timestamp)
     const date = dateObj.toDateString()
     const [user, setUser] = useState({
         "username": "",
         "profilePic": "",
     })
-    const [artistLink , setArtistLink] = useState("/")
+    const [artistLink, setArtistLink] = useState("/")
     useEffect(() => {
         setAlbumPromise(service.findAlbum(review.albumId))
-    },[review.albumId])
+    }, [review.albumId])
     useEffect(() => {
         if (review.userId !== undefined) {
             dispatch(findUsersThunk(review.userId));
         }
-    },[dispatch, review.userId])
+    }, [dispatch, review.userId])
     useEffect(() => {
         if (albumPromise !== null) {
             albumPromise.then((response) => {
@@ -47,9 +43,9 @@ const FeaturedReviewItem = ({ review }) => {
         }
     }, [albumPromise])
     useEffect(() => {
-    if (album.artists[0].id !== undefined ){
-    setArtistLink(`/artists/${album.artists[0].id}`)
-    }
+        if (album.artists[0].id !== undefined) {
+            setArtistLink(`/artists/${album.artists[0].id}`)
+        }
     }, [album])
     const { users } = useSelector(state => state.users)
     useEffect(() => {
@@ -77,7 +73,7 @@ const FeaturedReviewItem = ({ review }) => {
                             </div>
                             <p className="card-text nunito">{review.body}</p>
                             <div className="mb-2">
-                            <TagsComponent review={review}/></div>
+                                <TagsComponent review={review} /></div>
                         </Link>
                         <ReviewInteractionsComponent review={review} />
                     </div>
