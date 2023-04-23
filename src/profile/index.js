@@ -3,6 +3,7 @@ import TrackStarHeader from "../trackstar-header";
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
+import * as service from "../services/service"
 import { profileThunk, logoutThunk, updateUserThunk }
   from "../services/auth-thunks";
 function ProfileScreen() {
@@ -17,11 +18,29 @@ function ProfileScreen() {
 
   const [profile, setProfile] = useState({
     "username": "",
+    "_id": "",
     "role": "user",
+    "followers": [],
+    "following": [],
   })
   const [profileName, setProfileName] = useState("")
   const [profileImage, setProfileImage] = useState("https://i.pinimg.com/736x/83/bc/8b/83bc8b88cf6bc4b4e04d153a418cde62.jpg")
   const [nameEditing, setNameEditing] = useState(false);
+  const [reviewCount, setReviewCount] = useState(0);
+  const [reviewCountPromise, setReviewCountPromise] = useState(null);
+  useEffect(() => {
+    if (profile._id !== "") {
+      console.log(profile._id)
+      setReviewCountPromise(service.findReviewsByUserId(profile._id))
+    }
+  },[profile])
+  useEffect(() => {
+    if (reviewCountPromise !== null) {
+      reviewCountPromise.then((response) => {
+        setReviewCount(response.length)
+      })
+    }
+  }, [reviewCountPromise])
   useEffect(() => {
     if (currentUser !== null && currentUser !== undefined) {
       setProfile(currentUser.currentUser)
@@ -36,11 +55,13 @@ function ProfileScreen() {
   }, [profile])
 
   const updateNameHandler = () => {
-    dispatch(updateUserThunk({
+    const newProfile = {
       ...profile,
       username: profileName,
-    }))
+    }
+    dispatch(updateUserThunk({newProfile}))
     setNameEditing(false)
+    setProfile(newProfile)
   }
 
   return (<>
@@ -87,6 +108,15 @@ function ProfileScreen() {
                       <i class="fa fa-user-secret  ps-2 pb-2 fs-5" ></i>
                     </span>
                   }
+                  <span class="badge bg-light follow-info nunito me-2">
+                    Followers: {profile.followers.length}
+                  </span>
+                  <span class="badge bg-light follow-info nunito me-2">
+                    Following: {profile.following.length}
+                  </span>
+                  <span class="badge bg-light follow-info nunito me-2">
+                    Reviews: {reviewCount}
+                  </span>
                 </li>
               </ul>
             </div>
