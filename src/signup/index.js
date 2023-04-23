@@ -45,7 +45,7 @@ function SignUp() {
                         <div className="card">
                             <div className="card-header bg-success text-white">
 
-                                <h2 className="card-title text-center mt-3 mb-3">Sign Up</h2>
+                                <h2 className="card-title nunito text-center mt-3 mb-3">Sign Up</h2>
                             </div>
                             <div className="card-body">
                                 <form onSubmit={handleSubmit}>
