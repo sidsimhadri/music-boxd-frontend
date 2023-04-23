@@ -3,7 +3,7 @@ import TrackStarHeader from "../trackstar-header";
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-import { profileThunk, logoutThunk }
+import { profileThunk, logoutThunk, updateUserThunk }
   from "../services/auth-thunks";
 function ProfileScreen() {
   const navigate = useNavigate()
@@ -35,6 +35,14 @@ function ProfileScreen() {
     }
   }, [profile])
 
+  const updateNameHandler = () => {
+    dispatch(updateUserThunk({
+      ...profile,
+      username: profileName,
+    }))
+    setNameEditing(false)
+  }
+
   return (<>
     <div>
       <div className="row mt-2">
@@ -59,7 +67,7 @@ function ProfileScreen() {
                         className="form-control border-0 bg-dark text-white mb-1 me-1 text-large" value={profileName}
                           onChange={(event) => setProfileName(event.target.value)}></input>
                       <button className="btn me-2 btn-success" style={{float: "left"}}
-                        onClick={() => setNameEditing(false)}>
+                        onClick={updateNameHandler}>
                         <i class="fa fa-check"></i>
                       </button>
                     </>
