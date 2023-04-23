@@ -8,6 +8,10 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/albums/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/albums/index.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/albums/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/albums/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/artists/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/artists/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/artists/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/artists/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/home/featured-reviews/featured-review-item.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/home/featured-reviews/featured-review-item.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/home/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/home/index.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

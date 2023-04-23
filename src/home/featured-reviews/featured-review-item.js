@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { findUsersThunk } from "../../services/thunks";
 import { Link } from "react-router-dom";
 import TagsComponent from "../../review-component/tags";
+import "../index.css";
 
 const FeaturedReviewItem = ({ review }) => {
     console.log(review)
@@ -64,7 +65,7 @@ const FeaturedReviewItem = ({ review }) => {
                 <div className="row card-body">
                     <div className="col-8">
                         <Link className="link-white" to={`/reviews/${review._id}`}>
-                            <h4 className="card-title small-margin-bottom volkhov text-white"><i><Link className="link-salmon" to="/albums/">{album.name}</Link></i></h4>
+                            <h4 className="card-title small-margin-bottom volkhov text-white"><i><Link className="link-salmon" to={`/albums/${album.id}`} style={{ textDecoration: "none" }}>{album.name}</Link></i></h4>
                             <h6 className="text-white nunito no-margin-bottom"><Link className="link-salmon" to={artistLink}>{album.artists[0].name}</Link> • {album.release_date}</h6>
                             <div className="row no-margin-left d-flex center">
                                 <div className="col-1">
