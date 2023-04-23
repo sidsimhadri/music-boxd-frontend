@@ -50,7 +50,7 @@ function ArtistAlbumsComponent() {
             </div>
     {!artistLoading && (
       <div className="row mt-2">
-      <h1 className="row mt-2 nunito-font font-weight-12"><h1 className="col-1">Artist: </h1> <h1 className="ms-4 col-10">{artistName}</h1></h1>
+      <h1 className="row mt-2 nunito-font font-weight-12"><h1 className="size-title col-3 col-xl-2 col-xxl-2 col-xs-4 col-sm-3">Artist : </h1> <h1 className="size-title col-xs-7 col-xxl-10 col-xl-10 col-sm-9 col-8">{artistName}</h1></h1>
         {albumItems.map((album) => (
           <div className="card border-dark mb-3 nunito" style={{ width: "100%" }}>
             <div className="row card-body">
@@ -62,10 +62,7 @@ function ArtistAlbumsComponent() {
                   <Link className="text-white" to={`/albums/${album.id}`} style={{ textDecoration: "none" }}>{album.name}</Link>
                 </div>
               </h4>
-              <h5 className="row size-font">
-              <div className="col-4">Artist:</div>
-               <div className="col-8"> <Link to={`/artists/${album.artists[0].id}`} style={{ textDecoration: "none" }}>{album.artists[0].name}</Link></div>
-              </h5>
+
               <h4 className="row">
               <div className="col-4 size-font">Release date:</div> <div className="col-8 mt-1 salmon-text size-font-rd">{album.release_date}</div>
               </h4>
