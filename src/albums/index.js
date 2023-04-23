@@ -12,7 +12,6 @@ import StarRating from "../star-rating";
 function AverageAlbumRating(albumReviews) {
   let avg_rating = 0;
   let i=0;
-  //let names = []
   albumReviews.forEach((review) => {
     avg_rating = avg_rating + review.rating
     i=i+1
