@@ -14,10 +14,60 @@ color: salmon;
 font-family: 'Nunito Sans';
 }
 
+
+.sizes{
+width: 120px;
+height: 120px;
+}
+
+@media screen and (max-width: 990px) {
+  .sizes {
+        width: 100px;
+        height: 100px;  }
+}
+
+@media screen and (max-width: 766px) {
+  .sizes {
+        width: 100px;
+        height: 100px;  }
+}
+
+.size-font{
+font-size: 25px;
+}
+
+@media screen and (max-width: 990px) {
+  .size-font {
+       font-size: 20px;
+ }
+}
+
+@media screen and (max-width: 574px) {
+  .size-font {
+       font-size: 19px;
+ }
+}
+
+.size-font-rd{
+font-size: 20px;
+}
+
+@media screen and (max-width: 990px) {
+  .size-font-rd {
+       font-size: 17px;
+ }
+}
+
+@media screen and (max-width: 574px) {
+  .size-font-rd {
+       font-size: 15px;
+ }
+
 .font-weight-12{
 font-weight: 550;
 }
 
 .blue-text{
 color: cadetblue;
+
 }

@@ -5,7 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import TagsComponent from "../../review-component/tags";
+
+import "../index.css";
+
 import { updateReviewThunk } from "../../services/thunks";
+
 
 const FeaturedReviewItem = ({ review }) => {
 
@@ -90,10 +94,12 @@ const FeaturedReviewItem = ({ review }) => {
             <div className="card border-dark mb-3" style={{ "maxWidth": "80%" }}>
                 <div className="row card-body">
                     <div className="col-8">
+
                         <Link className="link-white" to={{pathname: `/reviews/${review._id}`,
                                                           search: `?editing=${editing}`
                                                          }}>
                             <h4 className="card-title small-margin-bottom volkhov text-white"><i><Link className="link-salmon" to="/albums/">{album.name}</Link></i></h4>
+
                             <h6 className="text-white nunito no-margin-bottom"><Link className="link-salmon" to={artistLink}>{album.artists[0].name}</Link> • {album.release_date}</h6>
                             <div className="row no-margin-left d-flex center">
                                 <div className="col-1">
