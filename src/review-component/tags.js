@@ -95,15 +95,12 @@ const TagsComponent = ({ review, editing, setParentTags }) => {
             {
                 tagArr.map(t => {
                     return (<>
-                    <button className = "btn" onClick={() => {handleTagClick(t)}}>
-                        <span className="badge bg-info me-2" key={t.name}>{t.name}
-                            {editing &&
-                                <button className="bg-info tag-x" onClick={() => {
-                                    deleteTagHandler(t)
-                                }}>X</button>
-                            }
-                        </span>
-                        </button>
+                    <span className="badge bg-info me-2" key={t.name}>
+                        <a href="#" className="text-white" style= {{textDecoration: "none"}} onClick={() => handleTagClick(t)}>{t.name}</a>
+                        {editing &&
+                            <button className="bg-info tag-x" onClick={() => deleteTagHandler(t)}>X</button>
+                        }
+                    </span>
                     </>);
                 })
             }

@@ -108,3 +108,7 @@ input.form-control:focus {
 input.form-control:focus::placeholder {
     color: salmon;
 }
+
+.text-white{
+color: white;
+}
