@@ -1,79 +1,91 @@
 import './index.css';
 import TrackStarHeader from "../trackstar-header";
-import ProfilePictureComponent from './profile-picture';
-import ProfileHeaderComponent from './profile-header';
-import FollowUnfollowButton from './follow-unfollow-button';
-import LatestReviewsComponent from './latest-reviews';
-
-
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-import { profileThunk, logoutThunk}
+import { profileThunk, logoutThunk }
   from "../services/auth-thunks";
 function ProfileScreen() {
   const navigate = useNavigate()
-    const currentUser = useSelector((state) =>
-        
-        state.auth.currentUser
-    );
-    const dispatch = useDispatch()
-    useEffect(() => {
-        dispatch(profileThunk());
-    }, []);
+  const currentUser = useSelector((state) =>
+    state.auth.currentUser
+  );
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(profileThunk());
+  }, []);
 
-    const [profile, setProfile] = useState({
-        "username": "",
-        "role": "user",
-    })
-    const [profileName, setProfileName] = useState("")
-    useEffect(() => {
-        if (currentUser !== null && currentUser !== undefined) {
-            setProfile(currentUser.currentUser)
-        }
-    }, [currentUser])
+  const [profile, setProfile] = useState({
+    "username": "",
+    "role": "user",
+  })
+  const [profileName, setProfileName] = useState("")
+  const [profileImage, setProfileImage] = useState("https://i.pinimg.com/736x/83/bc/8b/83bc8b88cf6bc4b4e04d153a418cde62.jpg")
+  const [nameEditing, setNameEditing] = useState(false);
+  useEffect(() => {
+    if (currentUser !== null && currentUser !== undefined) {
+      setProfile(currentUser.currentUser)
+    }
+  }, [currentUser])
 
-    useEffect(() => {
-      if (profile !== undefined && profile.role === "admin") {
-        navigate("/admin");
-      }
-    }, [profile, navigate]);
-
-    useEffect(() => {
-        if (profile !== undefined) {
-            if (profile.username !== undefined && profile.username !== null) {
-                setProfileName(profile.username)
-            }
-        }
-    }, [profile])
+  useEffect(() => {
+    if (profile !== undefined) {
+      setProfileName(profile.username)
+      setProfileImage(profile.profilePicture)
+    }
+  }, [profile])
 
   return (<>
-
-
     <div>
       <div className="row mt-2">
         <TrackStarHeader />
       </div>
       {profile && (
         <div>
-
           <div className="mt-2 row">
-       
             <div className="col-5 d-none d-lg-flex flex-column justify-content-center align-items-center relative">
-              {/* <ProfilePictureComponent user={user} /> */}
-              <FollowUnfollowButton following={profileName.isFollowing} />
+              <button className="profile-pic" onClick="document.getElementById('choose-profile-picture').click();">
+                <img className="profile-picture larger float-left" alt={profileName}
+                  src={profileImage} />
+                <input type="file" id="choose-profile-picture" />
+              </button>
             </div>
             <div className="col-12 col-lg-7">
-              <ProfileHeaderComponent user={profile} />
-              <h2 className="nunito text-white">Latest Ratings: </h2>
-              <LatestReviewsComponent />
+              <ul className="list-group mb-3">
+                <li className="list-group-item ">
+                  <div>
+                    {nameEditing && <>
+                        <input type="text" style={{width: "70%", float: "left"}}
+                        className="form-control border-0 bg-dark text-white mb-1 me-1 text-large" value={profileName}
+                          onChange={(event) => setProfileName(event.target.value)}></input>
+                      <button className="btn me-2 btn-success" style={{float: "left"}}
+                        onClick={() => setNameEditing(false)}>
+                        <i class="fa fa-check"></i>
+                      </button>
+                    </>
+                    }
+                    {!nameEditing && <>
+                      <span className="nunito text-large me-4">@{profileName}</span>
+                      <button className="btn me-2 btn-outline-info"
+                        onClick={() => setNameEditing(true)}>
+                        <i class="fa fa-edit"></i>
+                      </button>
+                    </>}
+                  </div>
+                </li>
+                <li className="list-group-item">
+                  {profile.role === "admin" &&
+                    <span class="badge bg-danger follow-info nunito me-2">Admin
+                      <i class="fa fa-user-secret  ps-2 pb-2 fs-5" ></i>
+                    </span>
+                  }
+                </li>
+              </ul>
             </div>
           </div>
         </div>
-
       )}
-      <div className  = "float-right mt-2">
-
+      <div className="float-right mt-2">
         <button className="me-2 btn btn-dark"
           onClick={() => {
             dispatch(logoutThunk());
@@ -82,8 +94,6 @@ function ProfileScreen() {
           Logout</button>
       </div>
     </div>
-
-
   </>); // see below
 }
 export default ProfileScreen;
