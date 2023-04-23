@@ -3,6 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router";
 import ProfileComponent from "./profile";
 import CuratorComponent from "./profile/curator.js";
+import AdminComponent from "./profile/admin.js";
 import ReviewComponent from "./review-component";
 import ArtistAlbumsComponent from "./artists";
 import AlbumReviewsComponent from "./albums";
@@ -36,6 +37,7 @@ function App() {
             <Route index path="/" element={<HomeComponent />} />
             <Route path="/profile" element={<ProfileComponent />} />
             <Route path="/curator" element={<CuratorComponent />} />
+            <Route path="/admin" element={<AdminComponent />} />
             <Route path="/reviews/:id" element={<ReviewComponent />} />
             <Route path="/login" element={<LoginComponent />} />
             <Route path="/signup" element={<SignupComponent />} />

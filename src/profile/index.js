@@ -35,9 +35,13 @@ function ProfileScreen() {
     }, [currentUser])
 
     useEffect(() => {
-      if (currentUser && currentUser.currentUser.isCurator) {
+      // if (currentUser && currentUser.currentUser.isCurator) {
+      //   console.log(currentUser.currentUser)
+      //   navigate("/curator");
+      // }
+      if (currentUser && currentUser.currentUser.isAdmin) {
         console.log(currentUser.currentUser)
-        navigate("/curator");
+        navigate("/admin");
       }
     }, [currentUser]);
 
@@ -60,6 +64,7 @@ function ProfileScreen() {
         <div>
 
           <div className="mt-2 row">
+       
             <div className="col-5 d-none d-lg-flex flex-column justify-content-center align-items-center relative">
               {/* <ProfilePictureComponent user={user} /> */}
               <FollowUnfollowButton following={profileName.isFollowing} />
