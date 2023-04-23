@@ -8,8 +8,6 @@ import * as service from "../../services/service";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { findReviewsThunk, updateReviewThunk, deleteReviewThunk } from "../../services/thunks"
-import { profileThunk } from "../../services/auth-thunks";
 import ReviewByComponent from "../../review-component/review-by"
 import { useNavigate } from "react-router";
 import { createReviewThunk } from "../../services/thunks";
@@ -66,12 +64,12 @@ function CreateReviewComponent() {
     useEffect(() => {
         setAlbumPromise(service.findAlbum(aid))
                 setReview({
-                ...review,
+                    ...review,
+                    
                 body: reviewBody,
                 rating: reviewRating,
                 tags: tags,
             })
-
 
     }, [aid,  reviewBody, reviewRating, tags])
     useEffect(() => {
@@ -93,14 +91,9 @@ function CreateReviewComponent() {
                 body: reviewBody,
                 rating: reviewRating,
                 tags: tags,
+                userId: profile._id
             }))
-        console.log(review)
-        // navigate('/featured', {
-        //         ...review,
-        //         body: reviewBody,
-        //         rating: reviewRating,
-        //         tags: tags,
-        //     })
+            navigate('/')
     }
 
     return (
@@ -114,7 +107,6 @@ function CreateReviewComponent() {
                     </div>
                     <div className="col-12 col-md-8 col-lg-6">
                         <div className="row">
-                            <ReviewByComponent review={review} />
                         </div>
                         <div className="row center" style={{ "wordBreak": "break-all" }}>
                             <span className="volkhov text-white h1-inline">
