@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router";
 import ProfileComponent from "./profile";
 import CuratorComponent from "./profile/curator.js";
 import ReviewComponent from "./review-component";
+import CreateReviewComponent from "./review-component/create-review.js";
 import ArtistAlbumsComponent from "./artists";
 import AlbumReviewsComponent from "./albums";
 import LoginComponent from "./login";
@@ -37,6 +38,7 @@ function App() {
             <Route path="/profile" element={<ProfileComponent />} />
             <Route path="/curator" element={<CuratorComponent />} />
             <Route path="/reviews/:id" element={<ReviewComponent />} />
+            <Route path="/createReview/:aid" element={<CreateReviewComponent />} />
             <Route path="/login" element={<LoginComponent />} />
             <Route path="/signup" element={<SignupComponent />} />
             <Route path="/artists/:artistId" element={<ArtistAlbumsComponent />} />

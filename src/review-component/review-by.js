@@ -14,10 +14,13 @@ const ReviewByComponent = ({ review }) => {
             dispatch(findUsersThunk(review.userId));
         }
     },[dispatch, review.userId])
+    // useEffect(() => {
+    //     //let dateObj = new Date(review.timestamp)
+    //     setDate(new Date(review.timestamp).toDateString())
+    // },[review])
     useEffect(() => {
-        //let dateObj = new Date(review.timestamp)
-        setDate(new Date(review.timestamp).toDateString())
-    },[review])
+    setDate(new Date().toDateString())
+}, [])
     const { users } = useSelector(state => state.users)
     useEffect(() => {
         if (users !== undefined) {

@@ -79,7 +79,7 @@ export const findTagThunk = createAsyncThunk(
 )
 
 export const findAlbumThunk = createAsyncThunk(
-  'spotify/album', async (aid) =>
+  'spotify/albums', async (aid) =>
   await service.findAlbum(aid)
 )
 
