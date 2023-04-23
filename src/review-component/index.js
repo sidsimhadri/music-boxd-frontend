@@ -11,13 +11,15 @@ import { useParams } from "react-router-dom";
 import { findReviewsThunk, updateReviewThunk, deleteReviewThunk } from "../services/thunks";
 import { profileThunk } from "../services/auth-thunks";
 import ReviewByComponent from "./review-by";
+import { useLocation } from 'react-router-dom';
 import { useNavigate } from "react-router";
 
 function ReviewComponent() {
+    const location = useLocation();
     const { id } = useParams();
     const { reviews, loading } = useSelector(state => state.reviews)
     const currentUser = useSelector((state) => state.auth.currentUser)
-    const [editing, setEditing] = useState(false)
+    const [editing, setEditing] = useState(location.search.includes('editing=true'))
     const [isUser, setIsUser] = useState(false)
     const [reviewBody, setBody] = useState(reviews.body)
     const [reviewRating, setRating] = useState(reviews.rating)

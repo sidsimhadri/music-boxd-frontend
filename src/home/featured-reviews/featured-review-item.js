@@ -22,9 +22,14 @@ const FeaturedReviewItem = ({ review }) => {
         ],
     })
     const [reviewBody, setBody] = useState(review.body)
+    const [reviewRating, setRating] = useState(review.rating)
+    const [reviewTags, setReviewTags] = useState(review.tags)
+
     useEffect(() => {
             setBody(review.body)
-        }, [review.body])
+            setRating(review.rating)
+            setReviewTags(review.tags)
+        }, [review.body, review.rating, review.tags])
     let dateObj = new Date(review.timestamp)
     const date = dateObj.toDateString()
     const [user, setUser] = useState({
@@ -33,17 +38,7 @@ const FeaturedReviewItem = ({ review }) => {
     })
     const [editing, setEditing] = useState(false)
     const dispatch = useDispatch()
-    const editingHandler = () => {
-            if (editing) {
-                dispatch(updateReviewThunk({
-                    ...review,
-                    body: review.body,
-                    rating: review.rating,
-                    tags: review.tags,
-                }))
-            }
-            setEditing(editing => !editing)
-        }
+
     const currentUser = useSelector((state) => state.auth.currentUser)
     const [isUser, setIsUser] = useState(false)
     const [profile, setProfile] = useState({
@@ -89,12 +84,15 @@ const FeaturedReviewItem = ({ review }) => {
     }, [album])
 
     console.log(isUser);
+    console.log(reviewTags);
     return (
         <>
             <div className="card border-dark mb-3" style={{ "maxWidth": "80%" }}>
                 <div className="row card-body">
                     <div className="col-8">
-                        <Link className="link-white" to={!editing ? `/reviews/${review._id}` : undefined} onClick={editing ? e => e.preventDefault() : undefined}>
+                        <Link className="link-white" to={{pathname: `/reviews/${review._id}`,
+                                                          search: `?editing=${editing}`
+                                                         }}>
                             <h4 className="card-title small-margin-bottom volkhov text-white"><i><Link className="link-salmon" to="/albums/">{album.name}</Link></i></h4>
                             <h6 className="text-white nunito no-margin-bottom"><Link className="link-salmon" to={artistLink}>{album.artists[0].name}</Link> • {album.release_date}</h6>
                             <div className="row no-margin-left d-flex center">
@@ -102,29 +100,23 @@ const FeaturedReviewItem = ({ review }) => {
                                     <img className="profile-picture me-2" src={user.profilePicture} alt="" />
                                 </div>
                                 <div className="col-8 ms-3">
-                                    <StarRating rating={review.rating} />
+                                    <StarRating rating={review.rating}></StarRating>
                                     <h6 className="text-muted nunito"><Link className="link-salmon" to="/profile">@{user.username}</Link> - {date}</h6>
                                 </div>
                             </div>
-                            {!editing && <div className="nunito text-white"> {reviewBody} </div>}
-                                                            {editing &&
-                                                                <div>
-                                                                    <textarea className="form-control border-0 bg-dark text-white mb-1" value={reviewBody}
-                                                                        onChange={(event) => setBody(event.target.value)}></textarea>
-                                                                </div>
-                                                            }
+                            <div className="nunito text-white"> {reviewBody} </div>
                             <div className="mb-2">
-                                <TagsComponent review={review} /></div>
+                                <TagsComponent review={review}/></div>
                         </Link>
                         <ReviewInteractionsComponent review={review} />
                         { isUser &&
-                                  <button className={"btn " + (editing ? "btn-info" : "btn-outline-info")} onClick={() => editingHandler()}>
-                                      <i className={"fa " + (editing ? "fa-check" : "fa-edit")}></i>
-                                      <span className="nunito">
-                                          {!editing && " Edit"}
-                                          {editing && " Save"}
-                                      </span>
-                                  </button>
+                                  <Link to={{pathname: `/reviews/${review._id}`,
+                                             search: `?editing=${!editing}`
+                                            }}
+                                    className={"btn btn-outline-info"}>
+                                    <i className={"fa fa-edit"}></i>
+                                    <span className="ms-2 nunito">Edit</span>
+                                  </Link>
                         }
                     </div>
                     <img className="album-cover-review-image col-4" src={album.images[0].url} alt={review.title} />

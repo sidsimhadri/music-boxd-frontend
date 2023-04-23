@@ -4,6 +4,7 @@ import { findTagThunk } from "../services/thunks";
 import * as service from "../services/service"
 
 const TagsComponent = ({ review, editing, setParentTags }) => {
+   console.log(setParentTags)
     const dispatch = useDispatch();
     const [tagIDs, setTagsIDs] = useState([]);
     const [tagArr, setTags] = useState([]);
@@ -15,12 +16,13 @@ const TagsComponent = ({ review, editing, setParentTags }) => {
         dispatch(findTagThunk())
     }, [dispatch])
     const { tags } = useSelector(state => state.tags)
+    console.log(tags)
     useEffect(() => {
         if (review.tags !== undefined && review.tags !== []) {
             setTagsIDs(review.tags)
         }
     }, [review.tags])
-
+   console.log(tagIDs)
     useEffect(() => {
         if (tagIDs !== [] && tags !== undefined) {
             setTags(tags.filter(t => {
@@ -37,6 +39,8 @@ const TagsComponent = ({ review, editing, setParentTags }) => {
     }, [editing])
     const pushNewTag = (tag) => {
         let newTags = tagArr
+        console.log("tagArr")
+        console.log(tagArr)
         newTags.push(tag)
         setTags(newTags)
         setParentTags(newTags)
@@ -48,6 +52,7 @@ const TagsComponent = ({ review, editing, setParentTags }) => {
             tagPromise.then((response) => {
                 if (response.length > 0) {
                     const newTagObj = response[0]
+                        console.log(newTagObj)
                     pushNewTag(newTagObj)
                 } else {
                     setAddTagPromise(service.createTag({name: newTag}))
@@ -73,10 +78,13 @@ const TagsComponent = ({ review, editing, setParentTags }) => {
     }
     const addTagHandler = () => {
         setAddingTag(!addingTag)
+
     }
     const confirmTagHandler = () => {
         setTagPromise(service.findTagByName(newTag))
     }
+    console.log(tagArr)
+    console.log(tagPromise)
     return (
         <>
             {
