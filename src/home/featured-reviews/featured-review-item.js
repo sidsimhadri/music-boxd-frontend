@@ -58,7 +58,8 @@ const FeaturedReviewItem = ({ review }) => {
                 setIsUser(profile._id === review.userId)
             }
         }, [profile, review.userId])
-    const [artistLink , setArtistLink] = useState("/")
+    const [artistLink, setArtistLink] = useState("/")
+    const [albumLink , setAlbumLink] = useState("/")
     useEffect(() => {
         setAlbumPromise(service.findAlbum(review.albumId))
     }, [review.albumId])
@@ -87,6 +88,12 @@ const FeaturedReviewItem = ({ review }) => {
         }
     }, [album])
 
+    useEffect(() => {
+        if (album !== undefined) {
+            setAlbumLink(`/albums/${album.id}`)
+        }
+    }, [album])
+
     console.log(isUser);
     console.log(reviewTags);
     return (
@@ -98,7 +105,7 @@ const FeaturedReviewItem = ({ review }) => {
                         <Link className="link-white" to={{pathname: `/reviews/${review._id}`,
                                                           search: `?editing=${editing}`
                                                          }}>
-                            <h4 className="card-title small-margin-bottom volkhov text-white"><i><Link className="link-salmon" to="/albums/">{album.name}</Link></i></h4>
+                            <h4 className="card-title small-margin-bottom volkhov text-white"><i><Link className="link-salmon" to={ albumLink}>{album.name}</Link></i></h4>
 
                             <h6 className="text-white nunito no-margin-bottom"><Link className="link-salmon" to={artistLink}>{album.artists[0].name}</Link> • {album.release_date}</h6>
                             <div className="row no-margin-left d-flex center">

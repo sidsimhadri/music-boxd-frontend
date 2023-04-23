@@ -115,6 +115,7 @@ input.form-control:focus::placeholder {
      height: 120px;
      width: 120px;
   }
+}
 
 .text-white{
 color: white;

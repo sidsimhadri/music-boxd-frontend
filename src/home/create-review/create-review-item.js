@@ -110,7 +110,10 @@ function CreateReviewComponent() {
                         </div>
                         <div className="row center" style={{ "wordBreak": "break-all" }}>
                             <span className="volkhov text-white h1-inline">
-                                <Link className="link-salmon"> <i className="me-3">{album.name}</i></Link><br />
+                            <Link className="link-salmon"> <i className="me-3">{album.name}
+                            
+                            
+                            </i></Link><br />
                                 <Link className="nunito link-salmon" to={artistLink}>
                                     <span className="h2-inline">{album.artists[0].name}
                                     </span>
