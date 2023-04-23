@@ -1,11 +1,13 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 
 const AlbumItem = ({ album }) => {
     const { name, release_date, images, artists } = album;
+    console.log(album.id)
 
     return (
         <>
-
+         <Link to={`/albums/${album.id}`}>
             <div className="container">
                 <div className="row">
                     <div className="card mt-5 col-12">
@@ -30,6 +32,7 @@ const AlbumItem = ({ album }) => {
                     </div>
                 </div>
             </div>
+          </Link>
         </>
     );
 };
