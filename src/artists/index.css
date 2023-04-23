@@ -13,3 +13,11 @@ color: salmon;
 .nunito-font{
 font-family: 'Nunito Sans';
 }
+
+.font-weight-12{
+font-weight: 550;
+}
+
+.blue-text{
+color: cadetblue;
+}
