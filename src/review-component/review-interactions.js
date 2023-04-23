@@ -84,7 +84,7 @@ const ReviewInteractionsComponent = ({ review }) => {
         </button>
         {isAdmin && (
             <>
-                <button className="btn btn-danger" onClick={deleteHandler}>Delete</button>
+                <button className="btn btn-danger me-2" onClick={deleteHandler}>Delete</button>
             </>)}
     </>);
 }

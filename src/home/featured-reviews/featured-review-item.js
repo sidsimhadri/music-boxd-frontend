@@ -72,9 +72,10 @@ const FeaturedReviewItem = ({ review }) => {
                                 </div>
                             </div>
                             <p className="card-text nunito">{review.body}</p>
-                            <div className="mb-2">
-                                <TagsComponent review={review} /></div>
+                            
                         </Link>
+                        <div className="mb-2">
+                                <TagsComponent review={review} /></div>
                         <ReviewInteractionsComponent review={review} />
                     </div>
                     <img className="album-cover-review-image col-4" src={album.images[0].url} alt={review.title} />

@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from 'react-router-dom';
 import { findTagThunk } from "../services/thunks";
 import * as service from "../services/service"
 
 const TagsComponent = ({ review, editing, setParentTags }) => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [tagIDs, setTagsIDs] = useState([]);
     const [tagArr, setTags] = useState([]);
     const [addingTag, setAddingTag] = useState(false);
@@ -77,11 +79,17 @@ const TagsComponent = ({ review, editing, setParentTags }) => {
     const confirmTagHandler = () => {
         setTagPromise(service.findTagByName(newTag))
     }
+
+    const handleTagClick = (tag) => {
+        navigate(`/tagsSearch/${tag._id}`);
+      };
+
     return (
         <>
             {
                 tagArr.map(t => {
-                    return (
+                    return (<>
+                    <button className = "btn" onClick={() => {handleTagClick(t)}}>
                         <span className="badge bg-info me-2" key={t.name}>{t.name}
                             {editing &&
                                 <button className="bg-info tag-x" onClick={() => {
@@ -89,7 +97,8 @@ const TagsComponent = ({ review, editing, setParentTags }) => {
                                 }}>X</button>
                             }
                         </span>
-                    );
+                        </button>
+                    </>);
                 })
             }
             {editing && <>
