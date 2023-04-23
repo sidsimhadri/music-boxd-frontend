@@ -39,18 +39,18 @@ function UserDetail({ userId }) {
   }
 
   return (
-    <>
+    <div>
       <img
+        className="size-dp-img"
         src={user.profilePicture}
-        width="80px"
-        height="80px"
+
         style={{ borderRadius: "50%" }}
         alt={user.username}
       />
-<div className="mt-1 ms-2 text-white font-15">
+<div className="mt-1 size-dp-img text-white font-15 d-none d-md-block">
   @{user.username}
 </div>
-    </>
+    </div>
   );
 }
 
@@ -111,25 +111,24 @@ function AlbumReviewsComponent() {
     {!albumInfoLoading && (
     <div className="card border-dark mt-2 mb-3 nunito" style={{ width: "100%" }}>
                 <div className="row card-body black-bg" style={{ borderRadius: "10px" }}>
-                <div className="col-2">
-                    <img src={albumInfo.images[0].url} width="200px" height="200px" style={{ borderRadius: "10%" }} alt={albumInfo.name}/>
+                <div className="col-xxl-2 col-xl-2 col-lg-2 col-2 col-sm-3 size-it-img d-none d-sm-block" style={{ borderRadius: "10px" }}>
+                    <img src={albumInfo.images[0].url} style={{width: "100%", height:"100%", maxHeight: "100%", maxWidth: "100%", borderRadius: "10%" }} alt={albumInfo.name}/>
                  </div>
-                 <div className="col-10 container">
-                  <h4 className="row item mt-2 bold">
-                  <div className="col-3"><strong>Album:</strong></div>
-                    <div className="col-9">
+                 <div className="col-xxl-10 col-xl-10 col-lg-10 col-sm-9 ps-3 container">
+                  <h4 className="row item mt-2 bold size-it-rest">
+                  <div className="col-3 col-sm-4"><strong>Album:</strong></div>
+                    <div className="col-9 col-sm-8">
                       <Link className="text-white " to={`/albums/${albumInfo.id}`} style={{ textDecoration: "none" }}><strong>{albumInfo.name}</strong></Link>
                     </div>
                   </h4>
-                  <h4 className="row item">
-                  <div className="col-3"><strong>Artist:</strong></div>
-                   <div className="col-9"> <Link to={`/artists/${albumInfo.artists[0].id}`} style={{ textDecoration: "none" }}><strong>{albumInfo.artists[0].name}</strong></Link></div>
+                  <h4 className="row item size-it-rest">
+                  <div className="col-3 col-sm-4"><strong>Artist:</strong></div>
+                   <div className="col-9 col-sm-8"> <Link to={`/artists/${albumInfo.artists[0].id}`} style={{ textDecoration: "none" }}><strong>{albumInfo.artists[0].name}</strong></Link></div>
                   </h4>
                   <div className="row item">
-                  <h4 className="col-3 mt-2"><strong>Average Rating:</strong></h4> <div className="col-9 font-25"><StarRating rating={avgRating} /></div>
+                  <h4 className="col-3 mt-2 col-sm-4 size-it-rest"><strong>Average Rating:</strong></h4> <div className="col-9 col-sm-8 font-25"><StarRating rating={avgRating} /></div>
                   </div>
                  </div>
-
                 </div>
               </div>
     )}
@@ -139,17 +138,17 @@ function AlbumReviewsComponent() {
         {albumReviews.map((review) => (
           <div className="card border-dark mb-3 text-white nunito" style={{ width: "100%" }}>
             <div className="row gold-bg card-body" style={{ borderRadius: "10px" }}>
-            <div className="col-2">
+            <div className="col-1 col-xs-5 ms-0 ps-0 size-dp-img d-none d-sm-block">
                 <UserDetail userId={review.userId} />
              </div>
-             <div className="col-10 mt-1">
-              <h5 className="row">
+             <div className="col-10 col-sm-10 col-xs-12 mt-2 size-block">
+              <h5 className="row size-block">
               <div className="col-3">Rating:</div>
                 <div className="col-9">
                    <h4><StarRating rating={review.rating} /></h4>
                 </div>
               </h5>
-              <h5 className="row">
+              <h5 className="row size-block">
               <div className="col-3">Review:</div>
                <div className="col-9"><h5>{review.body}</h5></div>
               </h5>
