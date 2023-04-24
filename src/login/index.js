@@ -16,7 +16,8 @@ function LoginScreen() {
     const handleLogin = async () => {
         try {
             await dispatch(loginThunk({ username, password }));
-            navigate("/profile");
+            navigate("/");
+            window.location.reload();
         } catch (e) {
             alert(e);
         }

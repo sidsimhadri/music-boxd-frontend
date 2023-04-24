@@ -46,6 +46,7 @@ const FeaturedReviewItem = ({ review }) => {
     const [isUser, setIsUser] = useState(false)
     const [profile, setProfile] = useState({
         "username": "",
+        "_id": ""
     })
     useEffect(() => {
         if (currentUser !== null && currentUser !== undefined) {
@@ -93,7 +94,7 @@ const FeaturedReviewItem = ({ review }) => {
             setAlbumLink(`/albums/${album.id}`)
         }
     }, [album])
-
+console.log(currentUser)
     return (
         <>
             <div className="card border-dark mb-3" style={{ "maxWidth": "80%" }}>
@@ -112,10 +113,17 @@ const FeaturedReviewItem = ({ review }) => {
                                 </div>
                                 <div className="col-8 ms-3">
                                     <StarRating rating={review.rating} />
-                                    <h6 className="text-muted nunito"><Link className="link-salmon" to={{
-                                                                                                         pathname: `/profile/${user._id}`,
-                                                                                                         search: `?isUser=${isUser}`
-                                                                                                       }}>@{user.username}</Link> - {date}</h6>
+                                    <h6 className="text-muted nunito">
+                                    {user._id !== profile._id &&
+                                    <Link className="link-salmon" to={{ pathname:  `/profile/${user._id}`,
+                                                                       search: `?isUser=${isUser}`  }}> @{user.username}</Link>
+                                    }
+                                    {user._id === profile._id &&
+                                    <Link className="link-salmon" to= "/profile"> @{user.username}</Link>
+                                    }
+                                   - {date}</h6>
+
+
                                 </div>
                             </div>
 

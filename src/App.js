@@ -2,6 +2,7 @@ import HomeComponent from "./home";
 import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router";
 import ProfileComponent from "./profile";
+import UserProfileComponent from "./profile/own-profile.js";
 import CuratorComponent from "./profile/curator.js";
 import AdminComponent from "./profile/admin.js";
 import ReviewComponent from "./review-component";
@@ -38,6 +39,7 @@ function App() {
           <Routes>
             <Route index path="/" element={<HomeComponent />} />
             <Route path="/profile/:userId" element={<ProfileComponent />} />
+            <Route path="/profile" element={<UserProfileComponent />} />
             <Route path="/curator" element={<CuratorComponent />} />
             <Route path="/admin" element={<AdminComponent />} />
             <Route path="/reviews/:id" element={<ReviewComponent />} />
