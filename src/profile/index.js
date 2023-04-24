@@ -6,49 +6,69 @@ import { useNavigate } from "react-router";
 import * as service from "../services/service"
 import { profileThunk, logoutThunk, updateUserThunk }
   from "../services/auth-thunks";
-import LatestReviewItem from "./latest-reviews/latest-review-item"
+import LatestReviewItem from "./latest-reviews/latest-review-item";
+import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+
 function ProfileScreen() {
+    const location = useLocation()
+    const isUser = location.search.includes('isUser=true')
+  const { userId } = useParams()
+  const [userProm, setUserProm] = useState(null)
+  const [reviewCountPromise, setReviewCountPromise] = useState(null)
+  const [profile, setProfile] = useState(null)
+
+  useEffect(() => {
+  if (userId !== null){
+  console.log(userId)
+  service.findUser(userId).then((response) => {console.log(response)})
+  setUserProm(service.findUser(userId))
+  console.log(userProm)
+  }
+  }, [userId])
+
+  useEffect(() => {
+            if (userProm !== null) {
+                userProm.then((response) => {
+                    setProfile(response);
+                })
+            }
+        }, [userProm])
+
+  useEffect(() => {
+  if(profile !== null){
+  console.log(profile._id)
+  console.log(service.findReviewsByUserId(profile._id))
+    setReviewCountPromise(service.findReviewsByUserId(profile._id))
+  }
+  },[profile])
+
   const navigate = useNavigate()
-  const currentUser = useSelector((state) =>
-    state.auth.currentUser
-  );
+
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(profileThunk());
   }, []);
 
-  const [profile, setProfile] = useState({
-    "username": "",
-    "_id": "",
-    "role": "user",
-    "followers": [],
-    "following": [],
-  })
+console.log(userProm)
   const [profileName, setProfileName] = useState("")
-  const [profileImage, setProfileImage] = useState("https://i.pinimg.com/736x/83/bc/8b/83bc8b88cf6bc4b4e04d153a418cde62.jpg")
+  const [profileImage, setProfileImage] = useState("")
   const [nameEditing, setNameEditing] = useState(false);
   const [reviews, setReviews] = useState([]);
-  const [reviewCountPromise, setReviewCountPromise] = useState(null);
-  useEffect(() => {
-    if (profile._id !== "") {
-      setReviewCountPromise(service.findReviewsByUserId(profile._id))
-    }
-  },[profile])
+
+
   useEffect(() => {
     if (reviewCountPromise !== null) {
+    console.log(reviewCountPromise)
       reviewCountPromise.then((response) => {
+      console.log(response)
         setReviews(response)
       })
     }
   }, [reviewCountPromise])
-  useEffect(() => {
-    if (currentUser !== null && currentUser !== undefined) {
-      setProfile(currentUser.currentUser)
-    }
-  }, [currentUser])
 
   useEffect(() => {
-    if (profile !== undefined) {
+    if (profile !== null) {
       setProfileName(profile.username)
       setProfileImage(profile.profilePicture)
     }
@@ -87,18 +107,20 @@ function ProfileScreen() {
                         <input type="text" style={{width: "70%", float: "left"}}
                         className="form-control border-0 bg-dark text-white mb-1 me-1 text-large" value={profileName}
                           onChange={(event) => setProfileName(event.target.value)}></input>
-                      <button className="btn me-2 btn-success" style={{float: "left"}}
-                        onClick={updateNameHandler}>
-                        <i class="fa fa-check"></i>
-                      </button>
+                      {isUser && (
+                         <button className="btn me-2 btn-success" style={{float: "left"}}
+                                onClick={updateNameHandler}>
+                          <i class="fa fa-check"></i>
+                        </button>                      )}
+
                     </>
                     }
                     {!nameEditing && <>
                       <span className="nunito text-large me-4">@{profileName}</span>
-                      <button className="btn me-2 btn-outline-info"
+                      {isUser && (<button className="btn me-2 btn-outline-info"
                         onClick={() => setNameEditing(true)}>
                         <i class="fa fa-edit"></i>
-                      </button>
+                      </button>)}
                     </>}
                   </div>
                 </li>
@@ -135,12 +157,12 @@ function ProfileScreen() {
         </div>
       )}
       <div className="float-right mt-2">
-        <button className="me-2 btn btn-dark"
+        {isUser && <button className="me-2 btn btn-dark"
           onClick={() => {
             dispatch(logoutThunk());
             navigate("/login");
           }}>
-          Logout</button>
+          Logout</button>}
       </div>
     </div>
   </>); // see below

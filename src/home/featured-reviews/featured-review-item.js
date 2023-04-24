@@ -87,14 +87,13 @@ const FeaturedReviewItem = ({ review }) => {
         }
     }, [album])
 
+
     useEffect(() => {
         if (album !== undefined) {
             setAlbumLink(`/albums/${album.id}`)
         }
     }, [album])
 
-    console.log(isUser);
-    console.log(reviewTags);
     return (
         <>
             <div className="card border-dark mb-3" style={{ "maxWidth": "80%" }}>
@@ -112,8 +111,11 @@ const FeaturedReviewItem = ({ review }) => {
                                     <img className="profile-picture me-2" src={user.profilePicture} alt="" />
                                 </div>
                                 <div className="col-8 ms-3">
-                                    <StarRating rating={review.rating}></StarRating>
-                                    <h6 className="text-muted nunito"><Link className="link-salmon" to="/profile">@{user.username}</Link> - {date}</h6>
+                                    <StarRating rating={review.rating} />
+                                    <h6 className="text-muted nunito"><Link className="link-salmon" to={{
+                                                                                                         pathname: `/profile/${user._id}`,
+                                                                                                         search: `?isUser=${isUser}`
+                                                                                                       }}>@{user.username}</Link> - {date}</h6>
                                 </div>
                             </div>
 
@@ -136,6 +138,7 @@ const FeaturedReviewItem = ({ review }) => {
                                     <i className={"fa fa-edit"}></i>
                                     <span className="ms-2 nunito">Edit</span>
                                   </Link>
+
                         }</Link>
                     </div>
                     <img className="album-cover-review-image col-4" src={album.images[0].url} alt={review.title} />

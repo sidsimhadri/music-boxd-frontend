@@ -37,7 +37,7 @@ function App() {
         <div className="container">
           <Routes>
             <Route index path="/" element={<HomeComponent />} />
-            <Route path="/profile" element={<ProfileComponent />} />
+            <Route path="/profile/:userId" element={<ProfileComponent />} />
             <Route path="/curator" element={<CuratorComponent />} />
             <Route path="/admin" element={<AdminComponent />} />
             <Route path="/reviews/:id" element={<ReviewComponent />} />
