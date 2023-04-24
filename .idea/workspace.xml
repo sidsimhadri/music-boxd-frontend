@@ -5,25 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a85cbc0e-f6ae-4578-830d-c48983deb0ad" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/home/create-review/create-review-item.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/tags-search/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/tags-search/tags-review-search.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/albums/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/albums/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/albums/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/albums/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/artists/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/artists/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/artists/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/artists/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/home/featured-reviews/featured-review-item.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/home/featured-reviews/featured-review-item.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/home/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/home/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/home/trending-releases/trending-release-item.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/home/trending-releases/trending-release-item.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/review-component/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/review-component/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/review-component/review-interactions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/review-component/review-interactions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/review-component/tags.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/review-component/tags.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/search/album-item.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/search/album-item.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/reducers.js/review-reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/reducers.js/review-reducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/thunks.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/thunks.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/profile/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/profile/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

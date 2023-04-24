@@ -37,6 +37,7 @@ function ProfileScreen() {
 
   useEffect(() => {
   if(profile !== null){
+  console.log(profile._id)
   console.log(service.findReviewsByUserId(profile._id))
     setReviewCountPromise(service.findReviewsByUserId(profile._id))
   }
