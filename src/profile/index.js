@@ -157,12 +157,12 @@ console.log(userProm)
         </div>
       )}
       <div className="float-right mt-2">
-        <button className="me-2 btn btn-dark"
+        {isUser && <button className="me-2 btn btn-dark"
           onClick={() => {
             dispatch(logoutThunk());
             navigate("/login");
           }}>
-          Logout</button>
+          Logout</button>}
       </div>
     </div>
   </>); // see below
