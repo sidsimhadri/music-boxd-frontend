@@ -5,7 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import TagsComponent from "../../review-component/tags";
+
+import "../index.css";
+
 import { updateReviewThunk } from "../../services/thunks";
+
 
 const FeaturedReviewItem = ({ review }) => {
 
@@ -22,9 +26,14 @@ const FeaturedReviewItem = ({ review }) => {
         ],
     })
     const [reviewBody, setBody] = useState(review.body)
+    const [reviewRating, setRating] = useState(review.rating)
+    const [reviewTags, setReviewTags] = useState(review.tags)
+
     useEffect(() => {
-        setBody(review.body)
-    }, [review.body])
+            setBody(review.body)
+            setRating(review.rating)
+            setReviewTags(review.tags)
+        }, [review.body, review.rating, review.tags])
     let dateObj = new Date(review.timestamp)
     const date = dateObj.toDateString()
     const [user, setUser] = useState({
@@ -33,17 +42,6 @@ const FeaturedReviewItem = ({ review }) => {
     })
     const [editing, setEditing] = useState(false)
     const dispatch = useDispatch()
-    const editingHandler = () => {
-        if (editing) {
-            dispatch(updateReviewThunk({
-                ...review,
-                body: review.body,
-                rating: review.rating,
-                tags: review.tags,
-            }))
-        }
-        setEditing(editing => !editing)
-    }
     const currentUser = useSelector((state) => state.auth.currentUser)
     const [isUser, setIsUser] = useState(false)
     const [profile, setProfile] = useState({
@@ -60,6 +58,7 @@ const FeaturedReviewItem = ({ review }) => {
         }
     }, [profile, review.userId])
     const [artistLink, setArtistLink] = useState("/")
+    const [albumLink , setAlbumLink] = useState("/")
     useEffect(() => {
         setAlbumPromise(service.findAlbum(review.albumId))
     }, [review.albumId])
@@ -87,15 +86,25 @@ const FeaturedReviewItem = ({ review }) => {
             setArtistLink(`/artists/${album.artists[0].id}`)
         }
     }, [album])
-    console.log(user)
-    console.log(isUser);
+
+
+    useEffect(() => {
+        if (album !== undefined) {
+            setAlbumLink(`/albums/${album.id}`)
+        }
+    }, [album])
+
     return (
         <>
             <div className="card border-dark mb-3" style={{ "maxWidth": "80%" }}>
                 <div className="row card-body">
                     <div className="col-8">
-                        <Link className="link-white" to={!editing ? `/reviews/${review._id}` : undefined} onClick={editing ? e => e.preventDefault() : undefined}>
-                            <h4 className="card-title small-margin-bottom volkhov text-white"><i><Link className="link-salmon" to="/albums/">{album.name}</Link></i></h4>
+
+                        <Link className="link-white" to={{pathname: `/reviews/${review._id}`,
+                                                          search: `?editing=${editing}`
+                                                         }}>
+                            <h4 className="card-title small-margin-bottom volkhov text-white"><i><Link className="link-salmon" to={ albumLink}>{album.name}</Link></i></h4>
+
                             <h6 className="text-white nunito no-margin-bottom"><Link className="link-salmon" to={artistLink}>{album.artists[0].name}</Link> • {album.release_date}</h6>
                             <div className="row no-margin-left d-flex center">
                                 <div className="col-1">
@@ -109,6 +118,7 @@ const FeaturedReviewItem = ({ review }) => {
                                                                                                        }}>@{user.username}</Link> - {date}</h6>
                                 </div>
                             </div>
+
                             {!editing && <div className="nunito text-white"> {reviewBody} </div>}
                             {editing &&
                                 <div>
@@ -118,17 +128,18 @@ const FeaturedReviewItem = ({ review }) => {
                             }
                             <div className="mb-2">
                                 <TagsComponent review={review} /></div>
-                        </Link>
                         <ReviewInteractionsComponent review={review} />
-                        {isUser &&
-                            <button className={"btn " + (editing ? "btn-info" : "btn-outline-info")} onClick={() => editingHandler()}>
-                                <i className={"fa " + (editing ? "fa-check" : "fa-edit")}></i>
-                                <span className="nunito">
-                                    {!editing && " Edit"}
-                                    {editing && " Save"}
-                                </span>
-                            </button>
+
+                        { isUser &&
+                                  <Link to={{pathname: `/reviews/${review._id}`,
+                                             search: `?editing=${!editing}`
+                                            }}
+                                    className={"btn btn-outline-info"}>
+                                    <i className={"fa fa-edit"}></i>
+                                    <span className="ms-2 nunito">Edit</span>
+                                  </Link>
                         }
+                        </Link>
                     </div>
                     <img className="album-cover-review-image col-4" src={album.images[0].url} alt={review.title} />
                 </div>

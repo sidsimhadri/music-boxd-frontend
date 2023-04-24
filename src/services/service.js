@@ -58,6 +58,18 @@ export const findReviewsByUserId = async (uid) => {
   return reviews;
 }
 
+export const findReviewsByTagId = async (tid) => {
+  let response = ""
+  if (tid === undefined) {
+    response = await axios.get(`${REVIEWS_API}`)
+  }
+  else {
+    response = await axios.get(`${REVIEWS_API}/tags/${tid}`)
+  }
+  const reviews = response.data;
+  return reviews;
+}
+
 export const findReviewsByAlbumId = async (aid) => {
   let response = ""
   if (aid !== undefined) {
