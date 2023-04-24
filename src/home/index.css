@@ -108,3 +108,16 @@ input.form-control:focus {
 input.form-control:focus::placeholder {
     color: salmon;
 }
+
+
+@media screen and (max-width: 768px) {
+  .album-cover-review-image {
+     height: 120px;
+     width: 120px;
+  }
+}
+
+.text-white{
+color: white;
+
+}
