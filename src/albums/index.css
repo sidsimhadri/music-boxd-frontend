@@ -53,6 +53,10 @@ width: 210px;
 font-size: 27px;
 }
 
+.size-username{
+font-size: 13px;
+}
+
 .size-dp-img{
 width: 80px;
 height: 80px;
@@ -78,26 +82,26 @@ font-size: 20px;
 
 @media screen and (max-width: 1100px) {
   .size-block {
-margin-left: 12px;
+margin-left: 0px;
   }
 }
 
 
 @media screen and (max-width: 990px) {
   .size-block {
-margin-left: 32px;
+margin-left: 0px;
   }
 }
 
 @media screen and (max-width: 767px) {
   .size-block {
-margin-left: 40px;
+margin-left: 0px;
   }
 }
 
 @media screen and (max-width: 576px) {
   .size-block {
-margin-left: 45px;
+margin-left: 0px;
   }
 }
 
