@@ -38,9 +38,7 @@ console.log(currentUser)
     return (<>
         {currentUser &&
             <div className="d-flex center">
-                <Link className="link-salmon d-flex center" to={{ pathname: `/profile/${currentUser.currentUser._id}`,
-                                                                  search: `?isUser=true`
-                                                                }}>
+                <Link className="link-salmon d-flex center" to="/profile">
                     <h6 className="nunito float-right mt-2">@{profileName}</h6>
                     <img className="profile-picture float-right me-3 ms-3" src={profileImage} alt="" />
                 </Link>

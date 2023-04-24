@@ -11,8 +11,7 @@ import { useLocation } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
 function ProfileScreen() {
-    const location = useLocation()
-    const isUser = location.search.includes('isUser=true')
+    const isUser = false
   const { userId } = useParams()
   const [userProm, setUserProm] = useState(null)
   const [reviewCountPromise, setReviewCountPromise] = useState(null)
@@ -107,20 +106,13 @@ console.log(userProm)
                         <input type="text" style={{width: "70%", float: "left"}}
                         className="form-control border-0 bg-dark text-white mb-1 me-1 text-large" value={profileName}
                           onChange={(event) => setProfileName(event.target.value)}></input>
-                      {isUser && (
-                         <button className="btn me-2 btn-success" style={{float: "left"}}
-                                onClick={updateNameHandler}>
-                          <i class="fa fa-check"></i>
-                        </button>                      )}
+
 
                     </>
                     }
                     {!nameEditing && <>
                       <span className="nunito text-large me-4">@{profileName}</span>
-                      {isUser && (<button className="btn me-2 btn-outline-info"
-                        onClick={() => setNameEditing(true)}>
-                        <i class="fa fa-edit"></i>
-                      </button>)}
+
                     </>}
                   </div>
                 </li>
@@ -157,12 +149,7 @@ console.log(userProm)
         </div>
       )}
       <div className="float-right mt-2">
-        {isUser && <button className="me-2 btn btn-dark"
-          onClick={() => {
-            dispatch(logoutThunk());
-            navigate("/login");
-          }}>
-          Logout</button>}
+
       </div>
     </div>
   </>); // see below

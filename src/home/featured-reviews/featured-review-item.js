@@ -115,8 +115,7 @@ console.log(currentUser)
                                     <StarRating rating={review.rating} />
                                     <h6 className="text-muted nunito">
                                     {user._id !== profile._id &&
-                                    <Link className="link-salmon" to={{ pathname:  `/profile/${user._id}`,
-                                                                       search: `?isUser=${isUser}`  }}> @{user.username}</Link>
+                                    <Link className="link-salmon" to= {`/profile/${user._id}`}> @{user.username}</Link>
                                     }
                                     {user._id === profile._id &&
                                     <Link className="link-salmon" to= "/profile"> @{user.username}</Link>
