@@ -39,15 +39,15 @@ function UserDetail({ userId }) {
   }
 
   return (
-    <div>
+    <div className="col">
       <img
-        className="size-dp-img"
+        className="row-9 size-dp-img"
         src={user.profilePicture}
 
         style={{ borderRadius: "50%" }}
         alt={user.username}
       />
-<div className="mt-1 size-dp-img text-white font-15 d-none d-md-block">
+<div className="row-3 mt-1 size-username text-white font-15 d-none d-xl-block">
   @{user.username}
 </div>
     </div>
@@ -138,10 +138,10 @@ function AlbumReviewsComponent() {
         {albumReviews.map((review) => (
           <div className="card border-dark mb-3 text-white nunito" style={{ width: "100%" }}>
             <div className="row gold-bg card-body" style={{ borderRadius: "10px" }}>
-            <div className="col-1 col-xs-5 ms-0 ps-0 size-dp-img d-none d-sm-block">
+            <div className="col-2 col-xxl-2 col-xs-5 col-xl-2 col-lg-2 col-sm-2 col-md-2 ms-0 ps-0 size-dp-img d-none d-sm-block">
                 <UserDetail userId={review.userId} />
              </div>
-             <div className="col-10 col-sm-10 col-xs-12 mt-2 size-block">
+             <div className="col-10 col-xxl-10 col-xl-10 col-lg-10 col-md-10 col-sm-10 col-xs-12 mt-2 size-block">
               <h5 className="row size-block">
               <div className="col-3">Rating:</div>
                 <div className="col-9">

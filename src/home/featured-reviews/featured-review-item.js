@@ -138,8 +138,8 @@ const FeaturedReviewItem = ({ review }) => {
                                     <i className={"fa fa-edit"}></i>
                                     <span className="ms-2 nunito">Edit</span>
                                   </Link>
-                        }
-                        </Link>
+
+                        }</Link>
                     </div>
                     <img className="album-cover-review-image col-4" src={album.images[0].url} alt={review.title} />
                 </div>
