@@ -87,7 +87,7 @@ const FeaturedReviewItem = ({ review }) => {
             setArtistLink(`/artists/${album.artists[0].id}`)
         }
     }, [album])
-
+    console.log(user)
     console.log(isUser);
     return (
         <>
@@ -103,7 +103,10 @@ const FeaturedReviewItem = ({ review }) => {
                                 </div>
                                 <div className="col-8 ms-3">
                                     <StarRating rating={review.rating} />
-                                    <h6 className="text-muted nunito"><Link className="link-salmon" to="/profile">@{user.username}</Link> - {date}</h6>
+                                    <h6 className="text-muted nunito"><Link className="link-salmon" to={{
+                                                                                                         pathname: `/profile/${user._id}`,
+                                                                                                         search: `?isUser=${isUser}`
+                                                                                                       }}>@{user.username}</Link> - {date}</h6>
                                 </div>
                             </div>
                             {!editing && <div className="nunito text-white"> {reviewBody} </div>}
