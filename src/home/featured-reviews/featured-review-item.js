@@ -42,22 +42,21 @@ const FeaturedReviewItem = ({ review }) => {
     })
     const [editing, setEditing] = useState(false)
     const dispatch = useDispatch()
-
     const currentUser = useSelector((state) => state.auth.currentUser)
     const [isUser, setIsUser] = useState(false)
     const [profile, setProfile] = useState({
-            "username": "",
-        })
+        "username": "",
+    })
     useEffect(() => {
-            if (currentUser !== null && currentUser !== undefined) {
-                setProfile(currentUser.currentUser)
-            }
-        }, [currentUser])
-        useEffect(() => {
-            if (profile !== undefined && review.userId !== undefined) {
-                setIsUser(profile._id === review.userId)
-            }
-        }, [profile, review.userId])
+        if (currentUser !== null && currentUser !== undefined) {
+            setProfile(currentUser.currentUser)
+        }
+    }, [currentUser])
+    useEffect(() => {
+        if (profile !== undefined && review.userId !== undefined) {
+            setIsUser(profile._id === review.userId)
+        }
+    }, [profile, review.userId])
     const [artistLink, setArtistLink] = useState("/")
     const [albumLink , setAlbumLink] = useState("/")
     useEffect(() => {
@@ -77,7 +76,7 @@ const FeaturedReviewItem = ({ review }) => {
         if (userPromise !== null) {
             userPromise.then((response) => {
                 if (response !== null) {
-                setUser(response)
+                    setUser(response)
                 }
             })
         }
@@ -119,16 +118,16 @@ const FeaturedReviewItem = ({ review }) => {
                             </div>
 
                             {!editing && <div className="nunito text-white"> {reviewBody} </div>}
-                                                            {editing &&
-                                                                <div>
-                                                                    <textarea className="form-control border-0 bg-dark text-white mb-1" value={reviewBody}
-                                                                        onChange={(event) => setBody(event.target.value)}></textarea>
-                                                                </div>
-                                                            }
-                                                            </Link>
+                            {editing &&
+                                <div>
+                                    <textarea className="form-control border-0 bg-dark text-white mb-1" value={reviewBody}
+                                        onChange={(event) => setBody(event.target.value)}></textarea>
+                                </div>
+                            }
                             <div className="mb-2">
                                 <TagsComponent review={review} /></div>
                         <ReviewInteractionsComponent review={review} />
+
                         { isUser &&
                                   <Link to={{pathname: `/reviews/${review._id}`,
                                              search: `?editing=${!editing}`
