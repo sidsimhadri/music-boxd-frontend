@@ -5,7 +5,7 @@ import {findReviewsByAlbumId} from "../services/service.js";
 import {findAlbum} from "../services/service.js";
 import {findUser} from "../services/service.js";
 import { Link } from "react-router-dom";
-import { useSelectorgit  } from "react-redux";
+import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import "./index.css";
 import StarRating from "../star-rating";
