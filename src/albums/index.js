@@ -5,6 +5,7 @@ import {findReviewsByAlbumId} from "../services/service.js";
 import {findAlbum} from "../services/service.js";
 import {findUser} from "../services/service.js";
 import { Link } from "react-router-dom";
+import { useSelectorgit  } from "react-redux";
 import { useState, useEffect } from "react";
 import "./index.css";
 import StarRating from "../star-rating";
@@ -55,6 +56,9 @@ function UserDetail({ userId }) {
 }
 
 function AlbumReviewsComponent() {
+const currentUser = useSelector((state) =>
+        state.auth.currentUser
+    );
     const { albumId } = useParams()
     let album=""
     //let albumReviewslist=[]
@@ -132,12 +136,20 @@ function AlbumReviewsComponent() {
                 </div>
               </div>
     )}
-    <div className="d-flex justify-content-between align-items-center">
+
+    {currentUser !== null && currentUser!== undefined && <div className="d-flex justify-content-between align-items-center">
       <h3 className="text-white">Reviews</h3>
       <a href={`/createReview/${albumId}`}>
         <button className="btn btn-primary">Add a Review</button>
       </a>
     </div>
+    }
+    {
+    (currentUser === null || currentUser=== undefined) && <div className="d-flex justify-content-between align-items-center">
+          <h3 className="text-white">Reviews</h3>
+          <div>Login to add review</div>
+        </div>
+    }
 
     {!reviewsLoading && (
       <div className="row mt-2">
