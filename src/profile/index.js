@@ -9,38 +9,45 @@ import { profileThunk, logoutThunk, updateUserThunk }
 import LatestReviewItem from "./latest-reviews/latest-review-item";
 import { useLocation } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import FollowUnfollowButton from './follow-unfollow-button';
 
 function ProfileScreen() {
-    const isUser = false
+  const isUser = false
   const { userId } = useParams()
   const [userProm, setUserProm] = useState(null)
   const [reviewCountPromise, setReviewCountPromise] = useState(null)
   const [profile, setProfile] = useState(null)
+  const currentUser = useSelector((state) => state.auth.currentUser)
+  const [following, setFollowing] = useState(false);
+  const [followers, setFollowers] = useState(0)
 
   useEffect(() => {
-  if (userId !== null){
-  console.log(userId)
-  service.findUser(userId).then((response) => {console.log(response)})
-  setUserProm(service.findUser(userId))
-  console.log(userProm)
-  }
+    if (userId !== null) {
+      service.findUser(userId).then((response) => { console.log(response) })
+      setUserProm(service.findUser(userId))
+    }
   }, [userId])
 
   useEffect(() => {
-            if (userProm !== null) {
-                userProm.then((response) => {
-                    setProfile(response);
-                })
-            }
-        }, [userProm])
+    if (currentUser !== undefined && currentUser !== null && profile !== null) {
+      setFollowing(currentUser.currentUser.following.includes(profile._id))
+    }
+
+  }, [currentUser, profile])
 
   useEffect(() => {
-  if(profile !== null){
-  console.log(profile._id)
-  console.log(service.findReviewsByUserId(profile._id))
-    setReviewCountPromise(service.findReviewsByUserId(profile._id))
-  }
-  },[profile])
+    if (userProm !== null) {
+      userProm.then((response) => {
+        setProfile(response);
+      })
+    }
+  }, [userProm])
+
+  useEffect(() => {
+    if (profile !== null) {
+      setReviewCountPromise(service.findReviewsByUserId(profile._id))
+    }
+  }, [profile])
 
   const navigate = useNavigate()
 
@@ -49,7 +56,6 @@ function ProfileScreen() {
     dispatch(profileThunk());
   }, []);
 
-console.log(userProm)
   const [profileName, setProfileName] = useState("")
   const [profileImage, setProfileImage] = useState("")
   const [nameEditing, setNameEditing] = useState(false);
@@ -58,9 +64,7 @@ console.log(userProm)
 
   useEffect(() => {
     if (reviewCountPromise !== null) {
-    console.log(reviewCountPromise)
       reviewCountPromise.then((response) => {
-      console.log(response)
         setReviews(response)
       })
     }
@@ -78,9 +82,19 @@ console.log(userProm)
       ...profile,
       username: profileName,
     }
-    dispatch(updateUserThunk({newProfile}))
+    dispatch(updateUserThunk({ newProfile }))
     setNameEditing(false)
     setProfile(newProfile)
+  }
+
+  const unfollowHander = () => {
+    setFollowing(false)
+    service.unfollow(currentUser.currentUser._id, profile._id)
+  }
+
+  const followHander = () => {
+    setFollowing(true)
+    service.follow(currentUser.currentUser._id, profile._id)
   }
 
   return (<>
@@ -97,17 +111,26 @@ console.log(userProm)
                   src={profileImage} />
                 <input type="file" id="choose-profile-picture" />
               </button>
+              {
+                following && <button type="button" 
+                className="btn nunito text-medium rounded-pill btn-outline-warning"
+                onClick={unfollowHander}
+                >unfollow</button>
+              }
+              {
+                !following && <button type="button" 
+                className="btn nunito text-medium rounded-pill btn-outline-success"
+                onClick={followHander}>follow</button>
+              }
             </div>
             <div className="col-12 col-lg-7">
               <ul className="list-group mb-3">
                 <li className="list-group-item ">
                   <div>
                     {nameEditing && <>
-                        <input type="text" style={{width: "70%", float: "left"}}
+                      <input type="text" style={{ width: "70%", float: "left" }}
                         className="form-control border-0 bg-dark text-white mb-1 me-1 text-large" value={profileName}
-                          onChange={(event) => setProfileName(event.target.value)}></input>
-
-
+                        onChange={(event) => setProfileName(event.target.value)}></input>
                     </>
                     }
                     {!nameEditing && <>
@@ -132,16 +155,16 @@ console.log(userProm)
                     Reviews: {reviews.length}
                   </span>
                 </li>
-                </ul>
-                <ul className="list-group">
+              </ul>
+              <ul className="list-group">
                 {
-                    reviews.map(review => {
-                        return (
-                          <li className="list-group-item">
-                            <LatestReviewItem review={review} />
-                            </li>
-                        )
-                    })
+                  reviews.map(review => {
+                    return (
+                      <li className="list-group-item">
+                        <LatestReviewItem review={review} />
+                      </li>
+                    )
+                  })
                 }
               </ul>
             </div>

@@ -4,6 +4,14 @@ const TAGS_API = 'http://localhost:4000/api/tags';
 const REVIEWS_API = 'http://localhost:4000/api/reviews';
 const SPOTIFY_API = 'http://localhost:4000/api/spotify'
 
+export const follow = async (uid, fid) => {
+  const response = await axios.put(`${USER_API}/follow/${uid}/${fid}`)
+  return response.data;
+}
+export const unfollow = async (uid, fid) => {
+  const response = await axios.put(`${USER_API}/unfollow/${uid}/${fid}`)
+  return response.data;
+}
 
 export const createUser = async (user) => {
   const response = await axios.post(USER_API, user)
