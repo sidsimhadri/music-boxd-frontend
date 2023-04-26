@@ -75,6 +75,10 @@ a.text-muted:hover {
     color: salmon;
 }
 
+.red-flag {
+  color: yellow;
+}
+
 i.opacity-low {
     opacity: 0.1;
 }

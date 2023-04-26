@@ -94,7 +94,7 @@ const FeaturedReviewItem = ({ review }) => {
             setAlbumLink(`/albums/${album.id}`)
         }
     }, [album])
-console.log(currentUser)
+console.log(user)
     return (
         <>
             <div className="card border-dark mb-3" style={{ "maxWidth": "80%" }}>
@@ -126,13 +126,12 @@ console.log(currentUser)
                                 </div>
                             </div>
 
-                            {!editing && <div className="nunito text-white"> {reviewBody} </div>}
-                            {editing &&
-                                <div>
-                                    <textarea className="form-control border-0 bg-dark text-white mb-1" value={reviewBody}
-                                        onChange={(event) => setBody(event.target.value)}></textarea>
-                                </div>
-                            }
+                            <div className="nunito text-white">
+
+                             {user.role === "curator" ? <span><i className="fa fa-flag red-flag me-2"></i></span> : null}
+                             {reviewBody}
+                            </div>
+
                             <div className="mb-2">
                                 <TagsComponent review={review} /></div>
                         <ReviewInteractionsComponent review={review} />
