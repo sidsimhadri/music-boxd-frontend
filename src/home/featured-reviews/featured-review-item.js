@@ -131,7 +131,7 @@ console.log(user)
                              {user.role === "curator" ? <span><i className="fa fa-flag red-flag me-2"></i></span> : null}
                              {reviewBody}
                             </div>
-
+</Link>
                             <div className="mb-2">
                                 <TagsComponent review={review} /></div>
                         <ReviewInteractionsComponent review={review} />
@@ -145,7 +145,7 @@ console.log(user)
                                     <span className="ms-2 nunito">Edit</span>
                                   </Link>
 
-                        }</Link>
+                        }
                     </div>
                     <img className="album-cover-review-image col-4" src={album.images[0].url} alt={review.title} />
                 </div>
