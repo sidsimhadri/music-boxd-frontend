@@ -84,14 +84,15 @@ function CreateReviewComponent() {
             setArtistLink(`/artists/${album.artists[0].id}`)
         }
     }, [album])
-    const editingHandler = () => {
+    const editingHandler = (flag) => {
 
             dispatch(createReviewThunk({
                 ...review,
                 body: reviewBody,
                 rating: reviewRating,
                 tags: tags,
-                userId: profile._id
+                userId: profile._id,
+                curator: flag,
             }))
             navigate('/')
     }
@@ -134,7 +135,7 @@ function CreateReviewComponent() {
                             <ReviewInteractionsComponent review={review} />
 
                                 <button className={"btn btn-info" }
-                                    onClick={() => editingHandler()}>
+                                    onClick={() => editingHandler(profile.role === 'curator')}>
                                     <i className={"fa fa-check" }></i>
                             <span className="nunito">
                                 Save
