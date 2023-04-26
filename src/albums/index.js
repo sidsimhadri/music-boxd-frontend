@@ -132,7 +132,13 @@ function AlbumReviewsComponent() {
                 </div>
               </div>
     )}
-    <h3 className="text-white">Reviews</h3>
+    <div className="d-flex justify-content-between align-items-center">
+      <h3 className="text-white">Reviews</h3>
+      <a href={`/createReview/${albumId}`}>
+        <button className="btn btn-primary">Add a Review</button>
+      </a>
+    </div>
+
     {!reviewsLoading && (
       <div className="row mt-2">
         {albumReviews.map((review) => (
