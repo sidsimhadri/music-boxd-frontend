@@ -1,8 +1,9 @@
 import axios from 'axios';
-const USER_API = 'http://localhost:4000/api/users';
-const TAGS_API = 'http://localhost:4000/api/tags';
-const REVIEWS_API = 'http://localhost:4000/api/reviews';
-const SPOTIFY_API = 'http://localhost:4000/api/spotify'
+const SERVER_API_URL = process.env.REACT_APP_SERVER_API_URL;
+const USER_API = `${SERVER_API_URL}/users`;
+const TAGS_API = `${SERVER_API_URL}/tags`;
+const REVIEWS_API = `${SERVER_API_URL}/reviews`;
+const SPOTIFY_API = `${SERVER_API_URL}/spotify`'
 
 export const follow = async (uid, fid) => {
   const response = await axios.put(`${USER_API}/follow/${uid}/${fid}`)
