@@ -3,8 +3,10 @@ import TrackStarLogo from '../trackstar-header/trackstar-logo';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { createUserThunk } from '../services/thunks';
+import { useNavigate } from 'react-router';
 
 function SignUp() {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const [userData, setUserData] = useState({
         firstName: '',
@@ -33,6 +35,8 @@ function SignUp() {
             // ...userData
         }
         dispatch(createUserThunk(newUser));
+        navigate('/')
+
     };
 
     return (
